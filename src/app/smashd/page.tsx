@@ -113,32 +113,36 @@ const testimonials: Testimonial[] = [
   },
 ];
 
-// Replace these with real app screenshots — drop PNGs into public/smashd/screens/
 const screenshots: Screenshot[] = [
   {
-    src: "/smashd/screens/create-tournament.png",
-    alt: "Create a tournament",
-    caption: "Create a tournament in seconds",
+    src: "/smashd/screens/home-feed.png",
+    alt: "Home feed with tournament activity",
+    caption: "Your tournament feed",
   },
   {
     src: "/smashd/screens/live-scoring.png",
-    alt: "Live scoring",
+    alt: "Live scoring courtside",
     caption: "Score matches courtside",
   },
   {
     src: "/smashd/screens/leaderboard.png",
-    alt: "Live leaderboard",
-    caption: "Real-time leaderboards",
+    alt: "Tournament results and MVP",
+    caption: "Results & MVP podium",
+  },
+  {
+    src: "/smashd/screens/player-stats.png",
+    alt: "Player stats and rating progression",
+    caption: "Track your form & rating",
   },
   {
     src: "/smashd/screens/player-profile.png",
-    alt: "Player profile",
+    alt: "Player profile with level and insights",
     caption: "Your padel CV",
   },
   {
     src: "/smashd/screens/club-directory.png",
-    alt: "Club directory",
-    caption: "Find clubs near you",
+    alt: "Discover events and clubs",
+    caption: "Find events near you",
   },
 ];
 
