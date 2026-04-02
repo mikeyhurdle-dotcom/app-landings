@@ -8,7 +8,9 @@ export { AppStoreBadge } from "./AppStoreBadge";
 export { TestimonialSection } from "./TestimonialSection";
 export { SupportForm } from "./SupportForm";
 export { PrivacyPolicy } from "./PrivacyPolicy";
+export { ScreenshotCarousel } from "./ScreenshotCarousel";
 
 export type { Feature } from "./FeatureCard";
 export type { PricingTier } from "./PricingTable";
 export type { Testimonial } from "./TestimonialSection";
+export type { Screenshot } from "./ScreenshotCarousel";

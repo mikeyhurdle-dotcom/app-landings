@@ -4,8 +4,9 @@ import {
   FeatureGrid,
   PricingTable,
   TestimonialSection,
+  ScreenshotCarousel,
 } from "@/components/shared";
-import type { Feature, PricingTier, Testimonial } from "@/components/shared";
+import type { Feature, PricingTier, Testimonial, Screenshot } from "@/components/shared";
 
 const features: Feature[] = [
   {
@@ -112,6 +113,35 @@ const testimonials: Testimonial[] = [
   },
 ];
 
+// Replace these with real app screenshots — drop PNGs into public/smashd/screens/
+const screenshots: Screenshot[] = [
+  {
+    src: "/smashd/screens/create-tournament.png",
+    alt: "Create a tournament",
+    caption: "Create a tournament in seconds",
+  },
+  {
+    src: "/smashd/screens/live-scoring.png",
+    alt: "Live scoring",
+    caption: "Score matches courtside",
+  },
+  {
+    src: "/smashd/screens/leaderboard.png",
+    alt: "Live leaderboard",
+    caption: "Real-time leaderboards",
+  },
+  {
+    src: "/smashd/screens/player-profile.png",
+    alt: "Player profile",
+    caption: "Your padel CV",
+  },
+  {
+    src: "/smashd/screens/club-directory.png",
+    alt: "Club directory",
+    caption: "Find clubs near you",
+  },
+];
+
 function HowItWorksSection() {
   const steps = [
     {
@@ -192,6 +222,12 @@ export default function SmashdPage() {
         features={features}
         title="Built for the court"
         subtitle="Everything you need to run, play, and grow your padel community."
+      />
+      <ScreenshotCarousel
+        brand={smashd}
+        screenshots={screenshots}
+        title="See it in action"
+        subtitle="From tournament creation to final standings — all from your phone."
       />
       <HowItWorksSection />
       <PricingTable brand={smashd} tiers={pricingTiers} />

@@ -4,8 +4,9 @@ import {
   FeatureGrid,
   PricingTable,
   TestimonialSection,
+  ScreenshotCarousel,
 } from "@/components/shared";
-import type { Feature, PricingTier, Testimonial } from "@/components/shared";
+import type { Feature, PricingTier, Testimonial, Screenshot } from "@/components/shared";
 
 const features: Feature[] = [
   {
@@ -95,6 +96,40 @@ const pricingTiers: PricingTier[] = [
   },
 ];
 
+// Replace these with real app screenshots — drop PNGs into public/mewstro/screens/
+const screenshots: Screenshot[] = [
+  {
+    src: "/mewstro/screens/practice-timer.png",
+    alt: "Practice timer",
+    caption: "Track every session",
+  },
+  {
+    src: "/mewstro/screens/calendar-heatmap.png",
+    alt: "Calendar heatmap",
+    caption: "Build your streak",
+  },
+  {
+    src: "/mewstro/screens/activity-rings.png",
+    alt: "Activity rings",
+    caption: "See your progress at a glance",
+  },
+  {
+    src: "/mewstro/screens/achievements.png",
+    alt: "Achievement unlock",
+    caption: "Earn badges along the way",
+  },
+  {
+    src: "/mewstro/screens/repertoire.png",
+    alt: "Repertoire list",
+    caption: "Organise your repertoire",
+  },
+  {
+    src: "/mewstro/screens/widgets.png",
+    alt: "Widgets",
+    caption: "Widgets keep you motivated",
+  },
+];
+
 const testimonials: Testimonial[] = [
   {
     quote:
@@ -174,6 +209,12 @@ export default function MewstroPage() {
         features={features}
         title="Everything you need to practise better"
         subtitle="From one-tap timers to a living mascot that celebrates every milestone."
+      />
+      <ScreenshotCarousel
+        brand={mewstro}
+        screenshots={screenshots}
+        title="See it in action"
+        subtitle="Beautiful progress tracking that makes practice feel rewarding."
       />
       <PricingTable brand={mewstro} tiers={pricingTiers} />
       <TeacherSection />

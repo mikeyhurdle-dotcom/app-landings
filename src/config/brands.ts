@@ -80,8 +80,8 @@ export const smashd: Brand = {
     textDim: "#8888A0",
   },
   fonts: {
-    heading: "var(--font-geist-sans)",
-    body: "var(--font-geist-sans)",
+    heading: "var(--font-outfit)",
+    body: "var(--font-outfit)",
   },
   links: {
     appStore: "#",
