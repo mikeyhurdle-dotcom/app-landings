@@ -239,14 +239,14 @@ export default function MewstroPage() {
       <FeatureGrid
         brand={mewstro}
         features={features}
-        title="Everything you need to practise better"
-        subtitle="From one-tap timers to a living mascot that celebrates every milestone."
+        title="Everything you need to show up and feel great"
+        subtitle="One-tap timers, streaks that stick, and a living mascot who celebrates every milestone."
       />
       <ScreenshotCarousel
         brand={mewstro}
         screenshots={screenshots}
         title="See it in action"
-        subtitle="Beautiful progress tracking that makes practice feel rewarding."
+        subtitle="Beautiful progress tracking that makes every session feel worth it."
       />
       <PricingTable brand={mewstro} tiers={pricingTiers} />
       <TeacherSection />
@@ -263,13 +263,13 @@ export default function MewstroPage() {
             className="text-3xl md:text-4xl font-bold"
             style={{ color: mewstro.colors.text }}
           >
-            Ready to meet your new practice companion?
+            Every practice deserves an encore.
           </h2>
           <p
             className="mt-4 text-lg"
             style={{ color: mewstro.colors.textDim }}
           >
-            Download Mewstro free and start building your streak today.
+            Download Mewstro free and let the cat conductor take it from here.
           </p>
           <a
             href={mewstro.links.appStore}

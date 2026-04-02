@@ -35,9 +35,9 @@ export type Brand = {
 export const mewstro: Brand = {
   id: "mewstro",
   name: "Mewstro",
-  tagline: "Your Practice Companion",
+  tagline: "Every practice deserves an encore.",
   description:
-    "Meet Mewstro, your animated cat conductor who makes music practice actually fun. Track sessions, build streaks, and master your craft.",
+    "Practice should feel good. Mewstro makes it feel great. A free music practice app with a living cat mascot who celebrates every session — for any instrument, any level, no ads ever.",
   logo: "/mewstro/mascot.webp",
   favicon: "/mewstro/mascot.webp",
   colors: {
