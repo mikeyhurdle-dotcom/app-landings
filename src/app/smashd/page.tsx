@@ -5,7 +5,9 @@ import {
   PricingTable,
   TestimonialSection,
   ScreenshotCarousel,
+  FaqSection,
 } from "@/components/shared";
+import { SmashdJsonLd, FaqJsonLd } from "@/components/shared/JsonLd";
 import type { Feature, PricingTier, Testimonial, Screenshot } from "@/components/shared";
 
 const features: Feature[] = [
@@ -217,9 +219,39 @@ function HowItWorksSection() {
   );
 }
 
+const faqs = [
+  {
+    question: "What is an Americano tournament?",
+    answer:
+      "Americano is a padel format where 8-16 players rotate partners each round. Each match has a fixed total of 24 points (if you score 14, your opponent gets 10). Individual points are cumulated across all rounds to determine the final leaderboard.",
+  },
+  {
+    question: "Is SMASHD free?",
+    answer:
+      "Yes! SMASHD is completely free for both players and organisers. Join unlimited tournaments, submit live scores, and track your stats at no cost.",
+  },
+  {
+    question: "Do players need to download the app to join?",
+    answer:
+      "Players can join a tournament via QR code or share code. Organisers can create ghost profiles for players who don't have an account yet — they can claim their profile later.",
+  },
+  {
+    question: "How does live scoring work?",
+    answer:
+      "One player per match enters their team's score courtside. The opponent's score is auto-calculated (24 minus your score). The leaderboard updates in real-time for everyone.",
+  },
+  {
+    question: "Can I use SMASHD for my padel club?",
+    answer:
+      "Yes! Club features are coming soon, including custom club pages, recurring tournaments, member management, and analytics. Players can already discover clubs and events in the Discover tab.",
+  },
+];
+
 export default function SmashdPage() {
   return (
     <>
+      <SmashdJsonLd />
+      <FaqJsonLd faqs={faqs} />
       <HeroSection brand={smashd} />
       <FeatureGrid
         brand={smashd}
@@ -236,6 +268,7 @@ export default function SmashdPage() {
       <HowItWorksSection />
       <PricingTable brand={smashd} tiers={pricingTiers} />
       <TestimonialSection brand={smashd} testimonials={testimonials} />
+      <FaqSection brand={smashd} faqs={faqs} />
 
       {/* Final CTA */}
       <section

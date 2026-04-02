@@ -5,7 +5,9 @@ import {
   PricingTable,
   TestimonialSection,
   ScreenshotCarousel,
+  FaqSection,
 } from "@/components/shared";
+import { MewstroJsonLd, FaqJsonLd } from "@/components/shared/JsonLd";
 import type { Feature, PricingTier, Testimonial, Screenshot } from "@/components/shared";
 
 const features: Feature[] = [
@@ -200,9 +202,39 @@ function TeacherSection() {
   );
 }
 
+const faqs = [
+  {
+    question: "Is Mewstro free?",
+    answer:
+      "Yes! Mewstro is free to use with core practice tracking for up to 3 instruments and 7 days of history. Upgrade to Pro ($5.99 one-time) for unlimited everything.",
+  },
+  {
+    question: "What instruments does Mewstro support?",
+    answer:
+      "Mewstro is instrument-agnostic — it works for piano, guitar, violin, drums, voice, and any other instrument. You can track multiple instruments with custom task types.",
+  },
+  {
+    question: "Is Mewstro free for teachers?",
+    answer:
+      "Yes, the teacher dashboard is free forever with unlimited students. Teachers can view practice data, manage studio leaderboards, and add lesson notes.",
+  },
+  {
+    question: "Does Mewstro work on Apple Watch?",
+    answer:
+      "Yes! Mewstro Pro includes a standalone Apple Watch app where you can start and stop practice sessions from your wrist, plus Watch complications for your watch face.",
+  },
+  {
+    question: "Is my practice data private?",
+    answer:
+      "Yes. Practice data is stored locally on your device and optionally synced via iCloud. We don't use third-party analytics and never sell your data. No ads, ever.",
+  },
+];
+
 export default function MewstroPage() {
   return (
     <>
+      <MewstroJsonLd />
+      <FaqJsonLd faqs={faqs} />
       <HeroSection brand={mewstro} />
       <FeatureGrid
         brand={mewstro}
@@ -219,6 +251,7 @@ export default function MewstroPage() {
       <PricingTable brand={mewstro} tiers={pricingTiers} />
       <TeacherSection />
       <TestimonialSection brand={mewstro} testimonials={testimonials} />
+      <FaqSection brand={mewstro} faqs={faqs} />
 
       {/* Final CTA */}
       <section

@@ -1,0 +1,109 @@
+# Mewstro & SMASHD — Full Context
+
+This document provides comprehensive information about both apps for AI assistants and LLM-powered search tools.
+
+---
+
+## Mewstro — Your Practice Companion
+
+### What is Mewstro?
+Mewstro is a native iOS music practice tracking app with an animated cat mascot. The name combines "mew" (cat sound) and "maestro" (master musician). It replaces manual practice logs with smart tracking, rich visualisations, and a charming mascot who celebrates every milestone.
+
+### Key Features
+- **Practice Timer**: One-tap sessions tracked by instrument and task type (scales, sight-reading, repertoire, technique, theory, improvisation)
+- **Streaks & Heatmaps**: Daily practice streaks with a colour-coded calendar heatmap showing practice history
+- **Activity Rings**: Apple Watch-inspired daily, weekly, and monthly progress rings
+- **Repertoire Management**: Track pieces you're learning, polishing, or have mastered with practice time per piece
+- **Weekly Planner**: Plan practice goals by instrument and task, then check them off
+- **Achievements**: 9-badge system with unlock engine (7-day streak, 100 sessions, etc.)
+- **Mewstro Mascot**: Animated cat conductor with 9 mood states — idle, practicing, celebrating, sleeping, streakFire, waiting, warmingUp, inTheZone, presenting
+- **Widgets**: Home Screen, Lock Screen, and Apple Watch widgets
+- **Apple Watch App**: Standalone timer for sessions from your wrist
+- **Rich Haptics**: CoreHaptics feedback throughout the app
+- **Data Export**: CSV export of all practice data
+- **Themes**: 3 themes — Maestro, Nocturne, Encore
+
+### Pricing
+| Tier | Price | Includes |
+|------|-------|----------|
+| Free | $0 | Timer (3 instruments), basic logging, 7-day history, basic mascot, 1 widget |
+| Pro | $5.99 (one-time) | Unlimited instruments, full history, all widgets, Watch app, achievements, repertoire, planner, themes, export |
+| Social Pass | $1.99/month | Everything in Pro + leaderboards, share cards, community challenges |
+
+No ads. Ever.
+
+### For Teachers
+The teacher dashboard is free forever with unlimited students. Teachers can view student practice data, manage a studio leaderboard, and add lesson notes. Teachers are the distribution channel — a teacher with 30 students typically generates 5-8 Pro conversions organically.
+
+### Technical Details
+- Platform: iOS 17+, watchOS 10+, WidgetKit
+- Built with: SwiftUI, SwiftData, CloudKit sync
+- Auth: Apple Sign-In, Google Sign-In, Email (via Supabase)
+- Privacy: Data stored locally with optional iCloud sync. No third-party analytics. No ads.
+
+### Links
+- Website: https://mewstro.app
+- Privacy: https://mewstro.app/privacy
+- Support: https://mewstro.app/support
+- App Store: Coming soon
+
+### Competitor Comparison
+| App | Mewstro's Edge |
+|-----|---------------|
+| Modacity | Simpler, more fun, mascot-driven engagement |
+| Andante | Watch app, mascot, teacher distribution, richer widgets |
+| Tonara | Free for teachers (Tonara charges $12-24/mo) |
+
+Mewstro is the only practice tracker with a living mascot, Apple Watch app, rich haptics, widget ecosystem, and free teacher dashboard.
+
+---
+
+## SMASHD — The Community Hub for Padel
+
+### What is SMASHD?
+SMASHD is a mobile app for the padel community — think "Strava for padel." It handles tournament organisation, live courtside scoring, real-time leaderboards, player profiles, and club discovery. The primary format is Americano (rotating partners, fixed points per match, individual cumulative leaderboard).
+
+### Key Features
+- **Americano Tournaments**: 8-16 players, rotating partners each round, automatic fair pairing
+- **Live Scoring**: Courtside score submission with fixed-point system (24 points per match). One player submits, opponent score auto-calculated
+- **Real-time Leaderboards**: Individual cumulative points across all rounds, updated instantly via Supabase Realtime
+- **QR Code Join**: Players join tournaments via QR or share code. Ghost profiles for players without accounts
+- **Player Profiles**: Tournament history, win rate, match stats, rating progression, court side preference, equipment. Shareable public link
+- **Club Directory**: Find padel clubs, explore courts, discover upcoming events
+- **Player Stats**: Win rate, form streak, rating progression chart, competitive/friendly/tournament filters
+
+### Pricing
+| Tier | Price | Includes |
+|------|-------|----------|
+| Player | Free | Join tournaments, live scoring, player profile, stats, club directory |
+| Organiser | Free | Everything in Player + create tournaments, QR joining, score management, export |
+| Club | Coming Soon | Custom club page, recurring tournaments, member management, analytics |
+
+### Americano Tournament Format
+- N players (8-16), rotating partners each round
+- Fixed points per match (default: 24) — if Team A scores 14, Team B gets 10
+- Round-robin with maximum pairing diversity
+- Individual leaderboard = cumulative personal points across all rounds
+- Scores locked after submission; organiser can override
+
+### Technical Details
+- Native app: Expo (React Native) + TypeScript
+- Web app: React + Vite + TypeScript (playsmashd.com)
+- Backend: Supabase (PostgreSQL, Auth, Realtime) — EU West region
+- Auth: Google OAuth (PKCE) + email/password
+- Real-time: Supabase Realtime (postgres_changes + broadcast)
+
+### Brand Identity
+- Primary colour: Optic Yellow (#CCFF00)
+- Secondary: Violet (#7B2FBE)
+- Accent: Aqua Green (#00E5CC)
+- Typography: Outfit (body/headings), Space Mono (mono/labels)
+- Tone: Energetic, community-first, modern sport tech
+
+### Links
+- Landing page: https://getsmashd.app
+- Web app: https://playsmashd.com
+- Privacy: https://getsmashd.app/privacy
+- Support: https://getsmashd.app/support
+- Instagram: https://instagram.com/playsmashd
+- TikTok: https://tiktok.com/@playsmashd

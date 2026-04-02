@@ -9,6 +9,7 @@ export { TestimonialSection } from "./TestimonialSection";
 export { SupportForm } from "./SupportForm";
 export { PrivacyPolicy } from "./PrivacyPolicy";
 export { ScreenshotCarousel } from "./ScreenshotCarousel";
+export { FaqSection } from "./FaqSection";
 
 export type { Feature } from "./FeatureCard";
 export type { PricingTier } from "./PricingTable";

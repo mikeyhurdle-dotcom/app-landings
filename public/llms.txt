@@ -1,0 +1,27 @@
+# Mewstro & SMASHD
+
+This site hosts landing pages for two mobile apps.
+
+## Mewstro — Your Practice Companion
+> Music practice tracker with an animated cat mascot
+
+Mewstro is an iOS app that helps musicians build consistent practice habits. It features a one-tap practice timer, daily streak tracking, calendar heatmaps, Apple Watch-style activity rings, repertoire management, a weekly planner, and an animated cat mascot named Mewstro who reacts to your practice in real time.
+
+- Website: https://mewstro.app
+- Platform: iOS (iPhone, iPad, Apple Watch)
+- Price: Free (Pro upgrade $5.99 one-time, Social Pass $1.99/month)
+- Teacher dashboard: Free forever — unlimited students
+- Privacy policy: https://mewstro.app/privacy
+- Support: https://mewstro.app/support
+
+## SMASHD — The Community Hub for Padel
+> Run tournaments, score live, climb leaderboards
+
+SMASHD is a mobile app for running Americano-format padel tournaments. Organisers create tournaments, players join via QR code, scores are submitted courtside in real-time, and leaderboards update instantly. Player profiles track tournament history, win rate, and rating progression.
+
+- Website: https://getsmashd.app
+- Web app: https://playsmashd.com
+- Platform: iOS, Android (planned)
+- Price: Free for players and organisers
+- Privacy policy: https://getsmashd.app/privacy
+- Support: https://getsmashd.app/support
