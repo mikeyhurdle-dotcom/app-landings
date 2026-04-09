@@ -3,12 +3,11 @@ import {
   HeroSection,
   FeatureGrid,
   PricingTable,
-  TestimonialSection,
   ScreenshotCarousel,
   FaqSection,
 } from "@/components/shared";
 import { MewstroJsonLd, FaqJsonLd } from "@/components/shared/JsonLd";
-import type { Feature, PricingTier, Testimonial, Screenshot } from "@/components/shared";
+import type { Feature, PricingTier, Screenshot } from "@/components/shared";
 
 const features: Feature[] = [
   {
@@ -132,26 +131,10 @@ const screenshots: Screenshot[] = [
   },
 ];
 
-const testimonials: Testimonial[] = [
-  {
-    quote:
-      "Mewstro has completely transformed my students' practice habits. They actually want to practise now!",
-    author: "Coming Soon",
-    role: "Piano Teacher",
-  },
-  {
-    quote:
-      "The streak feature is addictive in the best way. I've practised every day for 3 months straight.",
-    author: "Coming Soon",
-    role: "Guitar Student",
-  },
-  {
-    quote:
-      "Finally a practice app that's beautiful, simple, and doesn't try to sell me a subscription every 5 minutes.",
-    author: "Coming Soon",
-    role: "Violin Player",
-  },
-];
+// Testimonials intentionally omitted for v1 launch. We will not use fabricated
+// quotes with placeholder authors — real quotes will be added once Mewstro has
+// real users who have opted in to being featured. See Docs/Architecture/
+// Outreach-Drafts-Apr2026.md for the honesty rules driving this decision.
 
 function TeacherSection() {
   return (
@@ -226,7 +209,7 @@ const faqs = [
   {
     question: "Is my practice data private?",
     answer:
-      "Yes. Practice data is stored locally on your device and optionally synced via iCloud. We don't use third-party analytics and never sell your data. No ads, ever.",
+      "Yes. Practice data is stored locally on your device and optionally synced via iCloud. We use TelemetryDeck for privacy-first, anonymised usage analytics — no personally identifiable information, no IP tracking, no cross-app identifiers, no ads, ever. We never sell your data. Full details in our privacy policy.",
   },
 ];
 
@@ -250,7 +233,6 @@ export default function MewstroPage() {
       />
       <PricingTable brand={mewstro} tiers={pricingTiers} />
       <TeacherSection />
-      <TestimonialSection brand={mewstro} testimonials={testimonials} />
       <FaqSection brand={mewstro} faqs={faqs} />
 
       {/* Final CTA */}

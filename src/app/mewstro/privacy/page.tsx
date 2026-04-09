@@ -15,7 +15,7 @@ const sections = [
   {
     title: "Information We Collect",
     content:
-      "Practice session data (duration, instrument, task type) is stored locally on your device using Apple's SwiftData framework and synced via iCloud if you choose to enable it.\n\nIf you create an account, we collect your email address and display name via Apple Sign-In, Google Sign-In, or email/password registration through Supabase Auth.\n\nWe do not collect any analytics data beyond what Apple provides through App Store Connect. We use os_log for debugging, which stays on your device.",
+      "Practice session data (duration, instrument, task type) is stored locally on your device using Apple's SwiftData framework and synced via iCloud if you choose to enable it.\n\nIf you create an account, we collect your email address and display name via Apple Sign-In, Google Sign-In, or email/password registration through Supabase Auth.\n\nWe use TelemetryDeck for privacy-first analytics — it collects anonymised, aggregated usage signals (such as which screens are opened and how often sessions are logged) with no personally identifiable information, no IP address tracking, and no cross-app identifiers. You can read TelemetryDeck's privacy practices at telemetrydeck.com. We additionally use Apple's os_log for on-device debugging, which never leaves your device.\n\nWe do not sell, rent, or share any of this data with advertisers or data brokers, and Mewstro does not contain third-party advertising SDKs.",
   },
   {
     title: "How We Use Your Information",
