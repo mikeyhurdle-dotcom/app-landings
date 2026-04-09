@@ -148,6 +148,32 @@ const commitments = [
   },
 ];
 
+function BuiltWithTeachersCard() {
+  return (
+    <div className="rounded-2xl border border-[#E8DFD3] bg-white p-8 shadow-sm">
+      <div className="flex items-start gap-4">
+        <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-[#2D8B7E] text-2xl">
+          🎹
+        </div>
+        <div>
+          <h3 className="text-lg font-bold">
+            Built with music teachers, not for them
+          </h3>
+          <p className="mt-2 text-sm text-[#5A4E42]">
+            Every Mewstro feature has to pass the &ldquo;would a real
+            teacher actually use this?&rdquo; test before it ships. The
+            product is being shaped in a working music studio with a
+            professional teacher — not designed in a spreadsheet. Once
+            our founding pilot studio has been using Mewstro in real
+            lessons for long enough to have an informed view, a real
+            testimonial will live here.
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function MewstroPricingPage() {
   return (
     <div className="min-h-screen bg-[#FFFBF7] text-[#1A1A2E]">
@@ -255,28 +281,21 @@ export default function MewstroPricingPage() {
         </div>
       </section>
 
-      {/* Ellie partnership */}
+      {/* Built with teachers — testimonial slot */}
+      {/*
+       * This section is structured to host a real teacher testimonial once
+       * our founding pilot studio has been using Mewstro for long enough
+       * to give one. Do NOT add placeholder quotes, fabricated names, or
+       * "Coming Soon" testimonials here (see Phase B rule: every quote on
+       * this page has to come from a real teacher who has opted in).
+       *
+       * To add a real testimonial, replace the <BuiltWithTeachers /> card
+       * below with a quote card containing the teacher's words, their
+       * first name, their studio name, and ideally a photo.
+       */}
       <section className="px-6 pb-16">
         <div className="mx-auto max-w-4xl">
-          <div className="rounded-2xl border border-[#E8DFD3] bg-white p-8 shadow-sm">
-            <div className="flex items-start gap-4">
-              <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-[#2D8B7E] text-2xl">
-                🎹
-              </div>
-              <div>
-                <h3 className="text-lg font-bold">
-                  Built in partnership with Ellie Moorhouse
-                </h3>
-                <p className="mt-2 text-sm text-[#5A4E42]">
-                  Ellie is Mewstro&apos;s founding teacher partner. Her studio
-                  is the first to use the app in real lessons, and she gets
-                  the Studio tier free for 12 months as co-designer. Every
-                  feature decision goes through her first. After month 12 she
-                  moves onto the standard Studio plan, same as everyone else.
-                </p>
-              </div>
-            </div>
-          </div>
+          <BuiltWithTeachersCard />
         </div>
       </section>
 
