@@ -1,5 +1,8 @@
 import { isTeacherLoggedIn } from "@/lib/teacher-auth";
-import { getStudioOverview } from "@/lib/teacher-queries";
+import {
+  getStudioOverview,
+  getAssignmentSummary,
+} from "@/lib/teacher-queries";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 
@@ -59,7 +62,10 @@ export default async function TeacherDashboardPage() {
     redirect("/teacher/login");
   }
 
-  const overview = await getStudioOverview();
+  const [overview, assignmentSummary] = await Promise.all([
+    getStudioOverview(),
+    getAssignmentSummary(),
+  ]);
 
   return (
     <div className="mx-auto max-w-6xl px-6 py-10">
@@ -123,6 +129,44 @@ export default async function TeacherDashboardPage() {
           subtext="per active student"
         />
       </div>
+
+      {/* Assignments banner */}
+      <Link
+        href="/teacher/assignments"
+        className="mb-8 block rounded-2xl border border-[#2D8B7E]/30 bg-[#2D8B7E]/5 p-5 shadow-sm hover:border-[#2D8B7E]/60 hover:bg-[#2D8B7E]/10 transition-colors"
+      >
+        <div className="flex items-center justify-between gap-4">
+          <div className="flex items-center gap-4">
+            <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-[#2D8B7E] text-xl text-white">
+              📝
+            </div>
+            <div>
+              <p className="text-xs uppercase tracking-wider text-[#6B7280]">
+                Assignments
+              </p>
+              <p className="mt-0.5 text-lg font-bold text-[#1A1A2E]">
+                {assignmentSummary.activeCount} active{" "}
+                {assignmentSummary.activeCount === 1 ? "task" : "tasks"}
+                {assignmentSummary.totalTargets > 0 && (
+                  <span className="ml-2 text-sm font-normal text-[#6B7280]">
+                    · {assignmentSummary.totalCompleted}/
+                    {assignmentSummary.totalTargets} completed (
+                    {assignmentSummary.completionPct}%)
+                  </span>
+                )}
+              </p>
+            </div>
+          </div>
+          <div className="flex items-center gap-2 text-sm font-semibold text-[#2D8B7E]">
+            <span>
+              {assignmentSummary.activeCount === 0
+                ? "Create your first"
+                : "View all"}
+            </span>
+            <span>→</span>
+          </div>
+        </div>
+      </Link>
 
       {/* Student table */}
       <div className="overflow-hidden rounded-2xl border border-[#E8DFD3] bg-white shadow-sm">

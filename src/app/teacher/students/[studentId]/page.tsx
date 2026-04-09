@@ -4,6 +4,7 @@ import {
   type SessionRow,
   type RepertoireRow,
   type MilestoneRow,
+  type StudentAssignmentRow,
 } from "@/lib/teacher-queries";
 import { notFound, redirect } from "next/navigation";
 import Link from "next/link";
@@ -222,6 +223,31 @@ export default async function StudentDetailPage({
         <Heatmap data={student.heatmap} />
       </div>
 
+      {/* Assignments */}
+      {student.assignments.length > 0 && (
+        <div className="mb-10 rounded-2xl border border-[#E8DFD3] bg-white p-6 shadow-sm">
+          <div className="mb-4 flex items-center justify-between">
+            <h2 className="text-lg font-semibold">
+              Assignments{" "}
+              <span className="font-normal text-sm text-[#6B7280]">
+                ({student.assignments.length})
+              </span>
+            </h2>
+            <Link
+              href="/teacher/assignments"
+              className="text-xs font-medium text-[#2D8B7E] hover:underline"
+            >
+              Manage all →
+            </Link>
+          </div>
+          <div className="space-y-3">
+            {student.assignments.map((a) => (
+              <StudentAssignmentCard key={a.id} assignment={a} />
+            ))}
+          </div>
+        </div>
+      )}
+
       {/* Two-column: Repertoire + Recent sessions */}
       <div className="mb-10 grid gap-6 lg:grid-cols-2">
         {/* Repertoire */}
@@ -286,6 +312,81 @@ export default async function StudentDetailPage({
           </div>
         </div>
       )}
+    </div>
+  );
+}
+
+function StudentAssignmentCard({
+  assignment,
+}: {
+  assignment: StudentAssignmentRow;
+}) {
+  const isComplete = assignment.completedAt !== null;
+
+  const dueState = (() => {
+    if (!assignment.dueDate) return null;
+    const due = new Date(assignment.dueDate + "T23:59:59");
+    const now = new Date();
+    const diffDays = Math.floor(
+      (due.getTime() - now.getTime()) / (1000 * 60 * 60 * 24),
+    );
+    if (isComplete) return null;
+    if (diffDays < 0) return { label: `Overdue ${Math.abs(diffDays)}d`, tone: "red" as const };
+    if (diffDays === 0) return { label: "Due today", tone: "amber" as const };
+    if (diffDays <= 2) return { label: `Due in ${diffDays}d`, tone: "amber" as const };
+    return { label: `Due in ${diffDays}d`, tone: "neutral" as const };
+  })();
+
+  const toneStyles = {
+    red: "bg-red-50 text-red-700 border-red-200",
+    amber: "bg-amber-50 text-amber-700 border-amber-200",
+    neutral: "bg-gray-50 text-gray-600 border-gray-200",
+  };
+
+  return (
+    <div
+      className={`rounded-xl border p-4 ${
+        isComplete
+          ? "border-[#2D8B7E]/30 bg-[#2D8B7E]/5"
+          : "border-[#E8DFD3] bg-[#FFFBF7]"
+      }`}
+    >
+      <div className="flex items-start justify-between gap-3">
+        <div className="flex-1 min-w-0">
+          <div className="flex items-center gap-2">
+            {isComplete && (
+              <span className="flex h-5 w-5 items-center justify-center rounded-full bg-[#2D8B7E] text-white text-[11px] font-bold">
+                ✓
+              </span>
+            )}
+            <p className="font-semibold text-[#1A1A2E] truncate">
+              {assignment.title}
+            </p>
+          </div>
+          {assignment.description && (
+            <p className="mt-1.5 text-sm text-[#5A4E42] line-clamp-2">
+              {assignment.description}
+            </p>
+          )}
+          {isComplete && assignment.completionNotes && (
+            <p className="mt-2 text-xs italic text-[#2D8B7E]">
+              &ldquo;{assignment.completionNotes}&rdquo;
+            </p>
+          )}
+        </div>
+        {dueState && (
+          <span
+            className={`flex-shrink-0 inline-flex items-center rounded-full border px-2 py-0.5 text-[10px] font-medium ${toneStyles[dueState.tone]}`}
+          >
+            {dueState.label}
+          </span>
+        )}
+        {isComplete && (
+          <span className="flex-shrink-0 text-[10px] font-medium text-[#2D8B7E]">
+            Done
+          </span>
+        )}
+      </div>
     </div>
   );
 }

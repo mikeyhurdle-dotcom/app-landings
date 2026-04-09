@@ -90,6 +90,44 @@ export interface StudentDetail extends StudentSummary {
   milestones: MilestoneRow[];
   /** Map of YYYY-MM-DD → total minutes for the last 90 days */
   heatmap: Record<string, number>;
+  assignments: StudentAssignmentRow[];
+}
+
+// ─── Assignment types ──────────────────────────────────────────────────
+
+export interface AssignmentRow {
+  id: string;
+  title: string;
+  description: string | null;
+  dueDate: string | null;
+  createdAt: string;
+  targetCount: number;
+  completedCount: number;
+  targets: { userId: string; displayName: string }[];
+  completions: {
+    userId: string;
+    displayName: string;
+    completedAt: string;
+    notes: string | null;
+  }[];
+}
+
+export interface StudentAssignmentRow {
+  id: string;
+  title: string;
+  description: string | null;
+  dueDate: string | null;
+  createdAt: string;
+  completedAt: string | null;
+  completionNotes: string | null;
+}
+
+export interface AssignmentSummary {
+  activeCount: number;
+  totalTargets: number;
+  totalCompleted: number;
+  /** Rolling completion rate across all active assignments (0-100) */
+  completionPct: number;
 }
 
 /**
@@ -360,6 +398,9 @@ export async function getStudentDetail(
     new Set(last30.map((s) => s.instrument_type)),
   );
 
+  // Pull assignments targeted at this student + their completion status
+  const studentAssignments = await getAssignmentsForStudent(userId);
+
   return {
     userId,
     displayName: membership.display_name_override ?? "Student",
@@ -404,5 +445,228 @@ export async function getStudentDetail(
       durationSeconds: m.duration_seconds,
     })),
     heatmap,
+    assignments: studentAssignments,
   };
+}
+
+// ─── Assignment queries ────────────────────────────────────────────────
+
+/**
+ * All assignments for a studio, most recent first, with target and
+ * completion details joined in.
+ */
+export async function getAssignmentsForStudio(
+  studioName: string = ELLIE_STUDIO_NAME,
+): Promise<AssignmentRow[]> {
+  const supabase = getServerSupabase();
+
+  // Resolve studio id
+  const { data: studio } = await supabase
+    .from("mewstro_studios")
+    .select("id")
+    .eq("studio_name", studioName)
+    .single();
+
+  if (!studio) return [];
+
+  // Pull assignments for the studio
+  const { data: assignments, error } = await supabase
+    .from("mewstro_assignments")
+    .select("id, title, description, due_date, created_at")
+    .eq("studio_id", studio.id)
+    .order("created_at", { ascending: false });
+
+  if (error || !assignments) return [];
+
+  if (assignments.length === 0) return [];
+
+  const ids = assignments.map((a) => a.id);
+
+  // Pull every target and completion for this set of assignments
+  const [{ data: targets }, { data: completions }, { data: memberships }] =
+    await Promise.all([
+      supabase
+        .from("mewstro_assignment_targets")
+        .select("assignment_id, student_user_id")
+        .in("assignment_id", ids),
+      supabase
+        .from("mewstro_assignment_completions")
+        .select(
+          "assignment_id, student_user_id, completed_at, notes",
+        )
+        .in("assignment_id", ids),
+      supabase
+        .from("mewstro_leaderboard_memberships")
+        .select("user_id, display_name_override")
+        .eq("studio_name", studioName),
+    ]);
+
+  const nameFor = (userId: string): string => {
+    const row = memberships?.find((m) => m.user_id === userId);
+    return row?.display_name_override ?? "Student";
+  };
+
+  return assignments.map((a) => {
+    const aTargets = (targets ?? []).filter(
+      (t) => t.assignment_id === a.id,
+    );
+    const aCompletions = (completions ?? []).filter(
+      (c) => c.assignment_id === a.id,
+    );
+    return {
+      id: a.id,
+      title: a.title,
+      description: a.description,
+      dueDate: a.due_date,
+      createdAt: a.created_at,
+      targetCount: aTargets.length,
+      completedCount: aCompletions.length,
+      targets: aTargets.map((t) => ({
+        userId: t.student_user_id,
+        displayName: nameFor(t.student_user_id),
+      })),
+      completions: aCompletions.map((c) => ({
+        userId: c.student_user_id,
+        displayName: nameFor(c.student_user_id),
+        completedAt: c.completed_at,
+        notes: c.notes,
+      })),
+    };
+  });
+}
+
+/**
+ * Assignments targeted at a specific student, with their own completion
+ * state joined in.
+ */
+export async function getAssignmentsForStudent(
+  studentUserId: string,
+): Promise<StudentAssignmentRow[]> {
+  const supabase = getServerSupabase();
+
+  // Assignment ids the student is targeted by
+  const { data: targets } = await supabase
+    .from("mewstro_assignment_targets")
+    .select("assignment_id")
+    .eq("student_user_id", studentUserId);
+
+  const assignmentIds = (targets ?? []).map((t) => t.assignment_id);
+  if (assignmentIds.length === 0) return [];
+
+  const [{ data: assignments }, { data: completions }] = await Promise.all([
+    supabase
+      .from("mewstro_assignments")
+      .select("id, title, description, due_date, created_at")
+      .in("id", assignmentIds)
+      .order("created_at", { ascending: false }),
+    supabase
+      .from("mewstro_assignment_completions")
+      .select("assignment_id, completed_at, notes")
+      .in("assignment_id", assignmentIds)
+      .eq("student_user_id", studentUserId),
+  ]);
+
+  return (assignments ?? []).map((a) => {
+    const completion = (completions ?? []).find(
+      (c) => c.assignment_id === a.id,
+    );
+    return {
+      id: a.id,
+      title: a.title,
+      description: a.description,
+      dueDate: a.due_date,
+      createdAt: a.created_at,
+      completedAt: completion?.completed_at ?? null,
+      completionNotes: completion?.notes ?? null,
+    };
+  });
+}
+
+/**
+ * Summary stats across all of a studio's assignments — for the main
+ * dashboard stat card.
+ */
+export async function getAssignmentSummary(
+  studioName: string = ELLIE_STUDIO_NAME,
+): Promise<AssignmentSummary> {
+  const assignments = await getAssignmentsForStudio(studioName);
+  const activeCount = assignments.length;
+  const totalTargets = assignments.reduce(
+    (sum, a) => sum + a.targetCount,
+    0,
+  );
+  const totalCompleted = assignments.reduce(
+    (sum, a) => sum + a.completedCount,
+    0,
+  );
+  const completionPct =
+    totalTargets > 0
+      ? Math.round((totalCompleted / totalTargets) * 100)
+      : 0;
+  return { activeCount, totalTargets, totalCompleted, completionPct };
+}
+
+/**
+ * Create a new assignment, target it at students, in one transaction-ish
+ * flow. Called from the create form server action.
+ */
+export async function createAssignment(args: {
+  studioName: string;
+  title: string;
+  description: string | null;
+  dueDate: string | null; // ISO date string or null
+  studentUserIds: string[];
+}): Promise<{ ok: true; id: string } | { ok: false; error: string }> {
+  const supabase = getServerSupabase();
+
+  // Resolve studio
+  const { data: studio, error: studioErr } = await supabase
+    .from("mewstro_studios")
+    .select("id, teacher_email")
+    .eq("studio_name", args.studioName)
+    .single();
+
+  if (studioErr || !studio) {
+    return { ok: false, error: "Studio not found" };
+  }
+
+  // Insert assignment — use a placeholder teacher_user_id for the demo
+  // since we don't have real teacher auth yet. The column is still
+  // NOT NULL so we pass the same placeholder used in the seed data.
+  const placeholderTeacherId = "00000000-0000-0000-0000-000000000001";
+
+  const { data: created, error: insertErr } = await supabase
+    .from("mewstro_assignments")
+    .insert({
+      studio_id: studio.id,
+      teacher_user_id: placeholderTeacherId,
+      title: args.title,
+      description: args.description,
+      due_date: args.dueDate,
+    })
+    .select("id")
+    .single();
+
+  if (insertErr || !created) {
+    return { ok: false, error: insertErr?.message ?? "Insert failed" };
+  }
+
+  // Insert targets
+  if (args.studentUserIds.length > 0) {
+    const rows = args.studentUserIds.map((uid) => ({
+      assignment_id: created.id,
+      student_user_id: uid,
+    }));
+    const { error: targetErr } = await supabase
+      .from("mewstro_assignment_targets")
+      .insert(rows);
+    if (targetErr) {
+      return {
+        ok: false,
+        error: `Assignment created but targets failed: ${targetErr.message}`,
+      };
+    }
+  }
+
+  return { ok: true, id: created.id };
 }
