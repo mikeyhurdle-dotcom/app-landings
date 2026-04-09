@@ -1,20 +1,11 @@
-import { verifyPasswordAndLogin, isTeacherLoggedIn } from "@/lib/teacher-auth";
+import { isTeacherLoggedIn } from "@/lib/teacher-auth";
 import { redirect } from "next/navigation";
+import { loginAction } from "./actions";
 
 export const metadata = {
   title: "Sign in · Mewstro Teacher",
   robots: { index: false, follow: false },
 };
-
-async function loginAction(formData: FormData) {
-  "use server";
-  const password = (formData.get("password") as string | null)?.trim() ?? "";
-  const ok = await verifyPasswordAndLogin(password);
-  if (ok) {
-    redirect("/teacher");
-  }
-  redirect("/teacher/login?error=1");
-}
 
 export default async function TeacherLoginPage({
   searchParams,
