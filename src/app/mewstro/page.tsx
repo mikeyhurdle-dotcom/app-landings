@@ -1,99 +1,50 @@
+import Link from "next/link";
 import { mewstro } from "@/config/brands";
 import {
   HeroSection,
   FeatureGrid,
-  PricingTable,
   ScreenshotCarousel,
   FaqSection,
 } from "@/components/shared";
 import { MewstroJsonLd, FaqJsonLd } from "@/components/shared/JsonLd";
-import type { Feature, PricingTier, Screenshot } from "@/components/shared";
+import type { Feature, Screenshot } from "@/components/shared";
 
 const features: Feature[] = [
+  {
+    icon: "\uD83C\uDFB5",
+    title: "Studio Dashboard",
+    description:
+      "See every student's practice activity at a glance. Who practised, for how long, what they worked on. Click any student for the full picture.",
+  },
+  {
+    icon: "\uD83C\uDFC6",
+    title: "Studio Leaderboard",
+    description:
+      "A weekly ranking of your students by practice minutes. Tonara's teachers called this the single biggest driver of student practice — we rebuilt it with a cleaner invite flow.",
+  },
+  {
+    icon: "\uD83D\uDCF9",
+    title: "Milestone Moments",
+    description:
+      "Students capture a short video when a tricky passage finally clicks. You see every breakthrough in their detail view, not just the final result.",
+  },
   {
     icon: "\u23F1\uFE0F",
     title: "Practice Timer",
     description:
-      "Start a focused session with one tap. Track your time by instrument and task type — scales, sight-reading, repertoire, technique, and more.",
+      "Students start focused sessions with one tap, tracked by instrument and task type. Scales, sight-reading, repertoire, technique, and more.",
   },
   {
     icon: "\uD83D\uDD25",
     title: "Streaks & Heatmaps",
     description:
-      "Build daily practice streaks and watch your calendar fill with colour. See exactly when you practised and for how long at a glance.",
+      "Consecutive-day streaks and a 90-day calendar heatmap per student. Fast visual scan of who's consistent and who's slipping.",
   },
   {
-    icon: "\u2B55",
-    title: "Activity Rings",
+    icon: "\uD83D\uDCE8",
+    title: "Weekly Digest",
     description:
-      "Apple Watch-inspired daily, weekly, and monthly rings that close as you hit your goals. A beautiful way to visualise consistency.",
-  },
-  {
-    icon: "\uD83C\uDFB5",
-    title: "Repertoire Management",
-    description:
-      "Organise the pieces you're learning, polishing, or have mastered. Track practice time per piece and set target completion dates.",
-  },
-  {
-    icon: "\uD83D\uDC31",
-    title: "Mewstro the Mascot",
-    description:
-      "Your animated cat conductor reacts to your practice in real time. Watch him warm up, get in the zone, celebrate your achievements, and even fall asleep if you skip a day.",
-  },
-  {
-    icon: "\uD83D\uDCF1",
-    title: "Widgets & Watch App",
-    description:
-      "Home Screen, Lock Screen, and Apple Watch widgets keep you motivated. Start sessions from your wrist — perfect when your phone is on a music stand.",
-  },
-];
-
-const pricingTiers: PricingTier[] = [
-  {
-    name: "Free",
-    price: "$0",
-    description: "Everything you need to start building your practice habit.",
-    features: [
-      "Practice timer (3 instruments)",
-      "Basic session logging",
-      "7-day practice history",
-      "Basic mascot animations",
-      "1 Home Screen widget",
-      "Studio leaderboard",
-    ],
-    cta: "Get Started Free",
-  },
-  {
-    name: "Pro",
-    price: "$5.99",
-    period: "one-time",
-    description: "Unlock everything. Pay once, keep forever.",
-    features: [
-      "Unlimited instruments",
-      "Full practice history",
-      "All widgets & Watch app",
-      "Achievements & badges",
-      "Repertoire management",
-      "Weekly planner",
-      "Themes & data export",
-      "Full mascot experience",
-    ],
-    highlighted: true,
-    cta: "Upgrade to Pro",
-  },
-  {
-    name: "Social Pass",
-    price: "$1.99",
-    period: "/month",
-    description: "Practise with friends and compete together.",
-    features: [
-      "Everything in Pro",
-      "Leaderboards",
-      "Shareable practice cards",
-      "Community challenges",
-      "Weekly summary reports",
-    ],
-    cta: "Join the Community",
+      "A summary email every week of what your whole studio did. No dashboard login required if you just want the top line.",
   },
 ];
 
@@ -143,26 +94,29 @@ function TeacherSection() {
       style={{ backgroundColor: mewstro.colors.background }}
     >
       <div className="mx-auto max-w-6xl px-6">
-        <div className="rounded-3xl overflow-hidden" style={{ backgroundColor: mewstro.colors.accent }}>
+        <div className="rounded-3xl overflow-hidden bg-[#2D8B7E]">
           <div className="px-8 md:px-16 py-16 md:py-20 text-center md:text-left">
             <div className="max-w-2xl mx-auto md:mx-0">
               <p className="text-sm font-semibold text-white/80 uppercase tracking-wider mb-3">
-                For Teachers
+                For music teachers
               </p>
               <h2 className="text-3xl md:text-4xl font-bold text-white">
-                Free for teachers — forever
+                The practice tool your students will actually use
               </h2>
               <p className="mt-4 text-lg text-white/80 max-w-xl">
-                Set up your studio, see how your students practise, and keep everyone motivated. No cost, no catch.
+                See your whole studio&apos;s practice activity in one
+                dashboard. Built in partnership with Ellie Moorhouse, a
+                working music teacher. 30-day free trial, no card charge
+                until day 31.
               </p>
               <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {[
-                  "Unlimited students",
-                  "View practice data",
+                  "Studio dashboard on the web",
+                  "Per-student practice detail",
                   "Studio leaderboard",
-                  "Lesson notes",
-                  "Practice reminders",
-                  "Studio analytics",
+                  "Milestone Moment videos",
+                  "Weekly digest email",
+                  "One invite code per studio",
                 ].map((feature) => (
                   <div key={feature} className="flex items-center gap-2 text-white/90 text-sm">
                     <span className="text-white">&#10003;</span>
@@ -170,13 +124,20 @@ function TeacherSection() {
                   </div>
                 ))}
               </div>
-              <a
-                href={mewstro.links.appStore}
-                className="inline-block mt-10 rounded-full px-8 py-3 text-sm font-semibold bg-white transition-transform hover:scale-105"
-                style={{ color: mewstro.colors.accent }}
-              >
-                Set Up Your Studio
-              </a>
+              <div className="mt-10 flex flex-col sm:flex-row gap-3">
+                <Link
+                  href="/mewstro/pricing"
+                  className="inline-block rounded-full px-8 py-3 text-sm font-semibold bg-white text-[#2D8B7E] transition-transform hover:scale-105"
+                >
+                  See pricing
+                </Link>
+                <a
+                  href={mewstro.links.appStore}
+                  className="inline-block rounded-full px-8 py-3 text-sm font-semibold border border-white/30 text-white hover:bg-white/10 transition-colors"
+                >
+                  Get the app
+                </a>
+              </div>
             </div>
           </div>
         </div>
@@ -185,31 +146,65 @@ function TeacherSection() {
   );
 }
 
+function SoloLearnerSection() {
+  return (
+    <section className="py-16 px-6 bg-[#FFFBF7]">
+      <div className="mx-auto max-w-4xl text-center">
+        <p className="text-xs uppercase tracking-wider text-[#6B7280] mb-2">
+          No teacher? No problem.
+        </p>
+        <h2 className="text-2xl md:text-3xl font-bold" style={{ color: mewstro.colors.text }}>
+          Solo learners welcome too
+        </h2>
+        <p className="mt-4 text-base max-w-2xl mx-auto" style={{ color: mewstro.colors.textDim }}>
+          Download Mewstro free and practise at your own pace. Upgrade to
+          Premium for £6.99/mo (or £59.99/yr) to unlock Milestone Moments,
+          repertoire tracking, planner, Apple Watch, and everything else.
+          7-day free trial, no card required up front.
+        </p>
+        <div className="mt-6">
+          <Link
+            href="/mewstro/pricing"
+            className="text-sm font-semibold text-[#2D8B7E] hover:underline"
+          >
+            See all pricing options →
+          </Link>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 const faqs = [
   {
-    question: "Is Mewstro free?",
+    question: "How does teacher pricing work?",
     answer:
-      "Yes! Mewstro is free to use with core practice tracking for up to 3 instruments and 7 days of history. Upgrade to Pro ($5.99 one-time) for unlimited everything.",
+      "Teachers pay a simple monthly fee: Studio is £14.99/mo for up to 25 students, Studio Unlimited is £24.99/mo for unlimited students. Every student in your studio gets the full Mewstro experience included. Students never pay. Annual options save roughly 17%. 30-day free trial, card required at signup, no charge until day 31.",
+  },
+  {
+    question: "What do students get?",
+    answer:
+      "Everything Mewstro can do. Practice timer, streak tracking, repertoire with BPM, weekly planner, Milestone Moment videos, Apple Watch app, Siri Shortcuts, daily reminders, the full mascot experience, CSV export. Plus the community layer only they see: studio leaderboard, teacher-set challenges, and an assignment inbox.",
+  },
+  {
+    question: "What if I'm a solo learner without a teacher?",
+    answer:
+      "You can still use Mewstro. Download it free, track practice, build streaks, use the metronome. Upgrade to Premium for £6.99/mo (or £59.99/yr — saves 28%) to unlock Milestone Moments, repertoire, planner, Watch app, and everything else. Your first 7 days of Premium are free via Apple's Introductory Offer.",
   },
   {
     question: "What instruments does Mewstro support?",
     answer:
-      "Mewstro is instrument-agnostic — it works for piano, guitar, violin, drums, voice, and any other instrument. You can track multiple instruments with custom task types.",
+      "Mewstro is instrument-agnostic — piano, guitar, violin, drums, voice, brass, woodwinds, and anything else. You can track multiple instruments with custom task types.",
   },
   {
-    question: "Is Mewstro free for teachers?",
+    question: "How does the invite code work?",
     answer:
-      "Yes, the teacher dashboard is free forever with unlimited students. Teachers can view practice data, manage studio leaderboards, and add lesson notes.",
-  },
-  {
-    question: "Does Mewstro work on Apple Watch?",
-    answer:
-      "Yes! Mewstro Pro includes a standalone Apple Watch app where you can start and stop practice sessions from your wrist, plus Watch complications for your watch face.",
+      "When a teacher subscribes, they get an invite code from their dashboard. They share it with their students. Students download Mewstro, tap 'I have an invite code' during onboarding, paste the code, and the app unlocks. Apple handles the redemption through StoreKit — no card required on the student's side.",
   },
   {
     question: "Is my practice data private?",
     answer:
-      "Yes. Practice data is stored locally on your device and optionally synced via iCloud. We use TelemetryDeck for privacy-first, anonymised usage analytics — no personally identifiable information, no IP tracking, no cross-app identifiers, no ads, ever. We never sell your data. Full details in our privacy policy.",
+      "Yes. Practice data is stored locally on your device and synced to your own Supabase account. We use TelemetryDeck for privacy-first anonymised usage analytics — no personally identifiable information, no IP tracking, no cross-app identifiers, no ads ever. We never sell your data.",
   },
 ];
 
@@ -219,20 +214,20 @@ export default function MewstroPage() {
       <MewstroJsonLd />
       <FaqJsonLd faqs={faqs} />
       <HeroSection brand={mewstro} />
+      <TeacherSection />
       <FeatureGrid
         brand={mewstro}
         features={features}
-        title="Everything you need to show up and feel great"
-        subtitle="One-tap timers, streaks that stick, and a living mascot who celebrates every milestone."
+        title="Everything your studio needs in one place"
+        subtitle="Built around what actually drives practice: visibility for you, gamification for your students, and a mascot that makes showing up feel good."
       />
       <ScreenshotCarousel
         brand={mewstro}
         screenshots={screenshots}
         title="See it in action"
-        subtitle="Beautiful progress tracking that makes every session feel worth it."
+        subtitle="The dashboard you get, and the app your students use."
       />
-      <PricingTable brand={mewstro} tiers={pricingTiers} />
-      <TeacherSection />
+      <SoloLearnerSection />
       <FaqSection brand={mewstro} faqs={faqs} />
 
       {/* Final CTA */}
@@ -245,24 +240,28 @@ export default function MewstroPage() {
             className="text-3xl md:text-4xl font-bold"
             style={{ color: mewstro.colors.text }}
           >
-            Every practice deserves an encore.
+            Ready to try it with your studio?
           </h2>
           <p
             className="mt-4 text-lg"
             style={{ color: mewstro.colors.textDim }}
           >
-            Download Mewstro free and let the cat conductor take it from here.
+            30 days free. See pricing, or start your trial below.
           </p>
-          <a
-            href={mewstro.links.appStore}
-            className="inline-block mt-8 rounded-full px-8 py-4 text-base font-semibold transition-transform hover:scale-105"
-            style={{
-              backgroundColor: mewstro.colors.primary,
-              color: mewstro.colors.primaryForeground,
-            }}
-          >
-            Download on the App Store
-          </a>
+          <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
+            <Link
+              href="/mewstro/pricing"
+              className="inline-block rounded-full px-8 py-4 text-base font-semibold bg-[#2D8B7E] text-white hover:bg-[#246F64] transition-colors"
+            >
+              See pricing
+            </Link>
+            <a
+              href={mewstro.links.appStore}
+              className="inline-block rounded-full px-8 py-4 text-base font-semibold border border-[#E8DFD3] text-[#1A1A2E] bg-white hover:bg-[#FAF6EF] transition-colors"
+            >
+              Download the app
+            </a>
+          </div>
         </div>
       </section>
     </>

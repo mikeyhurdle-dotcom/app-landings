@@ -1,262 +1,334 @@
 import type { Metadata } from "next";
-import { mewstro } from "@/config/brands";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Pricing — Mewstro",
   description:
-    "Mewstro is free forever for teachers. Students get a free tier with an optional £4.99 one-time Pro upgrade. No ads, no data sales, no subscriptions required.",
+    "Mewstro is built for music teachers and their students. Teachers pay a simple monthly fee and every student in their studio gets full access included. Solo learners can subscribe directly. 30-day teacher trial, 7-day solo trial, no dark patterns.",
 };
 
-const teacherFeatures = [
-  "Full studio dashboard with live leaderboard of your students' weekly practice",
-  "See each student's weekly minutes, streak, and last-active timestamp",
-  "Lesson notes — link a Google Doc once, notes appear in-app next to sessions",
-  "Weekly digest email summarising your whole studio",
-  "Unlimited students in your studio",
-  "One shareable invite code — students type it during onboarding to join",
-  "Zero feature locks. Zero upgrade nags. Forever.",
+const teacherTiers = [
+  {
+    name: "Studio",
+    price: "£14.99",
+    period: "/ month",
+    annual: "or £149/year · saves £30",
+    description: "Up to 25 students in your studio.",
+    features: [
+      "Full teacher dashboard",
+      "See every student's practice at a glance",
+      "Studio leaderboard, ranked by weekly minutes",
+      "Practice heatmap and trends per student",
+      "Milestone Moment videos from your students",
+      "One invite code — students redeem it in the app",
+      "Every enrolled student gets full Mewstro, free",
+      "Lesson notes integration (link a Google Doc)",
+      "Weekly studio digest email",
+      "Email support",
+    ],
+    highlighted: false,
+    cta: "Start 30-day free trial",
+  },
+  {
+    name: "Studio Unlimited",
+    price: "£24.99",
+    period: "/ month",
+    annual: "or £249/year · saves £50",
+    description: "Unlimited students. For full-time teaching studios.",
+    features: [
+      "Everything in Studio",
+      "Unlimited students",
+      "Priority email support",
+      "Early access to new features",
+      "Feature requests get higher priority",
+    ],
+    highlighted: true,
+    cta: "Start 30-day free trial",
+  },
 ];
 
-const freeTier = {
-  name: "Free",
-  price: "£0",
-  period: "forever",
-  tagline: "Everything you need to build a practice habit.",
-  features: [
-    "Practice timer with task types",
-    "Session logging with mood, focus, notes",
-    "Manual entry (practice away from phone)",
-    "Up to 3 instruments",
-    "7-day practice history",
-    "Heatmap calendar + activity rings",
-    "Streak tracking",
-    "Repertoire — learning / polishing / mastered",
-    "Weekly planner",
-    "Achievements (all of them)",
-    "Mewstro mascot (4 basic moods)",
-    "1 Home Screen widget (Streak)",
-    "Metronome",
-    "Audio recording (7-day retention)",
-    "1 Milestone video per piece",
-    "Your studio leaderboard",
-    "Lesson notes from your teacher",
-    "No ads. No data sales.",
-  ],
-  highlighted: false,
-};
-
-const proTier = {
-  name: "Mewstro Pro",
-  price: "£4.99",
-  period: "one-time, yours forever",
-  tagline: "Unlock everything. Pay once. No subscription.",
-  features: [
-    "Everything in Free, plus:",
-    "Unlimited instruments",
-    "Full practice history (not just 7 days)",
-    "All 4 Home Screen widgets + Lock Screen widgets",
-    "Apple Watch app with standalone timer",
-    "Haptic metronome on Apple Watch",
-    "Premium themes (Nocturne + Encore)",
-    "CSV data export",
-    "Full mascot — all 9 moods, confetti, floating notes",
-    "30-day recording retention (up from 7)",
-    "Unlimited Milestone videos",
-    "Milestone comparison (this month vs last month)",
-  ],
-  highlighted: true,
-};
-
-const socialPassTier = {
-  name: "Social Pass",
-  price: "£1.99",
-  period: "per month",
-  tagline: "Optional subscription for the social layer.",
-  features: [
-    "Everything in Pro, plus:",
-    "Join multiple teachers' studios",
-    "Cross-studio leaderboards",
-    "Shareable practice cards (Instagram / Twitter)",
-    "Weekly summary email for you",
-    "Community-wide challenges",
-  ],
-  highlighted: false,
-};
+const soloTiers = [
+  {
+    name: "Free",
+    price: "£0",
+    period: "",
+    description: "Everything you need to build a basic practice habit.",
+    features: [
+      "Practice timer",
+      "Manual session entry",
+      "1 instrument",
+      "7-day practice history",
+      "Daily streak counter",
+      "Metronome (iPhone)",
+      "Mewstro the mascot (basic moods)",
+      "No ads, ever",
+    ],
+  },
+  {
+    name: "Premium",
+    price: "£6.99",
+    period: "/ month",
+    annual: "or £59.99/year · saves 28%",
+    description: "Everything Mewstro can do, for solo learners.",
+    features: [
+      "7-day free trial on first open",
+      "Unlimited instruments",
+      "Full practice history",
+      "Milestone Moment videos",
+      "Repertoire with BPM tracking",
+      "Weekly planner",
+      "Full stats — heatmap, trends",
+      "All 4 widgets + Lock Screen widgets",
+      "Apple Watch app + haptic metronome",
+      "Siri Shortcuts",
+      "Full mascot (all 9 moods)",
+      "CSV data export",
+    ],
+  },
+];
 
 const competitors = [
-  { name: "Mewstro", student: "Free + £4.99 once", teacher: "£0 forever", highlight: true },
-  { name: "Tonara", student: "~£5–10 / mo", teacher: "£8–19 / mo per teacher", highlight: false },
-  { name: "Modacity", student: "~£4 / mo or ~£32 / yr", teacher: "No teacher tier", highlight: false },
-  { name: "Yousician", student: "£12–17 / mo", teacher: "N/A (learning app)", highlight: false },
-  { name: "Andante", student: "£8 one-time", teacher: "No teacher tier", highlight: false },
+  {
+    name: "Mewstro",
+    student: "Free or £6.99/mo",
+    teacher: "£14.99 / £24.99 per month",
+    notes: "30-day trial · Ellie Moorhouse's Studio currently piloting",
+    highlight: true,
+  },
+  {
+    name: "Tonara (shut down 2023)",
+    student: "~£5–10/mo",
+    teacher: "£8–19/mo per teacher",
+    notes: "Closest comparable, raised $10.5M, couldn't sustain it",
+    highlight: false,
+  },
+  {
+    name: "Practice Space",
+    student: "£9.99/mo",
+    teacher: "£9.99/mo",
+    notes: "US-focused, no native iOS Milestones",
+    highlight: false,
+  },
+  {
+    name: "Better Practice",
+    student: "£9.99/mo",
+    teacher: "~£10/mo",
+    notes: "Similar shape, smaller community layer",
+    highlight: false,
+  },
+  {
+    name: "Modacity",
+    student: "£3.99/mo",
+    teacher: "—",
+    notes: "Solo-only, no teacher tier",
+    highlight: false,
+  },
 ];
 
 const commitments = [
   {
-    title: "Teachers will never pay",
-    body: "Hard-coded in the brand guide. If this ever changes, assume Mikey has been replaced by aliens.",
-  },
-  {
     title: "No ads. Ever.",
-    body: "Not banner ads. Not interstitials. Not 'sponsored practice tips'. Never.",
+    body: "Not banners, not interstitials, not sponsored practice tips. The subscription is how Mewstro pays for itself.",
   },
   {
     title: "No data sales",
-    body: "Your practice data is yours. We don't sell it, share it, or train ML models on it.",
+    body: "Your students' practice data stays private. We don't sell it, share it with music schools, or train ML models on it.",
   },
   {
     title: "No dark patterns",
-    body: "No fake free trials that auto-convert. No hidden consent. Students see what they get before they pay.",
+    body: "The 30-day teacher trial ends with a clear reminder email seven days before the first charge. No silent auto-renewal. Cancel any time from your dashboard.",
   },
   {
-    title: "If Mewstro dies, you get your data",
-    body: "We'll ship a full CSV export tool for every user — free or paid — before shutting anything down.",
+    title: "Every student covered",
+    body: "One teacher subscription covers every student in their studio (up to the tier cap). Students never pay. Parents never pay.",
+  },
+  {
+    title: "If Mewstro ever shuts down, you get your data",
+    body: "We'll publish a full CSV export tool for every user, free or paid, before anything goes offline.",
   },
 ];
 
 export default function MewstroPricingPage() {
-  const bg = mewstro.colors.background;
-  const surface = mewstro.colors.surface;
-  const primary = mewstro.colors.primary;
-  const accent = mewstro.colors.accent;
-  const text = mewstro.colors.text;
-  const textDim = mewstro.colors.textDim;
-
   return (
-    <div style={{ backgroundColor: bg, color: text }} className="min-h-screen">
+    <div className="min-h-screen bg-[#FFFBF7] text-[#1A1A2E]">
       {/* Hero */}
       <section className="pt-20 pb-12 px-6">
         <div className="mx-auto max-w-4xl text-center">
-          <p
-            className="text-sm font-semibold uppercase tracking-wider mb-4"
-            style={{ color: primary }}
-          >
+          <p className="text-sm font-semibold uppercase tracking-wider mb-4 text-[#2D8B7E]">
             Pricing
           </p>
-          <h1 className="text-4xl md:text-5xl font-bold mb-4" style={{ color: text }}>
-            Free forever for teachers.
-            <br />
-            Optional £4.99 upgrade for students.
+          <h1 className="text-4xl md:text-5xl font-bold">
+            Built for teachers.{" "}
+            <span className="text-[#2D8B7E]">Works for solo learners too.</span>
           </h1>
-          <p className="mt-6 text-lg max-w-2xl mx-auto" style={{ color: textDim }}>
-            No ads, no subscriptions required, no data sales, no dark patterns.
-            The core practice loop is free for every student, for as long as
-            they use Mewstro.
+          <p className="mt-6 text-lg max-w-2xl mx-auto text-[#6B7280]">
+            One teacher subscription covers every student in the studio.
+            Solo learners can subscribe directly. No ads, no data sales, no
+            dark patterns.
           </p>
         </div>
       </section>
 
-      {/* Teachers Hero Card */}
+      {/* Teacher tiers (primary) */}
       <section className="px-6 pb-16">
-        <div className="mx-auto max-w-4xl">
-          <div
-            className="rounded-3xl overflow-hidden"
-            style={{ backgroundColor: accent }}
-          >
-            <div className="px-8 md:px-16 py-14">
-              <div className="max-w-2xl">
-                <p className="text-sm font-semibold uppercase tracking-wider text-white/80">
-                  For music teachers
+        <div className="mx-auto max-w-5xl">
+          <div className="text-center mb-10">
+            <p className="text-xs uppercase tracking-wider text-[#6B7280] mb-2">
+              For music teachers
+            </p>
+            <h2 className="text-3xl md:text-4xl font-bold">
+              Pick your tier by studio size
+            </h2>
+            <p className="mt-3 text-[#6B7280]">
+              One decision: do you have more than 25 students?
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {teacherTiers.map((tier) => (
+              <div
+                key={tier.name}
+                className={`rounded-3xl p-8 flex flex-col ${
+                  tier.highlighted
+                    ? "bg-[#2D8B7E] text-white shadow-2xl scale-[1.02]"
+                    : "bg-white shadow-sm border border-[#E8DFD3]"
+                }`}
+              >
+                {tier.highlighted && (
+                  <span className="inline-block self-start px-3 py-1 rounded-full text-xs font-bold uppercase mb-4 bg-white text-[#2D8B7E]">
+                    Growing studios
+                  </span>
+                )}
+                <h3 className="text-2xl font-bold">{tier.name}</h3>
+                <div className="mt-4 flex items-baseline gap-2">
+                  <span className="text-5xl font-bold">{tier.price}</span>
+                  <span
+                    className={`text-sm ${tier.highlighted ? "text-white/80" : "text-[#6B7280]"}`}
+                  >
+                    {tier.period}
+                  </span>
+                </div>
+                <p
+                  className={`mt-1 text-sm ${tier.highlighted ? "text-white/80" : "text-[#6B7280]"}`}
+                >
+                  {tier.annual}
                 </p>
-                <h2 className="mt-3 text-3xl md:text-4xl font-bold text-white">
-                  £0 forever
-                </h2>
-                <p className="mt-3 text-lg text-white/90">
-                  No credit card. No trial. No upgrade prompt. Teachers are
-                  Mewstro's distribution channel, not its customers.
+                <p
+                  className={`mt-3 text-base ${tier.highlighted ? "text-white/90" : "text-[#5A4E42]"}`}
+                >
+                  {tier.description}
                 </p>
-                <ul className="mt-8 space-y-3">
-                  {teacherFeatures.map((feature) => (
-                    <li key={feature} className="flex items-start gap-3 text-white/95 text-base">
-                      <span className="text-white text-xl leading-none mt-0.5">✓</span>
-                      <span>{feature}</span>
+
+                <ul className="mt-8 space-y-3 flex-1">
+                  {tier.features.map((f) => (
+                    <li
+                      key={f}
+                      className="flex items-start gap-3 text-sm"
+                    >
+                      <span
+                        className={`mt-0.5 text-base ${tier.highlighted ? "text-white" : "text-[#2D8B7E]"}`}
+                      >
+                        ✓
+                      </span>
+                      <span>{f}</span>
                     </li>
                   ))}
                 </ul>
+
+                <div
+                  className={`mt-8 rounded-xl px-5 py-4 text-center text-sm font-semibold ${
+                    tier.highlighted
+                      ? "bg-white text-[#2D8B7E]"
+                      : "bg-[#2D8B7E] text-white"
+                  }`}
+                >
+                  {tier.cta}
+                </div>
+                <p
+                  className={`mt-3 text-xs text-center ${tier.highlighted ? "text-white/70" : "text-[#6B7280]"}`}
+                >
+                  Card required at signup. No charge for 30 days.
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Ellie partnership */}
+      <section className="px-6 pb-16">
+        <div className="mx-auto max-w-4xl">
+          <div className="rounded-2xl border border-[#E8DFD3] bg-white p-8 shadow-sm">
+            <div className="flex items-start gap-4">
+              <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-[#2D8B7E] text-2xl">
+                🎹
+              </div>
+              <div>
+                <h3 className="text-lg font-bold">
+                  Built in partnership with Ellie Moorhouse
+                </h3>
+                <p className="mt-2 text-sm text-[#5A4E42]">
+                  Ellie is Mewstro&apos;s founding teacher partner. Her studio
+                  is the first to use the app in real lessons, and she gets
+                  the Studio tier free for 12 months as co-designer. Every
+                  feature decision goes through her first. After month 12 she
+                  moves onto the standard Studio plan, same as everyone else.
+                </p>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Student Tiers */}
+      {/* Solo tiers (secondary) */}
       <section className="px-6 pb-20">
-        <div className="mx-auto max-w-6xl">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold" style={{ color: text }}>
-              For students
+        <div className="mx-auto max-w-5xl">
+          <div className="text-center mb-10">
+            <p className="text-xs uppercase tracking-wider text-[#6B7280] mb-2">
+              No teacher?
+            </p>
+            <h2 className="text-3xl md:text-4xl font-bold">
+              You can still use Mewstro
             </h2>
-            <p className="mt-3 text-lg" style={{ color: textDim }}>
-              Start with Free. Upgrade if you love it. Never feel locked out.
+            <p className="mt-3 text-[#6B7280]">
+              Solo learners can download the app for free and unlock
+              everything with Premium.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {[freeTier, proTier, socialPassTier].map((tier) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {soloTiers.map((tier) => (
               <div
                 key={tier.name}
-                className={`rounded-3xl p-8 flex flex-col ${
-                  tier.highlighted ? "shadow-2xl scale-[1.02]" : "shadow-md"
-                }`}
-                style={{
-                  backgroundColor: tier.highlighted ? primary : surface,
-                  color: tier.highlighted ? "white" : text,
-                  border: tier.highlighted ? "none" : `1px solid ${primary}22`,
-                }}
+                className="rounded-3xl p-8 bg-white shadow-sm border border-[#E8DFD3] flex flex-col"
               >
-                {tier.highlighted && (
-                  <div
-                    className="inline-block px-3 py-1 rounded-full text-xs font-bold uppercase mb-4 self-start"
-                    style={{ backgroundColor: "white", color: primary }}
-                  >
-                    Most popular
-                  </div>
-                )}
-
                 <h3 className="text-2xl font-bold">{tier.name}</h3>
                 <div className="mt-4 flex items-baseline gap-2">
                   <span className="text-5xl font-bold">{tier.price}</span>
-                  <span
-                    className="text-sm"
-                    style={{
-                      color: tier.highlighted ? "rgba(255,255,255,0.8)" : textDim,
-                    }}
-                  >
-                    {tier.period}
-                  </span>
+                  {tier.period && (
+                    <span className="text-sm text-[#6B7280]">
+                      {tier.period}
+                    </span>
+                  )}
                 </div>
-                <p
-                  className="mt-3 text-base"
-                  style={{
-                    color: tier.highlighted ? "rgba(255,255,255,0.9)" : textDim,
-                  }}
-                >
-                  {tier.tagline}
+                {tier.annual && (
+                  <p className="mt-1 text-sm text-[#6B7280]">{tier.annual}</p>
+                )}
+                <p className="mt-3 text-base text-[#5A4E42]">
+                  {tier.description}
                 </p>
-
                 <ul className="mt-8 space-y-3 flex-1">
-                  {tier.features.map((feature, idx) => {
-                    const isFirstHeader =
-                      idx === 0 && feature.startsWith("Everything in");
-                    return (
-                      <li
-                        key={feature}
-                        className={`flex items-start gap-3 text-sm ${
-                          isFirstHeader ? "font-semibold pb-2" : ""
-                        }`}
-                      >
-                        <span
-                          className="text-lg leading-none mt-0.5"
-                          style={{
-                            color: tier.highlighted ? "white" : primary,
-                          }}
-                        >
-                          {isFirstHeader ? "↑" : "✓"}
-                        </span>
-                        <span>{feature}</span>
-                      </li>
-                    );
-                  })}
+                  {tier.features.map((f) => (
+                    <li
+                      key={f}
+                      className="flex items-start gap-3 text-sm"
+                    >
+                      <span className="mt-0.5 text-base text-[#2D8B7E]">
+                        ✓
+                      </span>
+                      <span>{f}</span>
+                    </li>
+                  ))}
                 </ul>
               </div>
             ))}
@@ -264,77 +336,83 @@ export default function MewstroPricingPage() {
         </div>
       </section>
 
-      {/* Competitor comparison */}
+      {/* Teacher-invited students callout */}
       <section className="px-6 pb-20">
         <div className="mx-auto max-w-4xl">
+          <div className="rounded-3xl bg-[#2D8B7E]/5 border border-[#2D8B7E]/20 p-8 md:p-10">
+            <h2 className="text-2xl font-bold">
+              If your teacher uses Mewstro, it&apos;s already paid for
+            </h2>
+            <p className="mt-4 text-base text-[#5A4E42]">
+              Teacher-invited students get the full Mewstro experience plus
+              their studio layer (leaderboard, teacher-set challenges,
+              assignment inbox) completely free, for as long as their teacher
+              is subscribed. Just ask your teacher for the invite code and
+              redeem it during onboarding in the app.
+            </p>
+            <div className="mt-6 rounded-xl bg-white border border-[#E8DFD3] p-4 text-sm text-[#6B7280]">
+              <strong className="text-[#1A1A2E]">How it works:</strong>{" "}
+              Your teacher generates a code from their dashboard. You download
+              the app, tap &ldquo;I have an invite code&rdquo; during
+              onboarding, paste the code, and your account is unlocked. Apple
+              handles the redemption — no card, no fuss.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Competitor comparison */}
+      <section className="px-6 pb-20">
+        <div className="mx-auto max-w-5xl">
           <div className="text-center mb-10">
-            <h2 className="text-3xl md:text-4xl font-bold" style={{ color: text }}>
+            <h2 className="text-3xl md:text-4xl font-bold">
               How Mewstro compares
             </h2>
-            <p className="mt-3 text-base" style={{ color: textDim }}>
-              The UK music practice app market at a glance.
+            <p className="mt-3 text-base text-[#6B7280]">
+              Pricing in the music-practice app market.
             </p>
           </div>
-
-          <div
-            className="rounded-2xl overflow-hidden"
-            style={{ backgroundColor: surface, border: `1px solid ${primary}22` }}
-          >
+          <div className="rounded-2xl overflow-hidden border border-[#E8DFD3] bg-white">
             <table className="w-full text-left text-sm">
-              <thead>
-                <tr
-                  className="text-xs uppercase tracking-wider"
-                  style={{ backgroundColor: `${primary}08`, color: textDim }}
-                >
+              <thead className="bg-[#FAF6EF] text-xs uppercase tracking-wider text-[#6B7280]">
+                <tr>
                   <th className="px-6 py-4 font-semibold">App</th>
                   <th className="px-6 py-4 font-semibold">Student price</th>
                   <th className="px-6 py-4 font-semibold">Teacher price</th>
+                  <th className="px-6 py-4 font-semibold">Notes</th>
                 </tr>
               </thead>
-              <tbody>
-                {competitors.map((comp) => (
+              <tbody className="divide-y divide-[#E8DFD3]">
+                {competitors.map((c) => (
                   <tr
-                    key={comp.name}
-                    className="border-t"
-                    style={{
-                      borderColor: `${primary}11`,
-                      backgroundColor: comp.highlight ? `${primary}08` : "transparent",
-                    }}
+                    key={c.name}
+                    className={c.highlight ? "bg-[#2D8B7E]/5" : ""}
                   >
                     <td
-                      className="px-6 py-4"
-                      style={{
-                        color: comp.highlight ? primary : text,
-                        fontWeight: comp.highlight ? 700 : 500,
-                      }}
+                      className={`px-6 py-4 ${
+                        c.highlight
+                          ? "font-bold text-[#2D8B7E]"
+                          : "font-medium text-[#1A1A2E]"
+                      }`}
                     >
-                      {comp.name}
+                      {c.name}
                     </td>
-                    <td className="px-6 py-4" style={{ color: textDim }}>
-                      {comp.student}
-                    </td>
+                    <td className="px-6 py-4 text-[#6B7280]">{c.student}</td>
                     <td
-                      className="px-6 py-4"
-                      style={{
-                        color: comp.highlight ? primary : textDim,
-                        fontWeight: comp.highlight ? 600 : 400,
-                      }}
+                      className={`px-6 py-4 ${
+                        c.highlight ? "font-semibold text-[#2D8B7E]" : "text-[#6B7280]"
+                      }`}
                     >
-                      {comp.teacher}
+                      {c.teacher}
+                    </td>
+                    <td className="px-6 py-4 text-xs text-[#6B7280]">
+                      {c.notes}
                     </td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
-
-          <p
-            className="mt-6 text-center text-sm italic"
-            style={{ color: textDim }}
-          >
-            Mewstro is the only practice tracker in the UK market that is free
-            for teachers AND a one-time purchase for students.
-          </p>
         </div>
       </section>
 
@@ -342,31 +420,24 @@ export default function MewstroPricingPage() {
       <section className="px-6 pb-24">
         <div className="mx-auto max-w-4xl">
           <div className="text-center mb-10">
-            <h2 className="text-3xl md:text-4xl font-bold" style={{ color: text }}>
-              The honest commitments
+            <h2 className="text-3xl md:text-4xl font-bold">
+              What never changes
             </h2>
-            <p className="mt-3 text-base" style={{ color: textDim }}>
-              Promises baked into the code, not just the marketing page.
+            <p className="mt-3 text-base text-[#6B7280]">
+              These aren&apos;t marketing promises. They&apos;re baked into the
+              product.
             </p>
           </div>
-
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             {commitments.map((c) => (
               <div
                 key={c.title}
-                className="rounded-2xl p-6"
-                style={{
-                  backgroundColor: surface,
-                  border: `1px solid ${primary}22`,
-                }}
+                className="rounded-2xl bg-white p-6 border border-[#E8DFD3]"
               >
-                <h3
-                  className="text-lg font-bold mb-2"
-                  style={{ color: primary }}
-                >
+                <h3 className="text-lg font-bold mb-2 text-[#2D8B7E]">
                   {c.title}
                 </h3>
-                <p className="text-sm leading-relaxed" style={{ color: textDim }}>
+                <p className="text-sm leading-relaxed text-[#5A4E42]">
                   {c.body}
                 </p>
               </div>
@@ -376,27 +447,29 @@ export default function MewstroPricingPage() {
       </section>
 
       {/* Final CTA */}
-      <section
-        className="py-16 px-6 text-center"
-        style={{ backgroundColor: surface }}
-      >
+      <section className="py-16 px-6 text-center bg-white border-t border-[#E8DFD3]">
         <div className="mx-auto max-w-2xl">
-          <h2 className="text-3xl md:text-4xl font-bold" style={{ color: text }}>
-            Every practice deserves an encore.
+          <h2 className="text-3xl md:text-4xl font-bold">
+            Ready to try it with your studio?
           </h2>
-          <p className="mt-4 text-lg" style={{ color: textDim }}>
-            Download Mewstro free and let the cat conductor take it from here.
+          <p className="mt-4 text-lg text-[#6B7280]">
+            30 days free. Cancel any time before day 31 and you won&apos;t be
+            charged.
           </p>
-          <a
-            href={mewstro.links.appStore}
-            className="inline-block mt-8 rounded-full px-8 py-4 text-base font-semibold transition-transform hover:scale-105"
-            style={{
-              backgroundColor: primary,
-              color: mewstro.colors.primaryForeground,
-            }}
-          >
-            Download on the App Store
-          </a>
+          <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
+            <Link
+              href="/mewstro"
+              className="inline-block rounded-full px-8 py-4 text-base font-semibold bg-[#2D8B7E] text-white hover:bg-[#246F64] transition-colors"
+            >
+              Start your free trial
+            </Link>
+            <Link
+              href="/mewstro"
+              className="inline-block rounded-full px-8 py-4 text-base font-semibold border border-[#E8DFD3] text-[#1A1A2E] bg-white hover:bg-[#FAF6EF] transition-colors"
+            >
+              Learn more about Mewstro
+            </Link>
+          </div>
         </div>
       </section>
     </div>
