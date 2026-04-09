@@ -87,44 +87,6 @@ const soloTiers = [
   },
 ];
 
-const competitors = [
-  {
-    name: "Mewstro",
-    student: "Free or £6.99/mo",
-    teacher: "£14.99 / £24.99 per month",
-    notes: "30-day trial · Ellie Moorhouse's Studio currently piloting",
-    highlight: true,
-  },
-  {
-    name: "Tonara (shut down 2023)",
-    student: "~£5–10/mo",
-    teacher: "£8–19/mo per teacher",
-    notes: "Closest comparable, raised $10.5M, couldn't sustain it",
-    highlight: false,
-  },
-  {
-    name: "Practice Space",
-    student: "£9.99/mo",
-    teacher: "£9.99/mo",
-    notes: "US-focused, no native iOS Milestones",
-    highlight: false,
-  },
-  {
-    name: "Better Practice",
-    student: "£9.99/mo",
-    teacher: "~£10/mo",
-    notes: "Similar shape, smaller community layer",
-    highlight: false,
-  },
-  {
-    name: "Modacity",
-    student: "£3.99/mo",
-    teacher: "—",
-    notes: "Solo-only, no teacher tier",
-    highlight: false,
-  },
-];
-
 const commitments = [
   {
     title: "No ads. Ever.",
@@ -376,61 +338,6 @@ export default function MewstroPricingPage() {
               onboarding, paste the code, and your account is unlocked. Apple
               handles the redemption — no card, no fuss.
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Competitor comparison */}
-      <section className="px-6 pb-20">
-        <div className="mx-auto max-w-5xl">
-          <div className="text-center mb-10">
-            <h2 className="text-3xl md:text-4xl font-bold">
-              How Mewstro compares
-            </h2>
-            <p className="mt-3 text-base text-[#6B7280]">
-              Pricing in the music-practice app market.
-            </p>
-          </div>
-          <div className="rounded-2xl overflow-hidden border border-[#E8DFD3] bg-white">
-            <table className="w-full text-left text-sm">
-              <thead className="bg-[#FAF6EF] text-xs uppercase tracking-wider text-[#6B7280]">
-                <tr>
-                  <th className="px-6 py-4 font-semibold">App</th>
-                  <th className="px-6 py-4 font-semibold">Student price</th>
-                  <th className="px-6 py-4 font-semibold">Teacher price</th>
-                  <th className="px-6 py-4 font-semibold">Notes</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-[#E8DFD3]">
-                {competitors.map((c) => (
-                  <tr
-                    key={c.name}
-                    className={c.highlight ? "bg-[#2D8B7E]/5" : ""}
-                  >
-                    <td
-                      className={`px-6 py-4 ${
-                        c.highlight
-                          ? "font-bold text-[#2D8B7E]"
-                          : "font-medium text-[#1A1A2E]"
-                      }`}
-                    >
-                      {c.name}
-                    </td>
-                    <td className="px-6 py-4 text-[#6B7280]">{c.student}</td>
-                    <td
-                      className={`px-6 py-4 ${
-                        c.highlight ? "font-semibold text-[#2D8B7E]" : "text-[#6B7280]"
-                      }`}
-                    >
-                      {c.teacher}
-                    </td>
-                    <td className="px-6 py-4 text-xs text-[#6B7280]">
-                      {c.notes}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
           </div>
         </div>
       </section>
