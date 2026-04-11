@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "App Landings",
-  description: "Landing pages for Mewstro and SMASHD",
+  description: "Mewstro — Your Practice Companion",
 };
 
 export default function RootLayout({

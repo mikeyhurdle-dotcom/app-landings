@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { mewstro } from "@/config/brands";
 import {
   HeroSection,
@@ -96,7 +97,8 @@ function TeacherSection() {
       <div className="mx-auto max-w-6xl px-6">
         <div className="rounded-3xl overflow-hidden bg-[#2D8B7E]">
           <div className="px-8 md:px-16 py-16 md:py-20 text-center md:text-left">
-            <div className="max-w-2xl mx-auto md:mx-0">
+            <div className="flex flex-col md:flex-row items-center gap-12">
+            <div className="max-w-2xl mx-auto md:mx-0 flex-1">
               <p className="text-sm font-semibold text-white/80 uppercase tracking-wider mb-3">
                 For music teachers
               </p>
@@ -138,6 +140,16 @@ function TeacherSection() {
                   Get the app
                 </a>
               </div>
+            </div>
+            <div className="hidden md:block flex-shrink-0">
+              <Image
+                src="/mewstro/mascot-conducting.png"
+                alt="Mewstro conducting with baton"
+                width={240}
+                height={240}
+                className="drop-shadow-2xl"
+              />
+            </div>
             </div>
           </div>
         </div>

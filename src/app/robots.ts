@@ -8,9 +8,6 @@ export default function robots(): MetadataRoute.Robots {
         allow: "/",
       },
     ],
-    sitemap: [
-      "https://mewstro.app/sitemap.xml",
-      "https://getsmashd.app/sitemap.xml",
-    ],
+    sitemap: ["https://mewstro.com/sitemap.xml"],
   };
 }

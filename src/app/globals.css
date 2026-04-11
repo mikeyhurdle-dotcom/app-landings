@@ -3,9 +3,6 @@
 @theme inline {
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-  --font-outfit: var(--font-outfit);
-  --font-space-mono: var(--font-space-mono);
-
   /* Mewstro palette */
   --color-mewstro-primary: #F4845F;
   --color-mewstro-secondary: #F9A826;
@@ -14,16 +11,6 @@
   --color-mewstro-surface: #FFFFFF;
   --color-mewstro-text: #1A1A2E;
   --color-mewstro-dim: #6B7280;
-
-  /* SMASHD palette */
-  --color-smashd-primary: #CCFF00;
-  --color-smashd-secondary: #7B2FBE;
-  --color-smashd-accent: #00E5CC;
-  --color-smashd-magenta: #FF2D78;
-  --color-smashd-bg: #0A0A0F;
-  --color-smashd-surface: #111118;
-  --color-smashd-text: #E8E8F0;
-  --color-smashd-dim: #8888A0;
 }
 
 html {

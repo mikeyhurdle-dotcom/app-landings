@@ -30,7 +30,7 @@ const sections = [
   {
     title: "Your Rights",
     content:
-      "You can export all your practice data as CSV files from the app at any time.\n\nYou can delete your account and all associated data by contacting us at support@mewstro.app or through the app's Settings page.\n\nIf you are located in the EU, you have additional rights under GDPR including the right to access, rectification, erasure, and data portability.",
+      "You can export all your practice data as CSV files from the app at any time.\n\nYou can delete your account and all associated data by contacting us at support@mewstro.com or through the app's Settings page.\n\nIf you are located in the EU, you have additional rights under GDPR including the right to access, rectification, erasure, and data portability.",
   },
   {
     title: "Children's Privacy",
@@ -45,7 +45,7 @@ const sections = [
   {
     title: "Contact Us",
     content:
-      "If you have any questions about this Privacy Policy, please contact us at:\n\nEmail: support@mewstro.app",
+      "If you have any questions about this Privacy Policy, please contact us at:\n\nEmail: support@mewstro.com",
   },
 ];
 

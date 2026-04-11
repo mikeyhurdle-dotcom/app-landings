@@ -10,27 +10,27 @@ const sections = [
   {
     title: "Agreement",
     content:
-      "These Terms of Service (\"Terms\") govern your use of Mewstro, an iOS application for tracking music practice. By downloading, installing, or using Mewstro you agree to these Terms. If you do not agree, please do not use the app.\n\nMewstro is operated by Mikey Hurdle (\"we\", \"our\", \"us\"), a sole operator based in the United Kingdom. You can reach us at support@mewstro.app.",
+      "These Terms of Service (\"Terms\") govern your use of Mewstro, an iOS application for tracking music practice. By downloading, installing, or using Mewstro you agree to these Terms. If you do not agree, please do not use the app.\n\nMewstro is operated by Mikey Hurdle (\"we\", \"our\", \"us\"), a sole operator based in the United Kingdom. You can reach us at support@mewstro.com.",
   },
   {
     title: "What Mewstro Is",
     content:
-      "Mewstro is a free iOS app that helps musicians track practice sessions, manage repertoire, plan their practice week, and build consistent practice habits. The core experience — including the practice timer, session logging, streaks, calendar heatmap, repertoire, weekly planner, achievements, studio leaderboard, lesson notes, and the mascot — is and always will be free for students.\n\nMewstro Pro is an optional one-time purchase that unlocks additional features including unlimited instruments, full practice history, all widgets, the Apple Watch app, premium themes, data export, and extended recording retention.\n\nThe Social Pass is an optional monthly subscription that adds cross-studio leaderboards, shareable practice cards, and community challenges.\n\nMewstro is completely free for teachers with no feature gates or time limits, and this will not change.",
+      "Mewstro is an iOS app that helps musicians track practice sessions, manage repertoire, plan their practice week, and build consistent practice habits.\n\nThe free tier includes the practice timer, session logging, streaks, basic calendar history (last 7 days), one instrument, and the mascot (basic moods).\n\nMewstro Premium is an optional subscription (monthly at £6.99/mo or annual at £59.99/yr) that unlocks unlimited instruments, full practice history, repertoire management, weekly planner, all widgets, the Apple Watch app, data export, extended recording retention, and the full mascot experience. Premium subscriptions include a 7-day free trial.\n\nMewstro Studio is available to students invited by a teacher via an Apple Offer Code. Studio includes all Premium features plus the community layer: studio leaderboard, teacher-set challenges, assignment inbox, and submit-to-teacher.",
   },
   {
     title: "Your Account",
     content:
-      "To use Mewstro you create an account via Apple Sign-In, Google Sign-In, or email and password. You are responsible for keeping your account credentials safe. You must be at least 13 years old to create an account — younger users should ask a parent or guardian to set one up on their behalf.\n\nYou can delete your account at any time by emailing support@mewstro.app or through the in-app Account settings. We aim to permanently delete your data within 7 days of receiving a verified deletion request.",
+      "To use Mewstro you create an account via Apple Sign-In, Google Sign-In, or email and password. You are responsible for keeping your account credentials safe. You must be at least 13 years old to create an account — younger users should ask a parent or guardian to set one up on their behalf.\n\nYou can delete your account at any time by emailing support@mewstro.com or through the in-app Account settings. We aim to permanently delete your data within 7 days of receiving a verified deletion request.",
   },
   {
     title: "In-App Purchases & Refunds",
     content:
-      "Mewstro Pro and the Social Pass are sold through Apple's App Store using StoreKit. All payments are processed by Apple and are subject to Apple's Terms of Service.\n\nRefunds are handled directly by Apple, not by us. If you want to request a refund, use Apple's \"Report a Problem\" page at reportaproblem.apple.com within the window allowed by Apple's policies.\n\nSubscriptions (Social Pass) auto-renew by default. You can cancel auto-renewal at any time through your iOS Settings under your Apple ID → Subscriptions. Cancellation takes effect at the end of the current billing period. We do not offer pro-rated refunds for partially-used subscription periods.\n\nNon-consumable purchases (Mewstro Pro) are one-time and yours forever. If you reinstall the app or set up a new device, use \"Restore Purchases\" in the app's settings to re-enable your Pro features.",
+      "Mewstro Premium subscriptions are sold through Apple's App Store using StoreKit. All payments are processed by Apple and are subject to Apple's Terms of Service.\n\nRefunds are handled directly by Apple, not by us. If you want to request a refund, use Apple's \"Report a Problem\" page at reportaproblem.apple.com within the window allowed by Apple's policies.\n\nSubscriptions auto-renew by default. You can cancel auto-renewal at any time through your iOS Settings under your Apple ID → Subscriptions. Cancellation takes effect at the end of the current billing period. We do not offer pro-rated refunds for partially-used subscription periods.\n\nIf you reinstall the app or set up a new device, use \"Restore Purchases\" on the paywall to re-enable your Premium features.",
   },
   {
     title: "Your Content",
     content:
-      "Any practice data, notes, recordings, repertoire entries, or other content you create in Mewstro belongs to you. We do not claim ownership over your practice content.\n\nBy using the app, you grant us a limited licence to store, process, and display your content so we can provide the app's features — for example, syncing your sessions to Supabase, calculating your streak, rendering your heatmap, and showing your weekly minutes on a studio leaderboard you have joined.\n\nYou can export your practice sessions and repertoire as CSV files (with Mewstro Pro) at any time, and you can delete individual sessions, repertoire pieces, or recordings directly from the app.",
+      "Any practice data, notes, recordings, repertoire entries, or other content you create in Mewstro belongs to you. We do not claim ownership over your practice content.\n\nBy using the app, you grant us a limited licence to store, process, and display your content so we can provide the app's features — for example, syncing your sessions to Supabase, calculating your streak, rendering your heatmap, and showing your weekly minutes on a studio leaderboard you have joined.\n\nYou can export your practice sessions and repertoire as CSV files (with Mewstro Premium) at any time, and you can delete individual sessions, repertoire pieces, or recordings directly from the app.",
   },
   {
     title: "Studio Leaderboards & Teachers",
@@ -55,7 +55,7 @@ const sections = [
   {
     title: "Limitation of Liability",
     content:
-      "To the fullest extent permitted by applicable law, Mewstro and its operator are not liable for any indirect, incidental, special, consequential, or punitive damages, including but not limited to loss of practice data, loss of streak, loss of progress, loss of profits, or loss of goodwill, arising out of or related to your use of the app.\n\nOur total liability for any claim arising from these Terms or your use of Mewstro is limited to the amount you have paid us in the 12 months preceding the claim. For most users, this will be zero (free) or the one-time price of Mewstro Pro.",
+      "To the fullest extent permitted by applicable law, Mewstro and its operator are not liable for any indirect, incidental, special, consequential, or punitive damages, including but not limited to loss of practice data, loss of streak, loss of progress, loss of profits, or loss of goodwill, arising out of or related to your use of the app.\n\nOur total liability for any claim arising from these Terms or your use of Mewstro is limited to the amount you have paid us in the 12 months preceding the claim. For free-tier users, this will be zero.",
   },
   {
     title: "Changes to These Terms",
@@ -70,7 +70,7 @@ const sections = [
   {
     title: "Contact",
     content:
-      "Questions about these Terms? Email support@mewstro.app and we will reply as soon as we reasonably can.\n\nMewstro is operated by Mikey Hurdle, United Kingdom.",
+      "Questions about these Terms? Email support@mewstro.com and we will reply as soon as we reasonably can.\n\nMewstro is operated by Mikey Hurdle, United Kingdom.",
   },
 ];
 

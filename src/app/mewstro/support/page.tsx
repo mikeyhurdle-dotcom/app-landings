@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { mewstro } from "@/config/brands";
 import { SupportForm } from "@/components/shared";
 
@@ -13,6 +14,13 @@ export default function MewstroSupportPage() {
       style={{ backgroundColor: mewstro.colors.background }}
     >
       <div className="mx-auto max-w-2xl text-center mb-12">
+        <Image
+          src="/mewstro/mascot-grumpy.png"
+          alt="Mewstro looking grumpy"
+          width={120}
+          height={120}
+          className="mx-auto mb-6 drop-shadow-lg"
+        />
         <h1
           className="text-3xl md:text-4xl font-bold"
           style={{ color: mewstro.colors.text }}
@@ -24,7 +32,7 @@ export default function MewstroSupportPage() {
           style={{ color: mewstro.colors.textDim }}
         >
           Got a question, found a bug, or just want to say hello? We&apos;d love
-          to hear from you.
+          to hear from you. Mewstro&apos;s a bit grumpy about bugs too.
         </p>
       </div>
       <SupportForm brand={mewstro} />

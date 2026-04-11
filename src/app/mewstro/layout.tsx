@@ -24,20 +24,20 @@ export const metadata: Metadata = {
   authors: [{ name: "Mewstro" }],
   creator: "Mewstro",
   publisher: "Mewstro",
-  metadataBase: new URL("https://mewstro.app"),
+  metadataBase: new URL("https://mewstro.com"),
   alternates: {
     canonical: "/",
   },
   openGraph: {
     title: "Mewstro — Your Practice Companion",
     description: mewstro.description,
-    url: "https://mewstro.app",
+    url: "https://mewstro.com",
     siteName: "Mewstro",
     locale: "en_GB",
     type: "website",
     images: [
       {
-        url: "/mewstro/mascot.webp",
+        url: "/mewstro/mascot.png",
         width: 512,
         height: 512,
         alt: "Mewstro — animated cat conductor music practice companion",
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Mewstro — Your Practice Companion",
     description: mewstro.description,
-    images: ["/mewstro/mascot.webp"],
+    images: ["/mewstro/mascot.png"],
   },
   robots: {
     index: true,

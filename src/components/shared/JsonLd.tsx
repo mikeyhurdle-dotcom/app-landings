@@ -32,8 +32,8 @@ export function MewstroJsonLd() {
     "@type": "SoftwareApplication",
     name: "Mewstro — Practice Companion",
     description:
-      "Music practice tracker with animated cat mascot. Track sessions, build streaks, earn achievements, and master your craft. Free for teachers.",
-    url: "https://mewstro.app",
+      "Music practice tracker with animated cat mascot. Track sessions, build streaks, earn achievements, and master your craft.",
+    url: "https://mewstro.com",
     applicationCategory: "MusicApplication",
     operatingSystem: "iOS",
     offers: {
@@ -41,42 +41,11 @@ export function MewstroJsonLd() {
       price: "0",
       priceCurrency: "USD",
     },
-    image: "https://mewstro.app/mewstro/mascot.webp",
+    image: "https://mewstro.com/mewstro/app-icon.png",
     author: {
       "@type": "Organization",
       name: "Mewstro",
-      url: "https://mewstro.app",
-    },
-  };
-
-  return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
-    />
-  );
-}
-
-export function SmashdJsonLd() {
-  const data: SoftwareApplicationJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    name: "SMASHD — The Community Hub for Padel",
-    description:
-      "Run Americano padel tournaments, submit live scores courtside, track leaderboards, and grow your padel community. Free for players and organisers.",
-    url: "https://getsmashd.app",
-    applicationCategory: "SportsApplication",
-    operatingSystem: "iOS, Android",
-    offers: {
-      "@type": "Offer",
-      price: "0",
-      priceCurrency: "USD",
-    },
-    image: "https://getsmashd.app/smashd/logo-on-dark.png",
-    author: {
-      "@type": "Organization",
-      name: "SMASHD",
-      url: "https://getsmashd.app",
+      url: "https://mewstro.com",
     },
   };
 

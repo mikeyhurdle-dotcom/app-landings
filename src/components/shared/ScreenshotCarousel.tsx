@@ -17,22 +17,20 @@ function DeviceFrame({
   screenshot: Screenshot;
   brand: Brand;
 }) {
-  const isDark = brand.id === "smashd";
-
   return (
     <div className="flex-shrink-0 w-[260px] md:w-[280px] snap-center">
       {/* iPhone-style device frame */}
       <div
         className="relative mx-auto rounded-[40px] p-3 shadow-2xl"
         style={{
-          backgroundColor: isDark ? "#1C1C1E" : "#F5F5F7",
-          border: `3px solid ${isDark ? "#2C2C2E" : "#D1D1D6"}`,
+          backgroundColor: "#F5F5F7",
+          border: "3px solid #D1D1D6",
         }}
       >
         {/* Notch / Dynamic Island */}
         <div
           className="absolute top-0 left-1/2 -translate-x-1/2 w-[120px] h-[30px] rounded-b-2xl z-10"
-          style={{ backgroundColor: isDark ? "#1C1C1E" : "#F5F5F7" }}
+          style={{ backgroundColor: "#F5F5F7" }}
         />
 
         {/* Screen */}

@@ -91,58 +91,6 @@ export function Footer({ brand }: { brand: Brand }) {
             </ul>
           </div>
 
-          {/* Social */}
-          {brand.social && (
-            <div>
-              <p
-                className="text-sm font-semibold mb-3"
-                style={{ color: brand.colors.text }}
-              >
-                Follow Us
-              </p>
-              <ul className="space-y-2">
-                {brand.social.instagram && (
-                  <li>
-                    <a
-                      href={brand.social.instagram}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-sm hover:opacity-80 transition-colors"
-                      style={{ color: brand.colors.textDim }}
-                    >
-                      Instagram
-                    </a>
-                  </li>
-                )}
-                {brand.social.tiktok && (
-                  <li>
-                    <a
-                      href={brand.social.tiktok}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-sm hover:opacity-80 transition-colors"
-                      style={{ color: brand.colors.textDim }}
-                    >
-                      TikTok
-                    </a>
-                  </li>
-                )}
-                {brand.social.twitter && (
-                  <li>
-                    <a
-                      href={brand.social.twitter}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-sm hover:opacity-80 transition-colors"
-                      style={{ color: brand.colors.textDim }}
-                    >
-                      Twitter
-                    </a>
-                  </li>
-                )}
-              </ul>
-            </div>
-          )}
         </div>
 
         <div

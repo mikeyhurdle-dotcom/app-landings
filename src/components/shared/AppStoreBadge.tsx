@@ -8,15 +8,15 @@ export function AppStoreBadge({
   platform: "ios" | "android";
 }) {
   const href =
-    platform === "ios" ? brand.links.appStore : brand.links.playStore ?? "#";
+    platform === "ios" ? brand.links.appStore : "#";
 
   return (
     <a
       href={href}
       className="inline-flex items-center gap-3 rounded-xl px-5 py-3 transition-transform hover:scale-105"
       style={{
-        backgroundColor: brand.id === "smashd" ? "#FFFFFF" : "#000000",
-        color: brand.id === "smashd" ? "#000000" : "#FFFFFF",
+        backgroundColor: "#000000",
+        color: "#FFFFFF",
       }}
     >
       {platform === "ios" ? (

@@ -48,23 +48,29 @@ export function HeroSection({
             </p>
             <div className="mt-8 flex flex-wrap gap-4 justify-center md:justify-start">
               <AppStoreBadge brand={brand} platform="ios" />
-              {brand.links.playStore && (
-                <AppStoreBadge brand={brand} platform="android" />
-              )}
             </div>
             {children}
           </div>
 
-          {/* Image */}
-          <div className="flex-shrink-0">
+          {/* Mascot + App Icon */}
+          <div className="flex-shrink-0 relative">
             <Image
-              src={brand.logo}
-              alt={`${brand.name} logo`}
-              width={320}
-              height={320}
-              className="rounded-3xl shadow-2xl"
+              src="/mewstro/mascot-celebrating.png"
+              alt="Mewstro the cat conductor celebrating"
+              width={360}
+              height={360}
+              className="drop-shadow-2xl"
               priority
             />
+            <div className="absolute -bottom-4 -left-4">
+              <Image
+                src={brand.logo}
+                alt={`${brand.name} app icon`}
+                width={80}
+                height={80}
+                className="rounded-2xl shadow-lg"
+              />
+            </div>
           </div>
         </div>
       </div>
