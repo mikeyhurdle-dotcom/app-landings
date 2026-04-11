@@ -4,7 +4,7 @@ import { Navbar, Footer } from "@/components/shared";
 
 export const metadata: Metadata = {
   title: {
-    default: "Mewstro — Your Practice Companion",
+    default: "Mewstro — Every Practice Deserves an Encore",
     template: "%s | Mewstro",
   },
   description: mewstro.description,
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     canonical: "/",
   },
   openGraph: {
-    title: "Mewstro — Your Practice Companion",
+    title: "Mewstro — Every Practice Deserves an Encore",
     description: mewstro.description,
     url: "https://mewstro.com",
     siteName: "Mewstro",
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Mewstro — Your Practice Companion",
+    title: "Mewstro — Every Practice Deserves an Encore",
     description: mewstro.description,
     images: ["/mewstro/mascot.png"],
   },
