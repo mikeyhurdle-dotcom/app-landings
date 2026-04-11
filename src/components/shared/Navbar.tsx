@@ -51,6 +51,13 @@ export function Navbar({ brand }: { brand: Brand }) {
             Pricing
           </Link>
           <Link
+            href={`${base}/guides`}
+            className="text-sm font-medium transition-colors hover:opacity-80"
+            style={{ color: brand.colors.textDim }}
+          >
+            Guides
+          </Link>
+          <Link
             href={brand.links.support}
             className="text-sm font-medium transition-colors hover:opacity-80"
             style={{ color: brand.colors.textDim }}
@@ -113,6 +120,14 @@ export function Navbar({ brand }: { brand: Brand }) {
             style={{ color: brand.colors.textDim }}
           >
             Pricing
+          </Link>
+          <Link
+            href={`${base}/guides`}
+            onClick={() => setOpen(false)}
+            className="block text-sm font-medium"
+            style={{ color: brand.colors.textDim }}
+          >
+            Guides
           </Link>
           <Link
             href={brand.links.support}
