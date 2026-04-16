@@ -3,9 +3,11 @@ import type { Brand } from "@/config/brands";
 export function PrivacyPolicy({
   brand,
   sections,
+  title = "Privacy Policy",
 }: {
   brand: Brand;
   sections: { title: string; content: string }[];
+  title?: string;
 }) {
   return (
     <div className="mx-auto max-w-3xl prose-sm">
@@ -13,7 +15,7 @@ export function PrivacyPolicy({
         className="text-3xl md:text-4xl font-bold mb-2"
         style={{ color: brand.colors.text }}
       >
-        Privacy Policy
+        {title}
       </h1>
       <p className="text-sm mb-12" style={{ color: brand.colors.textDim }}>
         Last updated: {new Date().toLocaleDateString("en-GB", { year: "numeric", month: "long", day: "numeric" })}

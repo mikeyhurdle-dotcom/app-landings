@@ -80,7 +80,7 @@ export default function MewstroTermsPage() {
       className="py-20 px-6"
       style={{ backgroundColor: mewstro.colors.background }}
     >
-      <PrivacyPolicy brand={mewstro} sections={sections} />
+      <PrivacyPolicy brand={mewstro} sections={sections} title="Terms of Service" />
     </div>
   );
 }
