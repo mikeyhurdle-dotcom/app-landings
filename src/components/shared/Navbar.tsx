@@ -5,9 +5,57 @@ import Link from "next/link";
 import { useState } from "react";
 import type { Brand } from "@/config/brands";
 
+interface NavLink {
+  label: string;
+  href: string;
+  isExternal?: boolean;
+}
+
+function getNavConfig(brand: Brand): {
+  links: NavLink[];
+  cta: { label: string; href: string; isExternal: boolean };
+} {
+  const base = `/${brand.id}`;
+  if (brand.id === "mewstro") {
+    return {
+      links: [
+        { label: "For teachers", href: base },
+        { label: "Solo learners", href: `${base}/app` },
+        { label: "Story", href: `${base}/story` },
+        { label: "Pricing", href: `${base}/pricing` },
+        { label: "Support", href: brand.links.support },
+      ],
+      cta: {
+        label: "Apply",
+        href: `${base}/teachers/apply`,
+        isExternal: false,
+      },
+    };
+  }
+  return {
+    links: [
+      { label: "Features", href: `${base}#features` },
+      { label: "Pricing", href: `${base}#pricing` },
+      { label: "Guides", href: `${base}/guides` },
+      { label: "Support", href: brand.links.support },
+    ],
+    cta: {
+      label: "Download",
+      href: brand.links.appStore,
+      isExternal: true,
+    },
+  };
+}
+
 export function Navbar({ brand }: { brand: Brand }) {
   const [open, setOpen] = useState(false);
   const base = `/${brand.id}`;
+  const { links, cta } = getNavConfig(brand);
+
+  const CtaComponent = cta.isExternal ? "a" : Link;
+  const ctaProps = cta.isExternal
+    ? { href: cta.href }
+    : { href: cta.href };
 
   return (
     <nav
@@ -35,45 +83,27 @@ export function Navbar({ brand }: { brand: Brand }) {
         </Link>
 
         {/* Desktop links */}
-        <div className="hidden md:flex items-center gap-8">
-          <Link
-            href={`${base}#features`}
-            className="text-sm font-medium transition-colors hover:opacity-80"
-            style={{ color: brand.colors.textDim }}
-          >
-            Features
-          </Link>
-          <Link
-            href={`${base}#pricing`}
-            className="text-sm font-medium transition-colors hover:opacity-80"
-            style={{ color: brand.colors.textDim }}
-          >
-            Pricing
-          </Link>
-          <Link
-            href={`${base}/guides`}
-            className="text-sm font-medium transition-colors hover:opacity-80"
-            style={{ color: brand.colors.textDim }}
-          >
-            Guides
-          </Link>
-          <Link
-            href={brand.links.support}
-            className="text-sm font-medium transition-colors hover:opacity-80"
-            style={{ color: brand.colors.textDim }}
-          >
-            Support
-          </Link>
-          <a
-            href={brand.links.appStore}
+        <div className="hidden md:flex items-center gap-6 lg:gap-8">
+          {links.map((l) => (
+            <Link
+              key={l.label}
+              href={l.href}
+              className="text-sm font-medium transition-colors hover:opacity-80"
+              style={{ color: brand.colors.textDim }}
+            >
+              {l.label}
+            </Link>
+          ))}
+          <CtaComponent
+            {...ctaProps}
             className="rounded-full px-5 py-2 text-sm font-semibold transition-transform hover:scale-105"
             style={{
               backgroundColor: brand.colors.primary,
               color: brand.colors.primaryForeground,
             }}
           >
-            Download
-          </a>
+            {cta.label}
+          </CtaComponent>
         </div>
 
         {/* Mobile hamburger */}
@@ -105,48 +135,28 @@ export function Navbar({ brand }: { brand: Brand }) {
           className="md:hidden px-6 pb-4 space-y-3"
           style={{ backgroundColor: brand.colors.background }}
         >
-          <Link
-            href={`${base}#features`}
+          {links.map((l) => (
+            <Link
+              key={l.label}
+              href={l.href}
+              onClick={() => setOpen(false)}
+              className="block text-sm font-medium"
+              style={{ color: brand.colors.textDim }}
+            >
+              {l.label}
+            </Link>
+          ))}
+          <CtaComponent
+            {...ctaProps}
             onClick={() => setOpen(false)}
-            className="block text-sm font-medium"
-            style={{ color: brand.colors.textDim }}
-          >
-            Features
-          </Link>
-          <Link
-            href={`${base}#pricing`}
-            onClick={() => setOpen(false)}
-            className="block text-sm font-medium"
-            style={{ color: brand.colors.textDim }}
-          >
-            Pricing
-          </Link>
-          <Link
-            href={`${base}/guides`}
-            onClick={() => setOpen(false)}
-            className="block text-sm font-medium"
-            style={{ color: brand.colors.textDim }}
-          >
-            Guides
-          </Link>
-          <Link
-            href={brand.links.support}
-            onClick={() => setOpen(false)}
-            className="block text-sm font-medium"
-            style={{ color: brand.colors.textDim }}
-          >
-            Support
-          </Link>
-          <a
-            href={brand.links.appStore}
             className="block w-full text-center rounded-full px-5 py-2 text-sm font-semibold"
             style={{
               backgroundColor: brand.colors.primary,
               color: brand.colors.primaryForeground,
             }}
           >
-            Download
-          </a>
+            {cta.label}
+          </CtaComponent>
         </div>
       )}
     </nav>

@@ -27,7 +27,7 @@ const teacherTiers = [
       "Email support",
     ],
     highlighted: false,
-    cta: "Start 30-day free trial",
+    cta: "Apply for Founding Studio access",
   },
   {
     name: "Studio Unlimited",
@@ -43,7 +43,7 @@ const teacherTiers = [
       "Feature requests get higher priority",
     ],
     highlighted: true,
-    cta: "Start 30-day free trial",
+    cta: "Apply for Founding Studio access",
   },
 ];
 
@@ -223,22 +223,106 @@ export default function MewstroPricingPage() {
                   ))}
                 </ul>
 
-                <div
-                  className={`mt-8 rounded-xl px-5 py-4 text-center text-sm font-semibold ${
+                <Link
+                  href="/mewstro/teachers/apply"
+                  className={`mt-8 block rounded-xl px-5 py-4 text-center text-sm font-semibold transition-transform hover:scale-[1.02] ${
                     tier.highlighted
                       ? "bg-white text-[#2D8B7E]"
                       : "bg-[#2D8B7E] text-white"
                   }`}
                 >
                   {tier.cta}
-                </div>
+                </Link>
                 <p
                   className={`mt-3 text-xs text-center ${tier.highlighted ? "text-white/70" : "text-[#6B7280]"}`}
                 >
-                  Card required at signup. No charge for 30 days.
+                  Applications reviewed personally. Founding Studio rate 50%
+                  off for life — first 10 only.
                 </p>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Tiered founding comparison */}
+      <section className="px-6 pb-16">
+        <div className="mx-auto max-w-5xl">
+          <div className="text-center mb-10">
+            <p className="text-xs uppercase tracking-wider text-[#6B7280] mb-2">
+              The first 100 teachers
+            </p>
+            <h2 className="text-3xl md:text-4xl font-bold">
+              Three ways to join early
+            </h2>
+            <p className="mt-3 text-[#6B7280] max-w-2xl mx-auto">
+              We&apos;re opening the door in tiers. The earlier you come in,
+              the better the deal and the more say you have on where Mewstro
+              goes next.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+            <div className="rounded-3xl bg-[#2D8B7E] p-7 text-white shadow-2xl scale-[1.02]">
+              <span className="inline-block rounded-full bg-white px-3 py-1 text-xs font-bold uppercase text-[#2D8B7E]">
+                First 10
+              </span>
+              <h3 className="mt-4 text-2xl font-bold">Founding Studios</h3>
+              <p className="mt-2 text-3xl font-bold">50% off for life</p>
+              <ul className="mt-6 space-y-3 text-sm">
+                <li>✓ Locked half-price forever</li>
+                <li>✓ Direct WhatsApp with founder</li>
+                <li>✓ Quarterly roadmap call</li>
+                <li>✓ Founding Teacher badge on site &amp; in-app</li>
+                <li>✓ First say on features</li>
+              </ul>
+              <p className="mt-6 text-xs text-white/80">
+                Application + personal call. 1 of 10 reserved (Ellie).
+              </p>
+            </div>
+
+            <div className="rounded-3xl bg-white p-7 shadow-sm border border-[#E8DFD3]">
+              <span className="inline-block rounded-full bg-[#2D8B7E]/10 px-3 py-1 text-xs font-bold uppercase text-[#2D8B7E]">
+                Next 90
+              </span>
+              <h3 className="mt-4 text-2xl font-bold">Early Access</h3>
+              <p className="mt-2 text-3xl font-bold">3 months free</p>
+              <ul className="mt-6 space-y-3 text-sm text-[#5A4E42]">
+                <li>✓ First 90 days free</li>
+                <li>✓ Price locked for 2 years</li>
+                <li>✓ Early Access Teacher badge</li>
+                <li>✓ Priority email support</li>
+              </ul>
+              <p className="mt-6 text-xs text-[#6B7280]">
+                Opens once Founding cohort is full. Time-limited — closes at
+                teacher #100.
+              </p>
+            </div>
+
+            <div className="rounded-3xl bg-white p-7 shadow-sm border border-[#E8DFD3]">
+              <span className="inline-block rounded-full bg-[#FAF6EF] px-3 py-1 text-xs font-bold uppercase text-[#6B7280]">
+                From #101
+              </span>
+              <h3 className="mt-4 text-2xl font-bold">Standard</h3>
+              <p className="mt-2 text-3xl font-bold">30-day trial</p>
+              <ul className="mt-6 space-y-3 text-sm text-[#5A4E42]">
+                <li>✓ Standard monthly / annual pricing</li>
+                <li>✓ 30-day free trial</li>
+                <li>✓ Email support</li>
+                <li>✓ Self-serve onboarding</li>
+              </ul>
+              <p className="mt-6 text-xs text-[#6B7280]">
+                The normal self-serve experience — available once the first
+                100 are in.
+              </p>
+            </div>
+          </div>
+          <div className="mt-10 text-center">
+            <Link
+              href="/mewstro/teachers/apply"
+              className="inline-block rounded-full bg-[#1A1A2E] px-7 py-3 text-sm font-semibold text-white hover:opacity-90"
+            >
+              Apply for a Founding Studio slot →
+            </Link>
           </div>
         </div>
       </section>
@@ -376,24 +460,24 @@ export default function MewstroPricingPage() {
       <section className="py-16 px-6 text-center bg-white border-t border-[#E8DFD3]">
         <div className="mx-auto max-w-2xl">
           <h2 className="text-3xl md:text-4xl font-bold">
-            Ready to try it with your studio?
+            Want to be one of the first 10 studios?
           </h2>
           <p className="mt-4 text-lg text-[#6B7280]">
-            30 days free. Cancel any time before day 31 and you won&apos;t be
-            charged.
+            Founding Studios get 50% off for life, direct line to the founder,
+            and first say on features. Ten spots, by application only.
           </p>
           <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
             <Link
-              href="/mewstro"
+              href="/mewstro/teachers/apply"
               className="inline-block rounded-full px-8 py-4 text-base font-semibold bg-[#2D8B7E] text-white hover:bg-[#246F64] transition-colors"
             >
-              Start your free trial
+              Apply for Founding Studio access
             </Link>
             <Link
               href="/mewstro"
               className="inline-block rounded-full px-8 py-4 text-base font-semibold border border-[#E8DFD3] text-[#1A1A2E] bg-white hover:bg-[#FAF6EF] transition-colors"
             >
-              Learn more about Mewstro
+              Back to overview
             </Link>
           </div>
         </div>
