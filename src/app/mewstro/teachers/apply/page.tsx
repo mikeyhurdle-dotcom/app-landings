@@ -123,7 +123,7 @@ function TeacherApplyForm() {
           <p className="mt-4 text-base text-[#5A4E42]">
             Mewstro is in final pilot with our founding teacher, Ellie
             Moorhouse. Once her studio has been running on Mewstro for two
-            weeks, I&apos;ll open the first ten Founding Studio slots — and
+            weeks, I&apos;ll open the first five Founding Studio slots — and
             you&apos;ll be among the first I contact.
           </p>
           <div className="mt-8 rounded-2xl bg-[#FAF6EF] p-6 text-left text-sm text-[#5A4E42]">
@@ -141,7 +141,7 @@ function TeacherApplyForm() {
               </li>
               <li>
                 <strong>3.</strong> Founding Studios get 50% off for life,
-                direct line to me, and first say on features. Ten spots only.
+                direct line to me, and first say on features. Five spots only.
               </li>
             </ol>
           </div>
@@ -168,13 +168,13 @@ function TeacherApplyForm() {
           Founding Teacher waitlist
         </p>
         <h1 className="mt-2 text-4xl font-bold text-[#1A1A2E] md:text-5xl">
-          Be one of the first ten studios.
+          Be one of the first five studios.
         </h1>
         <p className="mt-5 text-base text-[#5A4E42] md:text-lg">
           Mewstro is in final pilot with our founding teacher. Apply now and
           I&apos;ll speak to you personally about joining the Founding
           Studios cohort — 50% off for life, direct line to me, and first say
-          on where the product goes. Ten slots, by application only.
+          on where the product goes. Five slots, by application only.
         </p>
       </div>
 

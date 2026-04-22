@@ -237,7 +237,7 @@ export default function MewstroPricingPage() {
                   className={`mt-3 text-xs text-center ${tier.highlighted ? "text-white/70" : "text-[#6B7280]"}`}
                 >
                   Applications reviewed personally. Founding Studio rate 50%
-                  off for life — first 10 only.
+                  off for life — first 5 only.
                 </p>
               </div>
             ))}
@@ -264,7 +264,7 @@ export default function MewstroPricingPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
             <div className="rounded-3xl bg-[#2D8B7E] p-7 text-white shadow-2xl scale-[1.02]">
               <span className="inline-block rounded-full bg-white px-3 py-1 text-xs font-bold uppercase text-[#2D8B7E]">
-                First 10
+                First 5
               </span>
               <h3 className="mt-4 text-2xl font-bold">Founding Studios</h3>
               <p className="mt-2 text-3xl font-bold">50% off for life</p>
@@ -276,31 +276,30 @@ export default function MewstroPricingPage() {
                 <li>✓ First say on features</li>
               </ul>
               <p className="mt-6 text-xs text-white/80">
-                Application + personal call. 1 of 10 reserved (Ellie).
+                Application + personal call. 1 of 5 reserved (Ellie).
               </p>
             </div>
 
             <div className="rounded-3xl bg-white p-7 shadow-sm border border-[#E8DFD3]">
               <span className="inline-block rounded-full bg-[#2D8B7E]/10 px-3 py-1 text-xs font-bold uppercase text-[#2D8B7E]">
-                Next 90
+                Next 20
               </span>
               <h3 className="mt-4 text-2xl font-bold">Early Access</h3>
-              <p className="mt-2 text-3xl font-bold">3 months free</p>
+              <p className="mt-2 text-3xl font-bold">Price locked 2 years</p>
               <ul className="mt-6 space-y-3 text-sm text-[#5A4E42]">
-                <li>✓ First 90 days free</li>
-                <li>✓ Price locked for 2 years</li>
+                <li>✓ Standard 30-day free trial</li>
+                <li>✓ Today&apos;s price locked for 2 years</li>
                 <li>✓ Early Access Teacher badge</li>
                 <li>✓ Priority email support</li>
               </ul>
               <p className="mt-6 text-xs text-[#6B7280]">
-                Opens once Founding cohort is full. Time-limited — closes at
-                teacher #100.
+                Opens once the Founding cohort is full. Closes at teacher #25.
               </p>
             </div>
 
             <div className="rounded-3xl bg-white p-7 shadow-sm border border-[#E8DFD3]">
               <span className="inline-block rounded-full bg-[#FAF6EF] px-3 py-1 text-xs font-bold uppercase text-[#6B7280]">
-                From #101
+                From #26
               </span>
               <h3 className="mt-4 text-2xl font-bold">Standard</h3>
               <p className="mt-2 text-3xl font-bold">30-day trial</p>
@@ -311,8 +310,8 @@ export default function MewstroPricingPage() {
                 <li>✓ Self-serve onboarding</li>
               </ul>
               <p className="mt-6 text-xs text-[#6B7280]">
-                The normal self-serve experience — available once the first
-                100 are in.
+                The normal self-serve experience — opens once the first 25
+                are in.
               </p>
             </div>
           </div>
@@ -460,11 +459,11 @@ export default function MewstroPricingPage() {
       <section className="py-16 px-6 text-center bg-white border-t border-[#E8DFD3]">
         <div className="mx-auto max-w-2xl">
           <h2 className="text-3xl md:text-4xl font-bold">
-            Want to be one of the first 10 studios?
+            Want to be one of the first 5 studios?
           </h2>
           <p className="mt-4 text-lg text-[#6B7280]">
             Founding Studios get 50% off for life, direct line to the founder,
-            and first say on features. Ten spots, by application only.
+            and first say on features. Five spots, by application only.
           </p>
           <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
             <Link

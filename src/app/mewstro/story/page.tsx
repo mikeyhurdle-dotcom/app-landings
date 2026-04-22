@@ -276,8 +276,8 @@ export default function MewstroStoryPage() {
                 Apply for a Founding Studio slot
               </h3>
               <p className="mt-3 text-sm text-[#5A4E42]">
-                Ten founding studios, 50% off for life, direct line to me.
-                Applications review personally.
+                Five founding studios, 50% off for life, direct line to me.
+                Applications reviewed personally.
               </p>
               <Link
                 href="/mewstro/teachers/apply"

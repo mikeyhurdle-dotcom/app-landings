@@ -54,7 +54,7 @@ const faqs = [
   {
     question: "Why do I need to apply, why can't I just subscribe?",
     answer:
-      "Mewstro is finishing its founding pilot with our first teacher, Ellie Moorhouse. I want to make sure everything works perfectly before taking on paying studios — so the first ten Founding Studios are hand-picked, with a personal conversation, 50% off for life, and direct input on the product. Once those ten are in, the next ninety go through Early Access (3 months free, price locked for 2 years), and after that it&apos;s standard self-serve.",
+      "Mewstro is finishing its founding pilot with our first teacher, Ellie Moorhouse. I want to make sure everything works before taking on paying studios — so the first five Founding Studios are hand-picked, with a personal conversation, 50% off for life, and direct input on the product. Once those are in, the next twenty join as Early Access — standard pricing, standard 30-day trial, but your price is locked for 2 years and you get a badge and priority support. After teacher #25 it&apos;s standard self-serve.",
   },
   {
     question: "What instruments are supported?",
@@ -89,11 +89,11 @@ function FoundingStrip() {
           </span>
           <div>
             <p className="text-sm font-semibold text-[#1A1A2E]">
-              Hand-picking our first 10 Founding Studios.
+              Hand-picking our first 5 Founding Studios.
             </p>
             <p className="text-xs text-[#5A4E42]">
               50% off for life · direct line to the founder · first say on
-              features. 1 of 10 reserved (Ellie).
+              features. 1 of 5 reserved (Ellie).
             </p>
           </div>
         </div>
@@ -639,7 +639,7 @@ function FinalCTA() {
     >
       <div className="mx-auto max-w-2xl">
         <h2 className="text-3xl font-bold text-[#1A1A2E] md:text-4xl">
-          Ten Founding Studios. One of them could be yours.
+          Five Founding Studios. One of them could be yours.
         </h2>
         <p className="mt-4 text-base text-[#5A4E42]">
           50% off for life, direct line to the founder, first say on where
