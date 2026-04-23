@@ -15,8 +15,8 @@ export default function MewstroSupportPage() {
     >
       <div className="mx-auto max-w-2xl text-center mb-12">
         <Image
-          src="/mewstro/mascot-grumpy.png"
-          alt="Mewstro looking grumpy"
+          src="/mewstro/mascot-celebrating.png"
+          alt="Mewstro waving hello"
           width={120}
           height={120}
           className="mx-auto mb-6 drop-shadow-lg"
@@ -31,8 +31,8 @@ export default function MewstroSupportPage() {
           className="mt-4 text-lg"
           style={{ color: mewstro.colors.textDim }}
         >
-          Got a question, found a bug, or just want to say hello? We&apos;d love
-          to hear from you. Mewstro&apos;s a bit grumpy about bugs too.
+          Got a question, found a bug, or just want to say hello?
+          We&apos;d love to hear from you.
         </p>
       </div>
       <SupportForm brand={mewstro} />

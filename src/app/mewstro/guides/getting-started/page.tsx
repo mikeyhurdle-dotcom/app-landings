@@ -56,44 +56,45 @@ export default function GettingStartedPage() {
               Open the app and you&apos;ll see the sign-in screen. You&apos;ve got three options:
             </p>
             <ul className="list-disc list-inside space-y-1 ml-1">
-              <li><strong>Sign in with Apple</strong> — fastest, one tap</li>
-              <li><strong>Sign in with Google</strong> — uses your Google account</li>
-              <li><strong>Email and password</strong> — enter any email address</li>
+              <li><strong>Sign in with Apple</strong>, the fastest option, one tap</li>
+              <li><strong>Sign in with Google</strong>, uses your Google account</li>
+              <li><strong>Email and password</strong>, enter any email address</li>
             </ul>
-            <p>Pick whichever you prefer. They all work the same way once you&apos;re in.</p>
+            <p>Pick whichever you prefer, they all work the same way once you&apos;re in.</p>
             <ScreenshotPlaceholder label="Sign-in screen" />
           </Step>
 
           <Step number={3} title="Choose your instrument">
             <p>
-              Mewstro asks which instrument you play. Pick your main one — you can
-              always add more later in Settings. Free accounts get one instrument;
-              Premium unlocks unlimited.
+              Mewstro asks which instrument you play. Pick your main one, and
+              you can always add more later in Settings. Free accounts get
+              one instrument, Premium unlocks unlimited.
             </p>
             <ScreenshotPlaceholder label="Instrument picker in onboarding" />
           </Step>
 
           <Step number={4} title="Enter an invite code (if your teacher gave you one)">
             <p>
-              If your music teacher uses Mewstro, they&apos;ll give you an invite
-              code. Tap &ldquo;I have an invite code&rdquo; and paste it in. This
-              unlocks everything for free — the full app, plus your teacher&apos;s
-              studio leaderboard.
+              If your music teacher uses Mewstro, they&apos;ll give you an
+              invite code. Tap &ldquo;I have an invite code&rdquo; and paste
+              it in. This unlocks everything for free, the full app plus
+              your teacher&apos;s studio leaderboard.
             </p>
             <p>
-              No code? No worries — just tap &ldquo;Skip&rdquo; and you&apos;ll
-              start on the free tier. You can upgrade to Premium any time.
+              No code, no worries. Just tap &ldquo;Skip&rdquo; and
+              you&apos;ll start on the free tier. You can upgrade to
+              Premium any time.
             </p>
             <ScreenshotPlaceholder label="Invite code screen" />
           </Step>
 
           <Step number={5} title="Start your first session">
             <p>
-              You&apos;re in! Tap the big <strong>Start</strong> button on the
-              Practice tab. The timer starts running. Pick what you&apos;re
-              working on — scales, sight-reading, repertoire, or whatever fits.
-              When you&apos;re done, tap <strong>Stop</strong> and Mewstro saves
-              the session.
+              You&apos;re in. Tap the big <strong>Start</strong> button on
+              the Practice tab, and the timer starts running. Pick what
+              you&apos;re working on, scales, sight-reading, repertoire, or
+              whatever fits. When you&apos;re done, tap <strong>Stop</strong>{" "}
+              and Mewstro saves the session.
             </p>
             <p>
               That&apos;s it. You&apos;ve logged your first practice. Mewstro the

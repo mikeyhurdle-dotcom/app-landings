@@ -14,7 +14,7 @@ import type { Feature, Screenshot } from "@/components/shared";
 export const metadata: Metadata = {
   title: "Mewstro for solo learners",
   description:
-    "Mewstro is a free music practice app with a living cat mascot who celebrates every session — for any instrument, any level, no ads ever. Premium £6.99/mo unlocks everything.",
+    "Mewstro is a free music practice app with a cat mascot who celebrates every session you log. Any instrument, any level, always ad-free. Premium at £6.99/mo unlocks everything.",
 };
 
 const features: Feature[] = [
@@ -22,37 +22,37 @@ const features: Feature[] = [
     icon: "⏱️",
     title: "Practice timer",
     description:
-      "One-tap sessions, tracked by instrument and task type. Scales, sight-reading, repertoire, technique — log it all without the admin.",
+      "One-tap sessions, tracked by instrument and task type. Scales, sight-reading, repertoire, technique, all logged without the admin overhead.",
   },
   {
     icon: "🔥",
     title: "Streaks & heatmap",
     description:
-      "A consecutive-day streak and a 90-day calendar heatmap so you can see the shape of your practice at a glance.",
+      "A consecutive-day streak and a 90-day calendar heatmap, so you can see the shape of your practice at a glance rather than just the last session.",
   },
   {
     icon: "🎨",
     title: "Mewstro the cat mascot",
     description:
-      "Nine moods, confetti, floating notes. Celebrates when you show up, sleeps when you rest — never guilt-trips you.",
+      "Nine moods, with confetti and floating notes when you&apos;re on form. Mewstro celebrates when you show up and sleeps when you rest, and never guilt-trips you for missing a day.",
   },
   {
     icon: "🎼",
     title: "Repertoire & BPM",
     description:
-      "Track every piece you&apos;re learning, from sight-read-through to performance-ready. Log BPM targets as you bring them up.",
+      "Track every piece you&apos;re learning, from sight-read-through to performance-ready. Log BPM targets as you bring them up, so you can actually see the needle move on the hard sections.",
   },
   {
     icon: "⌚️",
     title: "Apple Watch + widgets",
     description:
-      "Start a session from your Watch. Glance a Lock Screen widget. Full Home Screen widget ecosystem.",
+      "Start a session from your Watch. Glance a Lock Screen widget. Full Home Screen widget ecosystem if you want it on your main view.",
   },
   {
     icon: "📹",
     title: "Milestone Moments",
     description:
-      "Catch the moment a tricky passage finally clicks. Save short video clips and watch your progress compound over time.",
+      "Catch the moment a tricky passage finally clicks. Save short video clips and watch your progress compound over time in a library of small wins.",
   },
 ];
 
@@ -93,27 +93,27 @@ const faqs = [
   {
     question: "What does Free include?",
     answer:
-      "The practice timer, manual entry, one instrument, a 7-day practice history, streak counter, the metronome, and Mewstro the mascot with basic moods. No ads, ever. If that&apos;s all you need, Free stays Free.",
+      "The practice timer, manual session entry, one instrument, a 7-day practice history, the streak counter, a metronome, and Mewstro the mascot with his basic moods. Mewstro stays ad-free whether you&apos;re on Free or Premium. If that&apos;s all you need, Free stays Free.",
   },
   {
     question: "What do I get with Premium?",
     answer:
-      "Unlimited instruments, full practice history, Milestone Moment videos, repertoire with BPM, weekly planner, all widgets, the Apple Watch app with haptic metronome, Siri Shortcuts, the full nine-mood mascot, themes, and CSV export. £6.99/mo or £59.99/yr (saves 28%). Your first 7 days are free via Apple&apos;s Introductory Offer.",
+      "Unlimited instruments, full practice history, Milestone Moment videos, repertoire tracking with BPM, a weekly planner, all the widgets, the Apple Watch app with haptic metronome, Siri Shortcuts, the full nine-mood mascot, themes, and CSV data export. It&apos;s £6.99/mo or £59.99/yr which saves you 28%. Your first 7 days are free via Apple&apos;s Introductory Offer.",
   },
   {
     question: "Does my teacher use Mewstro?",
     answer:
-      "If they do, it&apos;s already paid for. Ask them for your studio&apos;s invite code — tap &lsquo;I have an invite code&rsquo; on first open, paste it in, and your account unlocks. Students never pay when invited by a teacher.",
+      "If they do, it&apos;s already paid for. Ask them for your studio&apos;s invite code, then tap &lsquo;I have an invite code&rsquo; on first open, paste the code in, and your account unlocks. Students never pay anything when they&apos;re invited by a teacher.",
   },
   {
     question: "What instruments does Mewstro support?",
     answer:
-      "Any of them. Piano, guitar, voice, violin, drums, brass, woodwind — Mewstro is instrument-agnostic and lets you track multiple instruments with custom task types.",
+      "Any of them. Piano, guitar, voice, violin, drums, brass, woodwind, and anything else you might be learning. Mewstro is instrument-agnostic and lets you track multiple instruments with custom task types for each.",
   },
   {
     question: "Is my practice data private?",
     answer:
-      "Yes. Sessions are stored on your device and synced to your own account. We use TelemetryDeck for privacy-first anonymised usage analytics — no personally identifiable information, no IP tracking, no ads, ever. We never sell your data.",
+      "Yes. Sessions are stored on your device and synced to your own account. The analytics we use is TelemetryDeck, which is anonymised and privacy-first by design, so there&apos;s nothing that identifies you individually, nothing that tracks your IP, and nothing shared with advertisers anywhere. I don&apos;t sell your data.",
   },
 ];
 
@@ -130,9 +130,9 @@ function TeacherEscapeHatch() {
               If they do, it&apos;s already paid for.
             </h2>
             <p className="mt-3 text-sm text-[#5A4E42]">
-              Teacher-invited students get the full Mewstro experience free
-              for as long as their teacher is subscribed. Just ask for the
-              studio&apos;s invite code.
+              Teacher-invited students get the full Mewstro experience
+              free for as long as their teacher is subscribed. Just ask
+              your teacher for the studio&apos;s invite code.
             </p>
           </div>
           <Link
@@ -160,7 +160,7 @@ function SoloPricingBand() {
             Solo learner pricing
           </p>
           <h2 className="mt-2 text-3xl font-bold text-[#1A1A2E] md:text-4xl">
-            Free to start. Premium when you&apos;re ready.
+            Free to start, Premium when you&apos;re ready.
           </h2>
         </div>
         <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2">
@@ -176,7 +176,7 @@ function SoloPricingBand() {
               <li>✓ 7-day practice history</li>
               <li>✓ Daily streak counter</li>
               <li>✓ Mewstro (basic moods)</li>
-              <li>✓ No ads, ever</li>
+              <li>✓ Ad-free, always</li>
             </ul>
           </div>
           <div className="rounded-3xl bg-[#2D8B7E] p-8 text-white shadow-2xl">
@@ -192,7 +192,7 @@ function SoloPricingBand() {
               </span>
             </p>
             <p className="mt-1 text-sm text-white/80">
-              or £59.99/year · saves 28%
+              or £59.99/year, saves you 28%
             </p>
             <p className="mt-3 text-sm text-white/90">
               Everything Mewstro can do. 7-day free trial via Apple.
@@ -242,9 +242,12 @@ function FounderCard() {
               Started piano at 40. Built the app my teacher inspired.
             </h2>
             <p className="mt-3 text-sm text-[#5A4E42]">
-              I&apos;m Mikey. I started piano just before my 40th birthday,
-              built elaborate practice spreadsheets, and my teacher Ellie
-              suggested I turn them into an app.
+              I&apos;m Mikey. I started piano just before my 40th
+              birthday, second time really, the first try at school
+              didn&apos;t stick. I built a spreadsheet to track my
+              practice because that&apos;s how I work day-to-day, and
+              my teacher Ellie saw it and reckoned her other students
+              would want something similar.
             </p>
             <Link
               href="/mewstro/story"
@@ -268,13 +271,13 @@ export default function MewstroSoloPage() {
         brand={mewstro}
         features={features}
         title="Everything you need to practise better"
-        subtitle="Practice should feel good. Mewstro makes it feel great — for any instrument, any level."
+        subtitle="Practice should feel good. Mewstro is built to make it feel that way, for any instrument and any level."
       />
       <ScreenshotCarousel
         brand={mewstro}
         screenshots={screenshots}
         title="See it in action"
-        subtitle="Widgets, Watch, mascot. All in one app."
+        subtitle="Widgets, Watch, and the mascot, all in one app."
       />
       <FounderCard />
       <TeacherEscapeHatch />
@@ -291,8 +294,8 @@ export default function MewstroSoloPage() {
             Ready to practise?
           </h2>
           <p className="mt-4 text-lg text-[#6B7280]">
-            Download Mewstro free. Upgrade to Premium when you&apos;re ready
-            for the full experience.
+            Download Mewstro free. Upgrade to Premium when you&apos;re
+            ready for the full experience.
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:justify-center">
             <a

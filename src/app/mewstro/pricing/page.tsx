@@ -4,7 +4,7 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "Pricing — Mewstro",
   description:
-    "Mewstro is built for music teachers and their students. Teachers pay a simple monthly fee and every student in their studio gets full access included. Solo learners can subscribe directly. 30-day teacher trial, 7-day solo trial, no dark patterns.",
+    "Mewstro is built for music teachers and their students. Teachers pay one simple monthly fee and every student in their studio gets full access included. Solo learners can subscribe directly. 30-day teacher trial, 7-day solo trial, honest pricing, easy to cancel.",
 };
 
 const teacherTiers = [
@@ -12,7 +12,7 @@ const teacherTiers = [
     name: "Studio",
     price: "£14.99",
     period: "/ month",
-    annual: "or £149/year · saves £30",
+    annual: "or £149/year, saves you £30",
     description: "Up to 25 students in your studio.",
     features: [
       "Full teacher dashboard",
@@ -20,8 +20,8 @@ const teacherTiers = [
       "Studio leaderboard, ranked by weekly minutes",
       "Practice heatmap and trends per student",
       "Milestone Moment videos from your students",
-      "One invite code — students redeem it in the app",
-      "Every enrolled student gets full Mewstro, free",
+      "One invite code that your students redeem inside the app",
+      "Every enrolled student gets full Mewstro included",
       "Lesson notes integration (link a Google Doc)",
       "Weekly studio digest email",
       "Email support",
@@ -33,7 +33,7 @@ const teacherTiers = [
     name: "Studio Unlimited",
     price: "£24.99",
     period: "/ month",
-    annual: "or £249/year · saves £50",
+    annual: "or £249/year, saves you £50",
     description: "Unlimited students. For full-time teaching studios.",
     features: [
       "Everything in Studio",
@@ -61,14 +61,14 @@ const soloTiers = [
       "Daily streak counter",
       "Metronome (iPhone)",
       "Mewstro the mascot (basic moods)",
-      "No ads, ever",
+      "Ad-free, always",
     ],
   },
   {
     name: "Premium",
     price: "£6.99",
     period: "/ month",
-    annual: "or £59.99/year · saves 28%",
+    annual: "or £59.99/year, saves you 28%",
     description: "Everything Mewstro can do, for solo learners.",
     features: [
       "7-day free trial on first open",
@@ -77,7 +77,7 @@ const soloTiers = [
       "Milestone Moment videos",
       "Repertoire with BPM tracking",
       "Weekly planner",
-      "Full stats — heatmap, trends",
+      "Full stats, including heatmap and trends",
       "All 4 widgets + Lock Screen widgets",
       "Apple Watch app + haptic metronome",
       "Siri Shortcuts",
@@ -89,24 +89,24 @@ const soloTiers = [
 
 const commitments = [
   {
-    title: "No ads. Ever.",
-    body: "Not banners, not interstitials, not sponsored practice tips. The subscription is how Mewstro pays for itself.",
+    title: "Your subscription is the only thing paying for this",
+    body: "There won&apos;t be banner ads, interstitials, or sponsored practice tips sneaking in. Teacher subscriptions and solo Premium are how I keep the lights on here.",
   },
   {
-    title: "No data sales",
-    body: "Your students' practice data stays private. We don't sell it, share it with music schools, or train ML models on it.",
+    title: "Your student data isn&apos;t a product",
+    body: "I don&apos;t sell it, share it with music schools, or train any machine learning models on it. It stays with you and your studio.",
   },
   {
-    title: "No dark patterns",
-    body: "The 30-day teacher trial ends with a clear reminder email seven days before the first charge. No silent auto-renewal. Cancel any time from your dashboard.",
+    title: "Honest pricing, easy to cancel",
+    body: "The 30-day teacher trial ends with a clear reminder email seven days before the first charge. No silent auto-renewal, no hoops to jump through. One-click cancel from your dashboard whenever you need to.",
   },
   {
-    title: "Every student covered",
-    body: "One teacher subscription covers every student in their studio (up to the tier cap). Students never pay. Parents never pay.",
+    title: "One subscription, all your students",
+    body: "Every student in your studio gets full Mewstro, up to whatever tier cap you&apos;re on. There&apos;s nothing for students or their parents to pay on top of that.",
   },
   {
-    title: "If Mewstro ever shuts down, you get your data",
-    body: "We'll publish a full CSV export tool for every user, free or paid, before anything goes offline.",
+    title: "If Mewstro ever has to shut down, you still get your data",
+    body: "If things go sideways and I have to close Mewstro down, I&apos;ll ship a full CSV export tool first for every user, free and paid, before anything goes offline. That&apos;s a hard commitment I&apos;ve made to myself and to Ellie.",
   },
 ];
 
@@ -119,16 +119,16 @@ function BuiltWithTeachersCard() {
         </div>
         <div>
           <h3 className="text-lg font-bold">
-            Built with music teachers, not for them
+            This was designed inside a working music studio
           </h3>
           <p className="mt-2 text-sm text-[#5A4E42]">
-            Every Mewstro feature has to pass the &ldquo;would a real
-            teacher actually use this?&rdquo; test before it ships. The
-            product is being shaped in a working music studio with a
-            professional teacher — not designed in a spreadsheet. Once
-            our founding pilot studio has been using Mewstro in real
-            lessons for long enough to have an informed view, a real
-            testimonial will live here.
+            Every teacher-facing feature has to pass the &ldquo;would
+            Ellie actually use this with her own studio?&rdquo; test
+            before it goes out. Ellie Moorhouse is my own piano teacher
+            and the founding pilot, and the whole app has been shaped
+            by how she actually teaches. Once her studio has been on
+            Mewstro for long enough to have a real view on it, her own
+            words will live here.
           </p>
         </div>
       </div>
@@ -150,9 +150,10 @@ export default function MewstroPricingPage() {
             <span className="text-[#2D8B7E]">Works for solo learners too.</span>
           </h1>
           <p className="mt-6 text-lg max-w-2xl mx-auto text-[#6B7280]">
-            One teacher subscription covers every student in the studio.
-            Solo learners can subscribe directly. No ads, no data sales, no
-            dark patterns.
+            One teacher subscription covers every student in the studio,
+            and solo learners can subscribe directly. I&apos;ve kept the
+            pricing simple and the terms honest, nothing hidden and
+            nothing clever.
           </p>
         </div>
       </section>
@@ -168,7 +169,8 @@ export default function MewstroPricingPage() {
               Pick your tier by studio size
             </h2>
             <p className="mt-3 text-[#6B7280]">
-              One decision: do you have more than 25 students?
+              Basically comes down to how many students you teach. More
+              than 25, or 25 and under.
             </p>
           </div>
 
@@ -236,8 +238,8 @@ export default function MewstroPricingPage() {
                 <p
                   className={`mt-3 text-xs text-center ${tier.highlighted ? "text-white/70" : "text-[#6B7280]"}`}
                 >
-                  Applications reviewed personally. Founding Studio rate 50%
-                  off for life — first 5 only.
+                  Applications reviewed personally. Founding Studio rate
+                  gets you 50% off for life, first five studios only.
                 </p>
               </div>
             ))}
@@ -256,9 +258,9 @@ export default function MewstroPricingPage() {
               Three ways to join early
             </h2>
             <p className="mt-3 text-[#6B7280] max-w-2xl mx-auto">
-              We&apos;re opening the door in tiers. The earlier you come in,
-              the better the deal and the more say you have on where Mewstro
-              goes next.
+              I&apos;m opening the door in tiers. The earlier you come in,
+              the better the deal and the more say you have on where
+              Mewstro goes next.
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
@@ -270,13 +272,14 @@ export default function MewstroPricingPage() {
               <p className="mt-2 text-3xl font-bold">50% off for life</p>
               <ul className="mt-6 space-y-3 text-sm">
                 <li>✓ Locked half-price forever</li>
-                <li>✓ Direct WhatsApp with founder</li>
+                <li>✓ Direct WhatsApp with me</li>
                 <li>✓ Quarterly roadmap call</li>
                 <li>✓ Founding Teacher badge on site &amp; in-app</li>
                 <li>✓ First say on features</li>
               </ul>
               <p className="mt-6 text-xs text-white/80">
-                Application + personal call. 1 of 5 reserved (Ellie).
+                Application plus a personal call. 1 of 5 reserved for
+                Ellie.
               </p>
             </div>
 
@@ -293,7 +296,8 @@ export default function MewstroPricingPage() {
                 <li>✓ Priority email support</li>
               </ul>
               <p className="mt-6 text-xs text-[#6B7280]">
-                Opens once the Founding cohort is full. Closes at teacher #25.
+                Opens once the Founding cohort is full. Closes once
+                teacher #25 is in.
               </p>
             </div>
 
@@ -310,8 +314,8 @@ export default function MewstroPricingPage() {
                 <li>✓ Self-serve onboarding</li>
               </ul>
               <p className="mt-6 text-xs text-[#6B7280]">
-                The normal self-serve experience — opens once the first 25
-                are in.
+                The normal self-serve experience, open once the first 25
+                teachers are in.
               </p>
             </div>
           </div>
@@ -355,7 +359,7 @@ export default function MewstroPricingPage() {
               You can still use Mewstro
             </h2>
             <p className="mt-3 text-[#6B7280]">
-              Solo learners can download the app for free and unlock
+              Solo learners can download the app for free, and unlock
               everything with Premium.
             </p>
           </div>
@@ -408,18 +412,20 @@ export default function MewstroPricingPage() {
               If your teacher uses Mewstro, it&apos;s already paid for
             </h2>
             <p className="mt-4 text-base text-[#5A4E42]">
-              Teacher-invited students get the full Mewstro experience plus
-              their studio layer (leaderboard, teacher-set challenges,
-              assignment inbox) completely free, for as long as their teacher
-              is subscribed. Just ask your teacher for the invite code and
-              redeem it during onboarding in the app.
+              Teacher-invited students get the full Mewstro experience
+              plus their studio layer (leaderboard, teacher-set
+              challenges, assignment inbox), all completely free for as
+              long as their teacher is subscribed. Just ask your teacher
+              for the invite code and redeem it during onboarding in the
+              app.
             </p>
             <div className="mt-6 rounded-xl bg-white border border-[#E8DFD3] p-4 text-sm text-[#6B7280]">
               <strong className="text-[#1A1A2E]">How it works:</strong>{" "}
-              Your teacher generates a code from their dashboard. You download
-              the app, tap &ldquo;I have an invite code&rdquo; during
-              onboarding, paste the code, and your account is unlocked. Apple
-              handles the redemption — no card, no fuss.
+              Your teacher generates a code from their dashboard. You
+              download the app, tap &ldquo;I have an invite code&rdquo;
+              during onboarding, paste the code, and your account
+              unlocks. Apple handles the redemption behind the scenes,
+              so you don&apos;t have to enter any card details.
             </div>
           </div>
         </div>
@@ -430,11 +436,11 @@ export default function MewstroPricingPage() {
         <div className="mx-auto max-w-4xl">
           <div className="text-center mb-10">
             <h2 className="text-3xl md:text-4xl font-bold">
-              What never changes
+              A few things I&apos;ve decided on
             </h2>
             <p className="mt-3 text-base text-[#6B7280]">
-              These aren&apos;t marketing promises. They&apos;re baked into the
-              product.
+              These aren&apos;t marketing promises, they&apos;re things
+              I&apos;ve decided on and aren&apos;t changing.
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
@@ -443,12 +449,14 @@ export default function MewstroPricingPage() {
                 key={c.title}
                 className="rounded-2xl bg-white p-6 border border-[#E8DFD3]"
               >
-                <h3 className="text-lg font-bold mb-2 text-[#2D8B7E]">
-                  {c.title}
-                </h3>
-                <p className="text-sm leading-relaxed text-[#5A4E42]">
-                  {c.body}
-                </p>
+                <h3
+                  className="text-lg font-bold mb-2 text-[#2D8B7E]"
+                  dangerouslySetInnerHTML={{ __html: c.title }}
+                />
+                <p
+                  className="text-sm leading-relaxed text-[#5A4E42]"
+                  dangerouslySetInnerHTML={{ __html: c.body }}
+                />
               </div>
             ))}
           </div>
@@ -462,8 +470,9 @@ export default function MewstroPricingPage() {
             Want to be one of the first 5 studios?
           </h2>
           <p className="mt-4 text-lg text-[#6B7280]">
-            Founding Studios get 50% off for life, direct line to the founder,
-            and first say on features. Five spots, by application only.
+            Founding Studios get 50% off for life, a direct line to me,
+            and first say on where Mewstro goes next. Five spots, by
+            application only.
           </p>
           <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
             <Link

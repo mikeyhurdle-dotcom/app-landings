@@ -35,20 +35,17 @@ export const metadata: Metadata = {
     siteName: "Mewstro",
     locale: "en_GB",
     type: "website",
-    images: [
-      {
-        url: "/mewstro/mascot.png",
-        width: 512,
-        height: 512,
-        alt: "Mewstro — animated cat conductor music practice companion",
-      },
-    ],
+    // images intentionally omitted — resolved via the file-based
+    // `src/app/mewstro/opengraph-image.tsx`, which generates a 1200×630
+    // dynamic card at request time. Per-route overrides can be added by
+    // dropping an `opengraph-image.tsx` into any sub-route folder.
   },
   twitter: {
     card: "summary_large_image",
     title: "Mewstro — Every Practice Deserves an Encore",
     description: mewstro.description,
-    images: ["/mewstro/mascot.png"],
+    // images intentionally omitted — same reasoning; Next auto-uses the
+    // OG image for twitter:image when `card: summary_large_image`.
   },
   robots: {
     index: true,

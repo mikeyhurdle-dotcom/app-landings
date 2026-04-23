@@ -31,7 +31,7 @@ export const mewstro: Brand = {
   name: "Mewstro",
   tagline: "Every practice deserves an encore.",
   description:
-    "Practice should feel good. Mewstro makes it feel great. A free music practice app with a living cat mascot who celebrates every session — for any instrument, any level, no ads ever.",
+    "Practice should feel good. Mewstro is built to make it feel that way, whatever instrument you're learning and whatever level you're at. Free to download, with a cat mascot that celebrates every session you log, and the app stays ad-free.",
   logo: "/mewstro/app-icon.png",
   favicon: "/mewstro/app-icon.png",
   colors: {

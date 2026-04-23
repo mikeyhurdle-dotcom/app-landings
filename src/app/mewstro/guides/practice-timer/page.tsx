@@ -31,10 +31,10 @@ export default function PracticeTimerPage() {
           <section>
             <h2 className="text-xl font-bold text-[#1A1A2E] mb-3">Starting a session</h2>
             <p className="text-[#5A4E42] text-sm leading-relaxed">
-              Open the app and tap <strong>Start</strong> on the Practice tab.
-              The timer starts counting immediately. You&apos;ll see your
-              instrument and task type at the top — these help you track
-              what kind of practice you did.
+              Open the app and tap <strong>Start</strong> on the Practice
+              tab. The timer starts counting immediately, and you&apos;ll
+              see your instrument and task type at the top. These help
+              you track what kind of practice you actually did.
             </p>
             <ScreenshotPlaceholder label="Practice tab with Start button" />
           </section>
@@ -45,16 +45,17 @@ export default function PracticeTimerPage() {
               Before you start (or during a session), pick what you&apos;re working on:
             </p>
             <ul className="text-[#5A4E42] text-sm leading-relaxed list-disc list-inside space-y-1 ml-1">
-              <li><strong>Scales &amp; arpeggios</strong> — warm-ups, finger exercises</li>
-              <li><strong>Sight-reading</strong> — playing something for the first time</li>
-              <li><strong>Repertoire</strong> — pieces you&apos;re learning or polishing</li>
-              <li><strong>Technique</strong> — specific skills like dynamics, pedalling, bowing</li>
-              <li><strong>Theory</strong> — reading, writing, or listening exercises</li>
-              <li><strong>Free practice</strong> — improvising, noodling, just playing</li>
+              <li><strong>Scales &amp; arpeggios</strong>, warm-ups and finger exercises</li>
+              <li><strong>Sight-reading</strong>, playing something for the first time</li>
+              <li><strong>Repertoire</strong>, pieces you&apos;re learning or polishing</li>
+              <li><strong>Technique</strong>, specific skills like dynamics, pedalling, or bowing</li>
+              <li><strong>Theory</strong>, reading, writing, or listening exercises</li>
+              <li><strong>Free practice</strong>, improvising, noodling, just playing</li>
             </ul>
             <p className="text-[#5A4E42] text-sm leading-relaxed mt-3">
-              This isn&apos;t just a label — your teacher can see what you&apos;ve
-              been focusing on, and it helps you spot patterns in your own practice.
+              This isn&apos;t just a label. Your teacher can see what
+              you&apos;ve been focusing on, and it helps you spot
+              patterns in your own practice over time.
             </p>
             <ScreenshotPlaceholder label="Task type picker" />
           </section>

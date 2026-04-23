@@ -121,10 +121,11 @@ function TeacherApplyForm() {
             You&apos;re on the Founding Teacher waitlist.
           </h1>
           <p className="mt-4 text-base text-[#5A4E42]">
-            Mewstro is in final pilot with our founding teacher, Ellie
-            Moorhouse. Once her studio has been running on Mewstro for two
-            weeks, I&apos;ll open the first five Founding Studio slots — and
-            you&apos;ll be among the first I contact.
+            Mewstro is in final pilot with Ellie Moorhouse, my own piano
+            teacher and founding studio. Once her studio has been running
+            on Mewstro for two weeks, I&apos;ll open the first five
+            Founding Studio slots, and you&apos;ll be among the first
+            people I contact.
           </p>
           <div className="mt-8 rounded-2xl bg-[#FAF6EF] p-6 text-left text-sm text-[#5A4E42]">
             <p className="font-semibold text-[#1A1A2E]">
@@ -132,21 +133,22 @@ function TeacherApplyForm() {
             </p>
             <ol className="mt-3 space-y-2">
               <li>
-                <strong>1.</strong> Our founding pilot wraps (2–3 weeks from
-                now).
+                <strong>1.</strong> Our founding pilot with Ellie wraps up
+                (2&ndash;3 weeks from now).
               </li>
               <li>
-                <strong>2.</strong> I email you personally to set up a 15-minute
-                call, in order of application.
+                <strong>2.</strong> I email you personally to set up a
+                15-minute call, in order of application.
               </li>
               <li>
                 <strong>3.</strong> Founding Studios get 50% off for life,
-                direct line to me, and first say on features. Five spots only.
+                a direct line to me, and first say on where Mewstro goes
+                next. Five spots only.
               </li>
             </ol>
           </div>
           <p className="mt-8 text-sm text-[#6B7280]">
-            In the meantime — if you&apos;d like to read the story behind
+            In the meantime, if you&apos;d like to read the story behind
             Mewstro, it&apos;s{" "}
             <Link
               href="/mewstro/story"
@@ -171,10 +173,11 @@ function TeacherApplyForm() {
           Be one of the first five studios.
         </h1>
         <p className="mt-5 text-base text-[#5A4E42] md:text-lg">
-          Mewstro is in final pilot with our founding teacher. Apply now and
-          I&apos;ll speak to you personally about joining the Founding
-          Studios cohort — 50% off for life, direct line to me, and first say
-          on where the product goes. Five slots, by application only.
+          Mewstro is in final pilot with my own piano teacher Ellie as our
+          founding studio. Apply now and I&apos;ll speak to you personally
+          about joining the Founding Studios cohort. You get 50% off for
+          life, a direct line to me, and first say on where the product
+          goes next. Five slots, by application only.
         </p>
       </div>
 
@@ -312,7 +315,7 @@ function TeacherApplyForm() {
         {/* How heard */}
         <Field
           label="How did you hear about Mewstro?"
-          hint="Directory, social media, another teacher, search — all useful."
+          hint="Directory, social media, another teacher, a search. Anything you can remember is useful."
         >
           <input
             type="text"

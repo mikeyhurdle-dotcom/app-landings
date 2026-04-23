@@ -31,10 +31,11 @@ export default function TeacherSetupPage() {
           <section>
             <h2 className="text-xl font-bold text-[#1A1A2E] mb-3">How Mewstro works for teachers</h2>
             <p className="text-[#5A4E42] text-sm leading-relaxed">
-              You subscribe to a Studio plan on the web. Your students download
-              the free Mewstro app and enter your invite code. From that point,
-              you can see who&apos;s practising, how much, and what they&apos;re
-              working on — all from your browser. Your students never pay.
+              You subscribe to a Studio plan on the web. Your students
+              download the free Mewstro app and enter your invite code.
+              From that point, you can see who&apos;s practising, how
+              much, and what they&apos;re working on, all from your
+              browser. Your students never pay anything.
             </p>
           </section>
 
@@ -45,8 +46,8 @@ export default function TeacherSetupPage() {
               pick the plan that fits your studio size:
             </p>
             <ul className="text-[#5A4E42] text-sm leading-relaxed list-disc list-inside space-y-1 ml-1 mt-3">
-              <li><strong>Studio</strong> (£14.99/mo) — up to 25 students</li>
-              <li><strong>Studio Unlimited</strong> (£24.99/mo) — unlimited students</li>
+              <li><strong>Studio</strong> (£14.99/mo), up to 25 students</li>
+              <li><strong>Studio Unlimited</strong> (£24.99/mo), unlimited students</li>
             </ul>
             <p className="text-[#5A4E42] text-sm leading-relaxed mt-3">
               Both come with a 30-day free trial. You won&apos;t be charged
@@ -80,10 +81,11 @@ export default function TeacherSetupPage() {
               handout (we&apos;ve got a <Link href="/mewstro/guides/getting-started" className="text-[#2D8B7E] hover:underline">one-pager you can print</Link> for this).
             </p>
             <p className="text-[#5A4E42] text-sm leading-relaxed mt-3">
-              Students download the Mewstro app (free on the App Store), enter
-              your code during onboarding, and they&apos;re in. Full app access,
-              no cost to them. The code unlocks everything — practice timer,
-              streaks, repertoire, planner, milestones, the lot.
+              Students download the Mewstro app (free on the App Store),
+              enter your code during onboarding, and they&apos;re in. Full
+              app access, nothing for them to pay. The code unlocks
+              everything, practice timer, streaks, repertoire, planner,
+              milestones, the lot.
             </p>
             <ScreenshotPlaceholder label="Invite code on teacher dashboard" />
           </section>
@@ -91,8 +93,10 @@ export default function TeacherSetupPage() {
           <section>
             <h2 className="text-xl font-bold text-[#1A1A2E] mb-3">What you can see (and what you can&apos;t)</h2>
             <p className="text-[#5A4E42] text-sm leading-relaxed mb-3">
-              Mewstro is deliberately designed so teachers see practice activity,
-              not personal data.
+              Mewstro is deliberately designed so that teachers see
+              practice activity from their studio, and that&apos;s it.
+              Anything that would count as personal data stays with the
+              student.
             </p>
             <div className="rounded-xl border border-[#E8DFD3] bg-white p-5">
               <div className="grid grid-cols-2 gap-4 text-sm">

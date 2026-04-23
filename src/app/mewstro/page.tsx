@@ -44,32 +44,32 @@ const faqs = [
   {
     question: "How does the teacher subscription work?",
     answer:
-      "You pay a simple monthly fee — £14.99/mo for up to 25 students, £24.99/mo for unlimited. Every student you invite gets full Mewstro included. Students never pay when they&apos;re part of your studio. Annual plans save roughly 17%.",
+      "You pay a simple monthly fee. £14.99/mo covers up to 25 students, £24.99/mo is unlimited. Every student you invite gets full Mewstro included, and students never pay anything while they're part of your studio. Annual plans save around 17% if you'd rather pay once a year.",
   },
   {
     question: "What does Mewstro actually do for my studio?",
     answer:
-      "You see every student&apos;s practice activity in one dashboard — who&apos;s practising, for how long, on what. Weekly digest email so you don&apos;t even have to log in. Studio leaderboard ranked by weekly minutes (optional — Tonara&apos;s teachers called this the single biggest driver of student practice). Assignment system so students have a clear to-do list. Milestone Moment videos when a tricky passage finally clicks.",
+      "You see every student's practice activity in one dashboard. Who's been practising, for how long, on what. A weekly digest email lands on a Sunday so you don't even have to log in just to know what's going on. There's a studio leaderboard ranked by weekly minutes, which you can toggle off per-student or for the whole studio, but it's consistently cited as the single biggest driver of students actually practising. An assignment system so your students have a clear to-do list between lessons. And Milestone Moment videos from your students whenever a tricky passage finally clicks.",
   },
   {
     question: "Why do I need to apply, why can't I just subscribe?",
     answer:
-      "Mewstro is finishing its founding pilot with our first teacher, Ellie Moorhouse. I want to make sure everything works before taking on paying studios — so the first five Founding Studios are hand-picked, with a personal conversation, 50% off for life, and direct input on the product. Once those are in, the next twenty join as Early Access — standard pricing, standard 30-day trial, but your price is locked for 2 years and you get a badge and priority support. After teacher #25 it&apos;s standard self-serve.",
+      "Mewstro is finishing its founding pilot with Ellie Moorhouse, my own teacher. I want to make sure everything actually works in a real studio before I start taking on paying teachers. The first five Founding Studios are hand-picked, with a personal conversation, 50% off for life, and direct input on where the product goes next. After those five, the next twenty join as Early Access at standard pricing and the standard 30-day trial, with their price locked in for two years, a Founding badge, and priority support. Once teacher #25 is in, it's standard self-serve signup.",
   },
   {
     question: "What instruments are supported?",
     answer:
-      "All of them. Mewstro is instrument-agnostic — piano, voice, guitar, violin, drums, brass, woodwinds, and anything else. Custom task types per instrument (scales, sight-reading, repertoire, technique, improvisation, and so on).",
+      "All of them. Mewstro is instrument-agnostic. Piano, voice, guitar, violin, drums, brass, woodwinds, and anything else you might teach. Each instrument has its own custom task types (scales, sight-reading, repertoire, technique, improvisation, and so on) so students can log the right kind of practice for what they're actually working on.",
   },
   {
     question: "What happens if I cancel?",
     answer:
-      "Your students keep full Mewstro access for 30 days, then drop to the Free tier. Their data stays on their devices — no loss. You can resubscribe at any time and everyone&apos;s access comes back instantly.",
+      "Your students keep full Mewstro access for 30 days after you cancel, and then drop to the Free tier. Their practice data stays on their devices regardless, nothing gets deleted. You can resubscribe at any point and everyone's access comes straight back.",
   },
   {
     question: "Is student practice data private?",
     answer:
-      "Yes. Data is stored on each student&apos;s device and synced to their own account. We use TelemetryDeck for privacy-first anonymised usage analytics — no personally identifiable information, no IP tracking, no cross-app identifiers, no ads ever. We never sell your or your students&apos; data.",
+      "Yes. Practice data is stored on each student's device and synced to their own account. The analytics we use is TelemetryDeck, which is anonymised and privacy-first by design, so there's nothing that identifies individuals, nothing that tracks IPs, and nothing that links across apps. I don't sell your data or your students' data, anywhere.",
   },
 ];
 
@@ -89,11 +89,11 @@ function FoundingStrip() {
           </span>
           <div>
             <p className="text-sm font-semibold text-[#1A1A2E]">
-              Hand-picking our first 5 Founding Studios.
+              I&apos;m hand-picking the first 5 Founding Studios.
             </p>
             <p className="text-xs text-[#5A4E42]">
-              50% off for life · direct line to the founder · first say on
-              features. 1 of 5 reserved (Ellie).
+              50% off for life, a direct line to me, and first say on where
+              the product goes. 1 of 5 reserved for Ellie.
             </p>
           </div>
         </div>
@@ -147,8 +147,9 @@ function Hero() {
             </h1>
             <p className="mt-6 max-w-xl text-lg text-[#5A4E42] md:text-xl">
               A music practice app your whole studio uses. One teacher
-              subscription covers every student you invite — leaderboard,
-              heatmaps, milestone videos, weekly digest. Students never pay.
+              subscription covers every student you invite, with the
+              leaderboard, heatmaps, milestone videos and weekly digest all
+              included. Students never pay a thing.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <Link
@@ -172,8 +173,8 @@ function Hero() {
                 className="font-semibold underline decoration-dotted underline-offset-4 hover:text-[#1A1A2E]"
               >
                 Mikey, who started piano at 40
-              </Link>{" "}
-              — alongside his piano teacher, Ellie Moorhouse.
+              </Link>
+              , alongside his piano teacher Ellie Moorhouse.
             </p>
           </div>
 
@@ -354,32 +355,32 @@ function DashboardTour() {
     {
       icon: "🏆",
       title: "Studio leaderboard",
-      body: "Weekly ranking by practice minutes. Tonara&apos;s teachers called this the single biggest driver of student practice. Toggleable per-student if you don&apos;t want rankings visible.",
+      body: "Weekly ranking by practice minutes. It&apos;s consistently cited as the single biggest driver of students actually practising, which tracks with what I&apos;ve seen. Toggleable per student if you&apos;d rather not show rankings.",
     },
     {
       icon: "📈",
       title: "Per-student heatmap",
-      body: "90-day calendar at a glance. Spot the student who was on fire then dropped off, and the one quietly building a 40-day streak.",
+      body: "90-day calendar at a glance. Spot the student who was on fire and then dropped off, and the one quietly building a 40-day streak without making a fuss.",
     },
     {
       icon: "📝",
       title: "Assignments",
-      body: "Set a task (&ldquo;work on bars 12–24, 15 min/day&rdquo;), target specific students, watch completions come in. Their practice log auto-credits progress.",
+      body: "Set a task like &ldquo;work on bars 12&ndash;24, 15 min/day&rdquo; and pick which students it applies to. Their practice log auto-credits as they get the work done.",
     },
     {
       icon: "📹",
       title: "Milestone Moments",
-      body: "Students capture a short video when a tricky passage finally clicks. You see every breakthrough in their detail view — a library of wins.",
+      body: "Students capture a short video whenever a tricky passage finally clicks. You see every one of those breakthroughs in their detail view, so the whole year&apos;s wins are there to look back on.",
     },
     {
       icon: "📨",
       title: "Weekly digest email",
-      body: "Every Sunday: who practised, who didn&apos;t, top practiser, total minutes, quick nudge links. You don&apos;t even have to log in.",
+      body: "Every Sunday you get an email with the week&apos;s picture. Who&apos;s been practising, who hasn&apos;t, total studio minutes, and a couple of nudge links for anyone who needs a gentle poke. Means you don&apos;t have to log in just to know what&apos;s going on.",
     },
     {
       icon: "🔗",
       title: "One invite code",
-      body: "Share a single code with your studio. Students tap &lsquo;I have a code&rsquo; during onboarding and their Mewstro unlocks. Apple handles the redemption — no cards, no fuss.",
+      body: "One code covers your whole studio. Your students tap &lsquo;I have a code&rsquo; during onboarding and their Mewstro unlocks. Apple handles the redemption bit behind the scenes, so none of them have to enter card details or anything like that.",
     },
   ];
 
@@ -398,8 +399,9 @@ function DashboardTour() {
             Everything a busy music teacher actually needs.
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-base text-[#5A4E42]">
-            No dashboard overload. No student-data-scrubbing. Six things that
-            shift behaviour — and nothing that doesn&apos;t.
+            Six things I&apos;ve seen actually shift how students practise.
+            I&apos;ve deliberately kept it to that, so there&apos;s nothing
+            else cluttering up your view.
           </p>
         </div>
         <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -440,12 +442,13 @@ function StudentSideBand() {
           What your students see
         </p>
         <h2 className="mt-2 text-3xl font-bold text-[#1A1A2E] md:text-4xl">
-          The full app — included in your subscription.
+          The full app, included in your subscription.
         </h2>
         <p className="mx-auto mt-4 max-w-2xl text-base text-[#5A4E42]">
-          Timer, repertoire, streak, widgets, Apple Watch, Milestone Moments,
-          Mewstro the mascot in all nine moods. Everything Mewstro can do.
-          Students never see an upsell.
+          Timer, repertoire tracking, streaks, widgets, Apple Watch support,
+          Milestone Moments, and Mewstro the mascot in all nine of his
+          moods. Basically everything Mewstro can do. Students never get
+          shown an upsell anywhere in the app.
         </p>
       </div>
     </section>
@@ -473,10 +476,11 @@ function FounderBand() {
             </h2>
             <p className="mt-3 text-sm leading-relaxed text-[#5A4E42]">
               I&apos;m Mikey. I started piano just before my 40th birthday,
-              got obsessive about structured practice, built elaborate
-              spreadsheets. My piano teacher Ellie suggested I turn them into
-              an app for her other students — and said she&apos;d love a
-              leaderboard for her studio. That&apos;s how Mewstro began.
+              second time really, the first try at school didn&apos;t
+              stick. I built a spreadsheet to track my practice because I
+              work in professional services and tracking time is muscle
+              memory for me. My teacher Ellie saw it. That&apos;s pretty
+              much how Mewstro began.
             </p>
             <Link
               href="/mewstro/story"
@@ -495,28 +499,28 @@ function FounderBand() {
 function CommitmentsBand() {
   const commitments = [
     {
-      title: "No ads. Ever.",
-      body: "Not banners, not interstitials, not sponsored practice tips. Your subscription is how Mewstro pays for itself.",
+      title: "Your subscription is the only thing paying for this",
+      body: "There won&apos;t be banner ads, interstitials, or sponsored practice tips sneaking in. Teacher subscriptions and solo Premium are how I keep the lights on here.",
     },
     {
-      title: "No data sales",
-      body: "Your students&apos; practice data stays private. We don&apos;t sell it, share it, or train ML models on it.",
+      title: "Your student data isn&apos;t a product",
+      body: "I don&apos;t sell it, share it, or train any machine learning models on it. It stays with you and your studio.",
     },
     {
-      title: "No dark patterns",
-      body: "Clear pricing, honest trial, cancel any time from the customer portal. One reminder email before the first charge.",
+      title: "Honest pricing, easy to cancel",
+      body: "Clear trial terms, a single reminder email before the first charge, and a one-click cancel from your billing portal whenever you want. If something changes on the pricing side, you&apos;ll hear about it from me before it hits your card.",
     },
     {
-      title: "Every student covered",
-      body: "One teacher subscription covers every student in your studio, up to the tier cap. Students never pay. Parents never pay.",
+      title: "One subscription, all your students",
+      body: "Every student in your studio gets full Mewstro, up to whatever tier cap you&apos;re on. There&apos;s nothing for students or their parents to pay on top of that.",
     },
     {
-      title: "Your data, portable",
-      body: "If Mewstro ever shuts down, we&apos;ll publish a full CSV export tool for every user — free or paid — before anything goes offline.",
+      title: "If Mewstro ever has to shut down, you still have your data",
+      body: "If things go sideways and I have to close it all down, I&apos;ll ship a full CSV export tool first for everyone, free and paid users both, before anything goes offline. That&apos;s a hard commitment.",
     },
     {
-      title: "Built with a real teacher",
-      body: "Every feature passes the &ldquo;would Ellie actually use this?&rdquo; test before shipping. Designed in a working studio, not a spreadsheet.",
+      title: "Ellie shapes what actually ships",
+      body: "Every teacher-facing feature has to pass the &ldquo;would Ellie actually use this with her studio?&rdquo; test before it goes out. This thing has been designed inside a working music studio, and that&apos;s not going to change.",
     },
   ];
 
@@ -528,7 +532,7 @@ function CommitmentsBand() {
             What never changes
           </p>
           <h2 className="mt-2 text-3xl font-bold text-[#1A1A2E] md:text-4xl">
-            Promises baked into the product.
+            A few things I&apos;ve decided on, that aren&apos;t changing.
           </h2>
         </div>
         <div className="mt-10 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
@@ -540,9 +544,8 @@ function CommitmentsBand() {
               <h3
                 className="text-base font-bold"
                 style={{ color: TEAL }}
-              >
-                {c.title}
-              </h3>
+                dangerouslySetInnerHTML={{ __html: c.title }}
+              />
               <p
                 className="mt-2 text-sm leading-relaxed text-[#5A4E42]"
                 dangerouslySetInnerHTML={{ __html: c.body }}
@@ -567,7 +570,8 @@ function PricingPreview() {
             Pick the tier that fits your studio.
           </h2>
           <p className="mt-3 text-sm text-[#5A4E42]">
-            One decision: more than 25 students, or not?
+            Basically comes down to how many students you teach. More than
+            25, or 25 and under.
           </p>
         </div>
         <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2">
@@ -579,7 +583,7 @@ function PricingPreview() {
               <span className="text-sm text-[#6B7280]">/ month</span>
             </div>
             <p className="mt-1 text-xs text-[#6B7280]">
-              or £149/year · saves £30
+              or £149/year, saves you £30
             </p>
             <p className="mt-3 text-sm text-[#5A4E42]">
               Up to 25 students in your studio. Every enrolled student gets
@@ -587,7 +591,7 @@ function PricingPreview() {
             </p>
             <div className="mt-6 rounded-xl bg-[#FAF6EF] p-4 text-xs text-[#6B7280]">
               <strong className="text-[#1A1A2E]">Founding Studio rate:</strong>{" "}
-              £7.49/mo for life (50% off) — if you&apos;re one of the first 10.
+              £7.49/mo for life (50% off) for the first 10 studios in.
             </div>
           </div>
 
@@ -605,15 +609,15 @@ function PricingPreview() {
               <span className="text-sm text-white/80">/ month</span>
             </div>
             <p className="mt-1 text-xs text-white/80">
-              or £249/year · saves £50
+              or £249/year, saves you £50
             </p>
             <p className="mt-3 text-sm text-white/90">
-              Unlimited students. Priority support. Early access to new
-              features.
+              Unlimited students, priority support, and early access to new
+              features as I&apos;m building them.
             </p>
             <div className="mt-6 rounded-xl bg-white/10 p-4 text-xs text-white/90">
               <strong className="text-white">Founding Studio rate:</strong>{" "}
-              £12.49/mo for life (50% off) — if you&apos;re one of the first 10.
+              £12.49/mo for life (50% off) for the first 10 studios in.
             </div>
           </div>
         </div>
@@ -642,9 +646,9 @@ function FinalCTA() {
           Five Founding Studios. One of them could be yours.
         </h2>
         <p className="mt-4 text-base text-[#5A4E42]">
-          50% off for life, direct line to the founder, first say on where
-          Mewstro goes. Apply now and I&apos;ll be in touch after our pilot
-          wraps.
+          50% off for life, a direct line to me, and first say on where
+          Mewstro goes next. Apply now and I&apos;ll be in touch once
+          Ellie&apos;s pilot fortnight wraps.
         </p>
         <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:justify-center">
           <Link

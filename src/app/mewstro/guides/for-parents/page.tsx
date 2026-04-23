@@ -17,60 +17,61 @@ export default function ForParentsPage() {
 
         <h1 className="text-3xl font-bold text-[#1A1A2E] mb-3">For parents: what Mewstro is</h1>
         <p className="text-lg text-[#6B7280] mb-12">
-          Your child&apos;s music teacher uses Mewstro. Here&apos;s what that
-          means for you.
+          Your child&apos;s music teacher uses Mewstro. Here&apos;s what
+          that actually means for you.
         </p>
 
         <div className="space-y-10">
           <section>
             <h2 className="text-xl font-bold text-[#1A1A2E] mb-3">The short version</h2>
             <p className="text-[#5A4E42] text-sm leading-relaxed">
-              Mewstro is an app that helps your child track their music practice.
-              They tap a button when they start practising, and another when they
-              stop. The app tracks how often they practise, builds daily streaks,
-              and has an animated cat mascot who celebrates their sessions.
-              Their teacher can see how much they&apos;ve been practising between
-              lessons.
+              Mewstro is an app that helps your child track their music
+              practice. They tap a button when they start a session and
+              another one when they stop. The app tracks how often they
+              practise and builds a daily streak, and it has an animated
+              cat mascot who celebrates their sessions. Their teacher can
+              see how much they&apos;ve been practising between lessons.
             </p>
           </section>
 
           <section>
             <h2 className="text-xl font-bold text-[#1A1A2E] mb-3">Does it cost anything?</h2>
             <p className="text-[#5A4E42] text-sm leading-relaxed">
-              <strong>No.</strong> If your child&apos;s teacher uses Mewstro,
-              it&apos;s free for your child. The teacher&apos;s subscription
-              covers everyone in their studio. Your child enters an invite code
-              during setup and gets the full app at no cost. No card required,
-              no hidden charges.
+              Honestly, not a thing. If your child&apos;s teacher uses
+              Mewstro, it&apos;s included in their subscription. Your
+              child enters the teacher&apos;s invite code during setup
+              and gets the full app at no cost. There&apos;s no card to
+              enter and no hidden charges along the way.
             </p>
           </section>
 
           <section>
             <h2 className="text-xl font-bold text-[#1A1A2E] mb-3">Is it safe for children?</h2>
             <p className="text-[#5A4E42] text-sm leading-relaxed mb-3">
-              Yes. Mewstro is rated 4+ on the App Store. Here&apos;s what we do
-              (and don&apos;t do):
+              Yes. Mewstro is rated 4+ on the App Store. Here&apos;s the
+              honest picture of what&apos;s in the app and what
+              isn&apos;t.
             </p>
             <ul className="text-[#5A4E42] text-sm leading-relaxed space-y-2 ml-1">
               <li className="flex items-start gap-2">
                 <span className="text-[#2D8B7E] mt-0.5">✓</span>
-                <span><strong>No ads.</strong> Not now, not ever. There are no banner ads, video ads, or sponsored content anywhere in the app.</span>
+                <span><strong>Ad-free, always.</strong> There are no banner ads, video ads, or sponsored content anywhere in the app, and that isn&apos;t going to change.</span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-[#2D8B7E] mt-0.5">✓</span>
-                <span><strong>No data sales.</strong> Practice data stays private. We don&apos;t sell it, share it with advertisers, or use it for anything other than showing your child their progress.</span>
+                <span><strong>Your child&apos;s data stays private.</strong> I don&apos;t sell it, share it with advertisers, or use it for anything other than showing your child their progress and their teacher the studio-level view.</span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-[#2D8B7E] mt-0.5">✓</span>
-                <span><strong>No messaging.</strong> Teachers can see practice activity, but they can&apos;t message students through Mewstro. There&apos;s no chat, no DMs, no social feed.</span>
+                <span><strong>Nothing social in the app.</strong> Teachers can see practice activity, but they can&apos;t message students through Mewstro. There&apos;s no chat, no DMs, and no social feed.</span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-[#2D8B7E] mt-0.5">✓</span>
-                <span><strong>No personal data shared.</strong> Teachers see weekly practice minutes and display name. Not email addresses, not private notes, not anything else.</span>
+                <span><strong>Teachers see practice, not personal details.</strong> What a teacher sees is weekly practice minutes and the display name. Not email addresses, not private notes, not anything else.</span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-[#2D8B7E] mt-0.5">✓</span>
-                <span><strong>Data export and deletion.</strong> You can export all practice data as a CSV file, and delete the account at any time from Settings or by emailing us.</span>
+                <span><strong>Data export and account deletion.</strong> You can export all practice data as a CSV file, and delete the account at any time from Settings or by emailing us.</span>
               </li>
             </ul>
           </section>
@@ -78,11 +79,12 @@ export default function ForParentsPage() {
           <section>
             <h2 className="text-xl font-bold text-[#1A1A2E] mb-3">What does their teacher see?</h2>
             <p className="text-[#5A4E42] text-sm leading-relaxed">
-              The teacher has a web dashboard that shows each student&apos;s
-              weekly practice minutes, which instruments they played, their
-              streak length, and any Milestone Moment recordings the student
-              chose to save. The studio leaderboard ranks students by weekly
-              minutes — it&apos;s meant to be a gentle motivator, not a
+              The teacher has a web dashboard that shows each
+              student&apos;s weekly practice minutes, which instruments
+              they played, their streak length, and any Milestone Moment
+              recordings the student chose to save. The studio
+              leaderboard ranks students by weekly minutes, and
+              it&apos;s meant as a gentle motivator rather than a
               competition.
             </p>
           </section>

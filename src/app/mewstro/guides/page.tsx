@@ -12,7 +12,7 @@ const guides = [
   {
     slug: "getting-started",
     title: "Getting started",
-    description: "Download, sign up, and log your first practice session in under two minutes.",
+    description: "Download, sign up, and log your first practice session. Takes about two minutes.",
     icon: "🚀",
   },
   {
@@ -63,8 +63,8 @@ export default function GuidesPage() {
             How to use Mewstro
           </h1>
           <p className="mt-4 text-lg text-[#6B7280] max-w-xl mx-auto">
-            Whether you&apos;re a student, teacher, or parent, these guides
-            will get you up and running.
+            Whether you&apos;re a student, a teacher, or a parent of a
+            student, these guides should get you up and running.
           </p>
         </div>
 
