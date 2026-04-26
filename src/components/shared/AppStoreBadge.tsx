@@ -1,4 +1,7 @@
+"use client";
+
 import type { Brand } from "@/config/brands";
+import { trackLink } from "@/lib/tealium";
 
 export function AppStoreBadge({
   brand,
@@ -10,9 +13,20 @@ export function AppStoreBadge({
   const href =
     platform === "ios" ? brand.links.appStore : "#";
 
+  const handleClick = () => {
+    trackLink("app_store_clicked", {
+      brand: brand.id,
+      platform,
+      target_url: href,
+      source_page:
+        typeof window !== "undefined" ? window.location.pathname : "",
+    });
+  };
+
   return (
     <a
       href={href}
+      onClick={handleClick}
       className="inline-flex items-center gap-3 rounded-xl px-5 py-3 transition-transform hover:scale-105"
       style={{
         backgroundColor: "#000000",

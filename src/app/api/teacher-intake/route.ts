@@ -20,6 +20,8 @@ interface IntakePayload {
   utmMedium?: string;
   utmCampaign?: string;
   utmContent?: string;
+  utmTerm?: string;
+  firstLandingPage?: string;
   referrer?: string;
 }
 
@@ -107,8 +109,43 @@ function parsePayload(body: unknown): IntakePayload | { error: string } {
     utmMedium: stringField(raw.utmMedium, 120) ?? undefined,
     utmCampaign: stringField(raw.utmCampaign, 120) ?? undefined,
     utmContent: stringField(raw.utmContent, 120) ?? undefined,
+    utmTerm: stringField(raw.utmTerm, 120) ?? undefined,
+    firstLandingPage: stringField(raw.firstLandingPage, 500) ?? undefined,
     referrer: stringField(raw.referrer, 500) ?? undefined,
   };
+}
+
+// Fire a Tealium collect beacon server-side so ad-blockers can't nuke the
+// conversion event. Non-blocking (keepalive), never throws. Requires the
+// standard NEXT_PUBLIC_TEALIUM_* env vars used by the client script.
+function fireServerBeacon(
+  event: string,
+  data: Record<string, unknown>,
+): void {
+  const account = process.env.NEXT_PUBLIC_TEALIUM_ACCOUNT;
+  const profile = process.env.NEXT_PUBLIC_TEALIUM_PROFILE;
+  if (!account || !profile) return;
+  try {
+    const payload = {
+      tealium_account: account,
+      tealium_profile: profile,
+      tealium_event: event,
+      event_name: event,
+      ...data,
+    };
+    // Intentionally no await — this is a fire-and-forget mirror of the
+    // client event. keepalive allows the request to outlive the handler.
+    void fetch("https://collect.tealiumiq.com/event", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+      keepalive: true,
+    }).catch(() => {
+      // Analytics must never break the page.
+    });
+  } catch {
+    // ignore
+  }
 }
 
 export async function POST(req: NextRequest) {
@@ -166,7 +203,9 @@ export async function POST(req: NextRequest) {
       medium: parsed.utmMedium ?? null,
       campaign: parsed.utmCampaign ?? null,
       content: parsed.utmContent ?? null,
+      term: parsed.utmTerm ?? null,
     },
+    first_landing_page: parsed.firstLandingPage ?? null,
     referrer: parsed.referrer ?? null,
     user_agent: req.headers.get("user-agent") ?? null,
   };
@@ -186,6 +225,24 @@ export async function POST(req: NextRequest) {
     // Non-fatal — the primary record is saved. Log for visibility.
     console.error("teacher-intake activity log failed", activityErr);
   }
+
+  // Server-side Tealium beacon mirror — rescues attribution from ad-blockers
+  // that kill the client-side teacher_apply_submitted event. Fire-and-forget.
+  fireServerBeacon("teacher_apply_submitted_server", {
+    brand: "teacher",
+    page_type: "apply",
+    country: parsed.country ?? null,
+    estimated_student_count: parsed.estimatedStudentCount ?? null,
+    instruments_count: parsed.instruments?.length ?? 0,
+    has_studio_name: parsed.studioName ? "true" : "false",
+    utm_source: parsed.utmSource ?? "",
+    utm_medium: parsed.utmMedium ?? "",
+    utm_campaign: parsed.utmCampaign ?? "",
+    utm_content: parsed.utmContent ?? "",
+    utm_term: parsed.utmTerm ?? "",
+    first_landing_page: parsed.firstLandingPage ?? "",
+    referrer: parsed.referrer ?? "",
+  });
 
   return NextResponse.json({ ok: true });
 }

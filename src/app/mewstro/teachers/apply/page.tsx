@@ -1,9 +1,18 @@
 "use client";
 
-import { useState, useMemo, FormEvent, Suspense } from "react";
+import {
+  useState,
+  useMemo,
+  useEffect,
+  useRef,
+  FormEvent,
+  Suspense,
+} from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
+import { trackLink, studioSizeTier } from "@/lib/tealium";
+import { resolveAttribution } from "@/lib/utm";
 
 const INSTRUMENTS = [
   { id: "piano", label: "Piano" },
@@ -30,17 +39,115 @@ function TeacherApplyForm() {
   );
 
   const searchParams = useSearchParams();
+
+  // Resolve attribution from first-touch cookie, falling back to current URL.
+  // Runs on the client after mount so cookie is readable.
+  const [attribution, setAttribution] = useState<{
+    utm_source?: string;
+    utm_medium?: string;
+    utm_campaign?: string;
+    utm_content?: string;
+    utm_term?: string;
+    referrer?: string;
+    first_landing_page?: string;
+  }>({});
+
+  useEffect(() => {
+    setAttribution(
+      resolveAttribution({
+        utm_source: searchParams.get("utm_source") ?? undefined,
+        utm_medium: searchParams.get("utm_medium") ?? undefined,
+        utm_campaign: searchParams.get("utm_campaign") ?? undefined,
+        utm_content: searchParams.get("utm_content") ?? undefined,
+        utm_term: searchParams.get("utm_term") ?? undefined,
+      }),
+    );
+  }, [searchParams]);
+
   const utm = useMemo(
     () => ({
-      source: searchParams.get("utm_source") ?? undefined,
-      medium: searchParams.get("utm_medium") ?? undefined,
-      campaign: searchParams.get("utm_campaign") ?? undefined,
-      content: searchParams.get("utm_content") ?? undefined,
+      source: attribution.utm_source,
+      medium: attribution.utm_medium,
+      campaign: attribution.utm_campaign,
+      content: attribution.utm_content,
       referrer:
-        typeof document !== "undefined" ? document.referrer || undefined : undefined,
+        attribution.referrer ??
+        (typeof document !== "undefined"
+          ? document.referrer || undefined
+          : undefined),
     }),
-    [searchParams],
+    [
+      attribution.utm_source,
+      attribution.utm_medium,
+      attribution.utm_campaign,
+      attribution.utm_content,
+      attribution.referrer,
+    ],
   );
+
+  useEffect(() => {
+    trackLink("teacher_landing_viewed", {
+      brand: "teacher",
+      page_type: "apply",
+      utm_source: utm.source ?? "",
+      utm_medium: utm.medium ?? "",
+      utm_campaign: utm.campaign ?? "",
+      utm_content: utm.content ?? "",
+    });
+  }, [utm.source, utm.medium, utm.campaign, utm.content]);
+
+  // Form lifecycle — fires teacher_apply_started on first field focus,
+  // and teacher_apply_abandoned on unload if the user engaged but didn't submit.
+  const formStartedRef = useRef(false);
+  const submittedRef = useRef(false);
+
+  const onFieldFocus = () => {
+    if (formStartedRef.current) return;
+    formStartedRef.current = true;
+    trackLink("teacher_apply_started", {
+      brand: "teacher",
+      page_type: "apply",
+      utm_source: utm.source ?? "",
+      utm_medium: utm.medium ?? "",
+      utm_campaign: utm.campaign ?? "",
+      utm_content: utm.content ?? "",
+    });
+  };
+
+  useEffect(() => {
+    const onPageHide = () => {
+      if (!formStartedRef.current || submittedRef.current) return;
+      // sendBeacon survives unload where fetch would not. utag.link is
+      // non-blocking but isn't guaranteed to complete on unload, so we go
+      // direct to Tealium collect.
+      const account = process.env.NEXT_PUBLIC_TEALIUM_ACCOUNT;
+      const profile = process.env.NEXT_PUBLIC_TEALIUM_PROFILE;
+      if (!account || !profile) return;
+      if (typeof navigator === "undefined" || !navigator.sendBeacon) return;
+      try {
+        const payload = {
+          tealium_account: account,
+          tealium_profile: profile,
+          tealium_event: "teacher_apply_abandoned",
+          event_name: "teacher_apply_abandoned",
+          brand: "teacher",
+          page_type: "apply",
+          utm_source: utm.source ?? "",
+          utm_medium: utm.medium ?? "",
+          utm_campaign: utm.campaign ?? "",
+          utm_content: utm.content ?? "",
+        };
+        navigator.sendBeacon(
+          "https://collect.tealiumiq.com/event",
+          new Blob([JSON.stringify(payload)], { type: "application/json" }),
+        );
+      } catch {
+        // never break unload
+      }
+    };
+    window.addEventListener("pagehide", onPageHide);
+    return () => window.removeEventListener("pagehide", onPageHide);
+  }, [utm.source, utm.medium, utm.campaign, utm.content]);
 
   function toggleInstrument(id: string) {
     setSelectedInstruments((prev) => {
@@ -58,6 +165,10 @@ function TeacherApplyForm() {
     const form = e.currentTarget;
     const data = new FormData(form);
 
+    const studentCount = data.get("estimatedStudentCount")
+      ? Number(data.get("estimatedStudentCount"))
+      : undefined;
+
     const payload = {
       firstName: data.get("firstName"),
       lastName: data.get("lastName"),
@@ -65,9 +176,7 @@ function TeacherApplyForm() {
       studioName: data.get("studioName") || undefined,
       location: data.get("location") || undefined,
       country: data.get("country") || "UK",
-      estimatedStudentCount: data.get("estimatedStudentCount")
-        ? Number(data.get("estimatedStudentCount"))
-        : undefined,
+      estimatedStudentCount: studentCount,
       yearsTeaching: data.get("yearsTeaching")
         ? Number(data.get("yearsTeaching"))
         : undefined,
@@ -79,8 +188,25 @@ function TeacherApplyForm() {
       utmMedium: utm.medium,
       utmCampaign: utm.campaign,
       utmContent: utm.content,
+      utmTerm: attribution.utm_term,
+      firstLandingPage: attribution.first_landing_page,
       referrer: utm.referrer,
     };
+
+    const analyticsBase = {
+      brand: "teacher" as const,
+      page_type: "apply" as const,
+      studio_size_tier: studioSizeTier(studentCount) ?? "",
+      instruments_count: String(selectedInstruments.size),
+      has_studio_name: payload.studioName ? "true" : "false",
+      country: String(payload.country ?? ""),
+      utm_source: utm.source ?? "",
+      utm_medium: utm.medium ?? "",
+      utm_campaign: utm.campaign ?? "",
+      utm_content: utm.content ?? "",
+    };
+
+    trackLink("teacher_apply_submitted", analyticsBase);
 
     try {
       const res = await fetch("/api/teacher-intake", {
@@ -90,17 +216,26 @@ function TeacherApplyForm() {
       });
       const json = await res.json();
       if (!res.ok || !json.ok) {
-        setSubmit({
-          status: "error",
-          message: json.error ?? "Something went wrong. Please try again.",
+        const message =
+          json.error ?? "Something went wrong. Please try again.";
+        setSubmit({ status: "error", message });
+        trackLink("teacher_apply_failed", {
+          ...analyticsBase,
+          error_message: message,
+          http_status: String(res.status),
         });
         return;
       }
+      submittedRef.current = true;
       setSubmit({ status: "success" });
+      trackLink("teacher_apply_succeeded", analyticsBase);
     } catch {
-      setSubmit({
-        status: "error",
-        message: "Network error. Please try again.",
+      const message = "Network error. Please try again.";
+      setSubmit({ status: "error", message });
+      trackLink("teacher_apply_failed", {
+        ...analyticsBase,
+        error_message: message,
+        http_status: "0",
       });
     }
   }
@@ -183,6 +318,7 @@ function TeacherApplyForm() {
 
       <form
         onSubmit={onSubmit}
+        onFocusCapture={onFieldFocus}
         className="rounded-3xl border border-[#E8DFD3] bg-white p-8 shadow-sm md:p-10"
       >
         {/* Name + email */}
