@@ -121,31 +121,39 @@ function TeacherApplyForm() {
     });
   };
 
-  // Looks-like-an-email gate (intentionally permissive — server validates).
-  const isProbablyEmail = (s: string) => /.+@.+\..+/.test(s);
+  // Permissive email shape check — TLD must be 2+ chars to avoid firing on
+  // "user@host.c" mid-type. Server still validates properly on submit.
+  const isProbablyEmail = (s: string) => /.+@.+\..{2,}/.test(s);
 
+  // onChange just mirrors the latest value into refs so the abandon beacon
+  // (read at pagehide time) always has the freshest input. We deliberately
+  // do NOT fire teacher_apply_progress here — see onIdentityBlur.
   const onIdentityChange = (
     field: "firstName" | "email",
     value: string,
   ) => {
     if (field === "firstName") firstNameRef.current = value;
     else emailRef.current = value;
-    if (
-      !progressFiredRef.current &&
-      isProbablyEmail(emailRef.current)
-    ) {
-      progressFiredRef.current = true;
-      trackLink("teacher_apply_progress", {
-        brand: "teacher",
-        page_type: "apply",
-        email: emailRef.current,
-        first_name: firstNameRef.current,
-        utm_source: utm.source ?? "",
-        utm_medium: utm.medium ?? "",
-        utm_campaign: utm.campaign ?? "",
-        utm_content: utm.content ?? "",
-      });
-    }
+  };
+
+  // teacher_apply_progress fires once on email-field blur (i.e. the user has
+  // finished typing the email and tabbed/clicked away). Firing on change
+  // misfires mid-type — e.g. "user@host.c" passes a permissive regex and
+  // leaves AudienceStream with a truncated email forever.
+  const onIdentityBlur = () => {
+    if (progressFiredRef.current) return;
+    if (!isProbablyEmail(emailRef.current)) return;
+    progressFiredRef.current = true;
+    trackLink("teacher_apply_progress", {
+      brand: "teacher",
+      page_type: "apply",
+      email: emailRef.current,
+      first_name: firstNameRef.current,
+      utm_source: utm.source ?? "",
+      utm_medium: utm.medium ?? "",
+      utm_campaign: utm.campaign ?? "",
+      utm_content: utm.content ?? "",
+    });
   };
 
   useEffect(() => {
@@ -398,6 +406,7 @@ function TeacherApplyForm() {
             onChange={(e) =>
               onIdentityChange("email", e.currentTarget.value)
             }
+            onBlur={onIdentityBlur}
           />
         </Field>
 
