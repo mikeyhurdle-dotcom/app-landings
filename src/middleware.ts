@@ -3,6 +3,8 @@ import { NextRequest, NextResponse } from "next/server";
 const DOMAIN_MAP: Record<string, string> = {
   "mewstro.com": "/mewstro",
   "www.mewstro.com": "/mewstro",
+  "spindlapp.com": "/spindl",
+  "www.spindlapp.com": "/spindl",
 };
 
 export function middleware(request: NextRequest) {
@@ -22,5 +24,5 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/((?!_next|api|favicon.ico|mewstro/).*)"],
+  matcher: ["/((?!_next|api|favicon.ico|mewstro/|spindl/).*)"],
 };

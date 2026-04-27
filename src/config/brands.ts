@@ -1,5 +1,5 @@
 export type Brand = {
-  id: "mewstro" | "purrouette" | "bouldy";
+  id: "mewstro" | "purrouette" | "bouldy" | "spindl";
   name: string;
   tagline: string;
   description: string;
@@ -112,5 +112,35 @@ export const bouldy: Brand = {
     appStore: "#",
     privacy: "/bouldy/privacy",
     support: "/bouldy/support",
+  },
+};
+
+export const spindl: Brand = {
+  id: "spindl",
+  name: "Spindl",
+  tagline: "A reading tracker built because Goodreads gave up.",
+  description:
+    "Track every book, log every reading session, and keep an honest journal as you go. No Amazon, no algorithmic feed, no abandoned redesign — just a quiet, warm reading app with a hedgehog who notices when you've kept your streak.",
+  logo: "/spindl/app-icon.png",
+  favicon: "/spindl/app-icon.png",
+  // Soft Paper palette — mirrored from Spindl/Extensions/Color+Theme.swift
+  colors: {
+    primary: "#A0624D",          // warm terracotta
+    primaryForeground: "#FFF8EE",
+    secondary: "#C98F7D",        // dusty terracotta
+    accent: "#D4A574",           // warm beige-gold
+    background: "#FDF8F0",       // buttery cream
+    surface: "#FFFFFF",
+    text: "#3B2318",             // dark espresso
+    textDim: "#8B6E5F",          // warm grey-brown
+  },
+  fonts: {
+    heading: "var(--font-fraunces)",
+    body: "var(--font-inter)",
+  },
+  links: {
+    appStore: "#",
+    privacy: "/spindl/privacy",
+    support: "/spindl/support",
   },
 };

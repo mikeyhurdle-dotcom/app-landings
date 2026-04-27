@@ -8,7 +8,7 @@
 // event_name, utm_*, studio_size_tier, …) onto GA4 event params, so new
 // events can be added here without a code change in most cases.
 
-export type Brand = "mewstro" | "bouldy" | "purrouette" | "teacher" | "root";
+export type Brand = "mewstro" | "bouldy" | "purrouette" | "spindl" | "teacher" | "root";
 
 export type PageType =
   | "landing"
@@ -196,6 +196,7 @@ const BRAND_SEGMENTS: readonly Brand[] = [
   "mewstro",
   "bouldy",
   "purrouette",
+  "spindl",
   "teacher",
 ];
 

@@ -57,6 +57,37 @@ export function MewstroJsonLd() {
   );
 }
 
+export function SpindlJsonLd() {
+  const data: SoftwareApplicationJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    name: "Spindl — Reading Tracker & Journal",
+    description:
+      "A native iOS reading tracker and journal. Track books across four shelves, log reading sessions, keep an honest per-book journal, and watch Spindl the hedgehog react to your streak. No Amazon, no algorithmic feed.",
+    url: "https://spindlapp.com",
+    applicationCategory: "LifestyleApplication",
+    operatingSystem: "iOS",
+    offers: {
+      "@type": "Offer",
+      price: "0",
+      priceCurrency: "GBP",
+    },
+    image: "https://spindlapp.com/spindl/app-icon.png",
+    author: {
+      "@type": "Organization",
+      name: "Spindl",
+      url: "https://spindlapp.com",
+    },
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
+    />
+  );
+}
+
 export function FaqJsonLd({
   faqs,
 }: {
