@@ -153,11 +153,11 @@ export function StudentWelcomePDF({ vars }: { vars: TeacherAssetVars }) {
         />
         <Faq
           q={`What can ${vars.teacherName} actually see?`}
-          a="Your session times, what you've been practising, and any Milestone Moment recordings you choose to send. I can't see anything you don't put in the app."
+          a="Your session times, what you've been practising, and any Milestone Moment videos you choose to send. I can't see anything you don't put in the app."
         />
         <Faq
-          q="Can I record myself playing?"
-          a="Yes. Milestone Moments are short audio clips you save when something clicks. Keep them private, send one to me, or post one to the studio if you're feeling brave."
+          q="Can I film myself playing?"
+          a="Yes. Milestone Moments are short video clips you film on your phone when something clicks. Keep them private, send one to me, or post one to the studio if you're feeling brave."
         />
         <Faq
           q="What if I miss a day and lose my streak?"

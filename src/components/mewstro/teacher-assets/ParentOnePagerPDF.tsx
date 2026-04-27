@@ -104,8 +104,8 @@ export function ParentOnePagerPDF({ vars }: { vars: TeacherAssetVars }) {
           onAccent={onAccent}
         />
         <Item
-          title="Recording."
-          body={`There's an optional feature called Milestone Moments where students can record short audio clips of themselves playing. Recordings live on your child's device by default, only shared with ${vars.teacherName} if your child explicitly chooses to send one.`}
+          title="Filming."
+          body={`There's an optional feature called Milestone Moments where students can film short video clips of themselves playing. Videos live on your child's device by default, only shared with ${vars.teacherName} if your child explicitly chooses to send one.`}
           accent={accent}
           onAccent={onAccent}
         />
