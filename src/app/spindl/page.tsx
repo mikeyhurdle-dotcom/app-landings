@@ -658,9 +658,11 @@ function Pricing() {
             </div>
             <ul className="mt-6 space-y-2 text-sm" style={{ color: WALNUT }}>
               <li>Four shelves, ISBN scanning</li>
-              <li>Reading sessions, pages, time</li>
+              <li>Reading sessions — pages, time, notes</li>
               <li>Per-book journal</li>
               <li>Streaks &amp; basic stats</li>
+              <li>Annual reading goal</li>
+              <li>Goodreads CSV import</li>
               <li>Spindl in all his moods</li>
             </ul>
           </div>
@@ -693,10 +695,18 @@ function Pricing() {
             <p className="mt-1 text-xs opacity-80">
               or £19.99/year — saves you £15.89
             </p>
-            <ul className="mt-6 space-y-2 text-sm opacity-95">
+            <p className="mt-5 text-xs uppercase tracking-wider opacity-70">
+              Everything in Free, plus —
+            </p>
+            <ul className="mt-3 space-y-2 text-sm opacity-95">
+              <li>Mood tracking &amp; mood-vs-genre insights</li>
+              <li>Streak insurance — catch-up days when life happens</li>
+              <li>Smart suggestions from your own shelf</li>
+              <li>OCR page-snap straight into your journal</li>
               <li>Yearly reading report PDF</li>
+              <li>Quarterly mini-reports</li>
+              <li>Custom shelves &amp; richer reading challenges</li>
               <li>Journal export (PDF + markdown)</li>
-              <li>Custom shelves</li>
               <li>Reading speed tracking</li>
               <li>Advanced stats &amp; genre breakdowns</li>
               <li>Spindl theme variants</li>
