@@ -11,7 +11,7 @@ import {
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-import { trackLink, studioSizeTier } from "@/lib/tealium";
+import { getConsentStatus, trackLink, studioSizeTier } from "@/lib/tealium";
 import { resolveAttribution } from "@/lib/utm";
 
 const INSTRUMENTS = [
@@ -101,6 +101,13 @@ function TeacherApplyForm() {
   const formStartedRef = useRef(false);
   const submittedRef = useRef(false);
 
+  // Captured form state, mirrored from inputs as the user types so that the
+  // abandon beacon and the progress event have the user's email (without it,
+  // AudienceStream has no way to address an abandon-recovery email).
+  const firstNameRef = useRef("");
+  const emailRef = useRef("");
+  const progressFiredRef = useRef(false);
+
   const onFieldFocus = () => {
     if (formStartedRef.current) return;
     formStartedRef.current = true;
@@ -114,9 +121,39 @@ function TeacherApplyForm() {
     });
   };
 
+  // Looks-like-an-email gate (intentionally permissive — server validates).
+  const isProbablyEmail = (s: string) => /.+@.+\..+/.test(s);
+
+  const onIdentityChange = (
+    field: "firstName" | "email",
+    value: string,
+  ) => {
+    if (field === "firstName") firstNameRef.current = value;
+    else emailRef.current = value;
+    if (
+      !progressFiredRef.current &&
+      isProbablyEmail(emailRef.current)
+    ) {
+      progressFiredRef.current = true;
+      trackLink("teacher_apply_progress", {
+        brand: "teacher",
+        page_type: "apply",
+        email: emailRef.current,
+        first_name: firstNameRef.current,
+        utm_source: utm.source ?? "",
+        utm_medium: utm.medium ?? "",
+        utm_campaign: utm.campaign ?? "",
+        utm_content: utm.content ?? "",
+      });
+    }
+  };
+
   useEffect(() => {
     const onPageHide = () => {
       if (!formStartedRef.current || submittedRef.current) return;
+      // Honour the cookie banner — if the visitor declined non-essential,
+      // don't fire a marketing-purpose abandon event even via beacon.
+      if (getConsentStatus() !== "granted") return;
       // sendBeacon survives unload where fetch would not. utag.link is
       // non-blocking but isn't guaranteed to complete on unload, so we go
       // direct to Tealium collect.
@@ -132,6 +169,9 @@ function TeacherApplyForm() {
           event_name: "teacher_apply_abandoned",
           brand: "teacher",
           page_type: "apply",
+          email: emailRef.current,
+          first_name: firstNameRef.current,
+          has_email: emailRef.current ? "true" : "false",
           utm_source: utm.source ?? "",
           utm_medium: utm.medium ?? "",
           utm_campaign: utm.campaign ?? "",
@@ -331,6 +371,9 @@ function TeacherApplyForm() {
               maxLength={80}
               className={inputClass}
               autoComplete="given-name"
+              onChange={(e) =>
+                onIdentityChange("firstName", e.currentTarget.value)
+              }
             />
           </Field>
           <Field label="Last name" required>
@@ -352,6 +395,9 @@ function TeacherApplyForm() {
             maxLength={200}
             className={inputClass}
             autoComplete="email"
+            onChange={(e) =>
+              onIdentityChange("email", e.currentTarget.value)
+            }
           />
         </Field>
 

@@ -33,6 +33,7 @@ export interface UtagData {
 export type TeacherEvent =
   | "teacher_landing_viewed"
   | "teacher_apply_started"
+  | "teacher_apply_progress"
   | "teacher_apply_submitted"
   | "teacher_apply_succeeded"
   | "teacher_apply_failed"
@@ -106,6 +107,17 @@ export function setTealiumConsent(granted: boolean): void {
   } else {
     // User denied — discard anything queued during the pending window.
     queue.length = 0;
+  }
+  // Broadcast so consent-aware integrations (Clarity, etc.) can lazy-load
+  // without a page reload.
+  try {
+    window.dispatchEvent(
+      new CustomEvent("tealium:consent-changed", {
+        detail: { granted },
+      }),
+    );
+  } catch {
+    // ignore
   }
 }
 

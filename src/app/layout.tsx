@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { TealiumScript } from "@/components/shared/TealiumScript";
 import { TealiumRouteTracker } from "@/components/shared/TealiumRouteTracker";
+import { ClarityScript } from "@/components/shared/ClarityScript";
 import { ConsentBanner } from "@/components/shared/ConsentBanner";
 import "./globals.css";
 
@@ -37,6 +38,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col">
         {children}
         <TealiumRouteTracker />
+        <ClarityScript />
         <ConsentBanner />
         <Analytics />
       </body>
