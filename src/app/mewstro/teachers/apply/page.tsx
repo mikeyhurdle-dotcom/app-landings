@@ -330,9 +330,24 @@ function TeacherApplyForm() {
               </li>
             </ol>
           </div>
-          <p className="mt-8 text-sm text-[#6B7280]">
-            In the meantime, if you&apos;d like to read the story behind
-            Mewstro, it&apos;s{" "}
+          <div className="mt-8 rounded-2xl border border-[#2D8B7E]/30 bg-[#2D8B7E]/5 p-5 text-left text-sm text-[#5A4E42]">
+            <p className="font-semibold text-[#1A1A2E]">
+              While you wait, take a look at the Studio toolkit.
+            </p>
+            <p className="mt-2">
+              The handouts you&apos;ll be sending to your students and
+              parents are already built. Have a play, generate a sample
+              with your studio name, see what your rollout will feel like.
+            </p>
+            <Link
+              href="/mewstro/teachers/assets"
+              className="mt-3 inline-block font-semibold text-[#2D8B7E] hover:underline"
+            >
+              Browse the Studio toolkit →
+            </Link>
+          </div>
+          <p className="mt-6 text-sm text-[#6B7280]">
+            Or read the story behind Mewstro{" "}
             <Link
               href="/mewstro/story"
               className="font-semibold text-[#2D8B7E] hover:underline"

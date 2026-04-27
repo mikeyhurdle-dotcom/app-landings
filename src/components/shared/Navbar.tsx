@@ -20,6 +20,7 @@ function getNavConfig(brand: Brand): {
     return {
       links: [
         { label: "For teachers", href: base },
+        { label: "Studio toolkit", href: `${base}/teachers/assets` },
         { label: "Solo learners", href: `${base}/app` },
         { label: "Story", href: `${base}/story` },
         { label: "Pricing", href: `${base}/pricing` },

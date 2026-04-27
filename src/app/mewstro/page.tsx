@@ -659,12 +659,16 @@ function FinalCTA() {
             Apply for Founding Studio access
           </Link>
           <Link
-            href="/mewstro/pricing"
+            href="/mewstro/teachers/assets"
             className="inline-block rounded-full border border-[#E8DFD3] bg-white px-8 py-4 text-base font-semibold text-[#1A1A2E] hover:bg-[#FAF6EF]"
           >
-            See pricing
+            See the Studio toolkit
           </Link>
         </div>
+        <p className="mt-4 text-xs text-[#6B7280]">
+          Or browse the rollout pack we generate for every studio, no
+          sign-up needed.
+        </p>
       </div>
     </section>
   );
