@@ -4,10 +4,12 @@ import {
   Page,
   Text,
   View,
+  Image,
   Document,
   StyleSheet,
 } from "@react-pdf/renderer";
 import { TeacherAssetVars, PALETTE, isLightColor } from "./types";
+import { MEWSTRO_ICON_DATA_URL } from "./app-icon";
 
 export function StudentWelcomePDF({ vars }: { vars: TeacherAssetVars }) {
   const accent = vars.accentColor;
@@ -19,9 +21,8 @@ export function StudentWelcomePDF({ vars }: { vars: TeacherAssetVars }) {
       <Page size="A4" style={styles.page}>
         <View style={styles.header}>
           <View style={styles.logoBlock}>
-            <View style={styles.logoMark}>
-              <Text style={styles.logoMarkText}>M</Text>
-            </View>
+            {/* eslint-disable-next-line jsx-a11y/alt-text */}
+            <Image src={MEWSTRO_ICON_DATA_URL} style={styles.logoMark} />
             <View>
               <Text style={styles.brandName}>Mewstro</Text>
               <Text style={styles.brandTag}>
@@ -301,14 +302,6 @@ function createStyles(accent: string, onAccent: string) {
       width: 38,
       height: 38,
       borderRadius: 9,
-      backgroundColor: accent,
-      justifyContent: "center",
-      alignItems: "center",
-    },
-    logoMarkText: {
-      color: onAccent,
-      fontSize: 22,
-      fontFamily: "Helvetica-Bold",
     },
     brandName: {
       fontSize: 20,
