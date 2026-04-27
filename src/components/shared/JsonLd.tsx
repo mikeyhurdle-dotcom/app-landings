@@ -63,7 +63,7 @@ export function SpindlJsonLd() {
     "@type": "SoftwareApplication",
     name: "Spindl — Reading Tracker & Journal",
     description:
-      "A native iOS reading tracker and journal. Track books across four shelves, log reading sessions, keep an honest per-book journal, and watch Spindl the hedgehog react to your streak. No Amazon, no algorithmic feed.",
+      "A native iOS reading tracker and journal. Track books across four shelves, log reading sessions, keep an honest per-book journal, and watch Spindl the hedgehog react to your streak. Built quietly, on your terms.",
     url: "https://spindlapp.com",
     applicationCategory: "LifestyleApplication",
     operatingSystem: "iOS",

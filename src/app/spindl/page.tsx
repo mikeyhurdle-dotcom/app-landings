@@ -10,7 +10,7 @@ const CREAM = spindl.colors.background;
 const PAPER = spindl.colors.surface;
 const GOLD = spindl.colors.accent;
 
-const SERIF = "var(--font-fraunces)";
+const SERIF = "var(--font-lora)";
 
 function Hero() {
   return (
@@ -42,20 +42,20 @@ function Hero() {
               className="mt-6 text-5xl leading-[1.02] tracking-tight md:text-7xl"
               style={{ color: ESPRESSO, fontFamily: SERIF, fontWeight: 500 }}
             >
-              Built because{" "}
+              A reading tracker that takes{" "}
               <span style={{ color: TERRACOTTA, fontStyle: "italic" }}>
-                Goodreads
+                books
               </span>{" "}
-              gave up.
+              seriously.
             </h1>
             <p
               className="mt-7 max-w-xl text-lg leading-relaxed md:text-xl"
               style={{ color: WALNUT }}
             >
-              A quiet, warm reading tracker for people who actually finish
-              books. Four honest shelves. A real per-book journal. A
-              hedgehog who notices your streak. No Amazon, no algorithmic
-              feed, no half-finished redesign.
+              Four shelves you actually use. A running journal for every
+              book. A hedgehog who notices when you&apos;ve kept your
+              streak. Built quietly, by one person, for the people who
+              still keep a notes app full of underlined passages.
             </p>
             <div className="mt-9 flex flex-col gap-3 sm:flex-row">
               <a
@@ -226,7 +226,7 @@ function Shelves() {
     },
     {
       title: "Did Not Finish",
-      blurb: "The one Goodreads pretends doesn&apos;t exist.",
+      blurb: "Some books aren&apos;t for you. That&apos;s allowed here.",
       count: "5",
     },
   ];
@@ -242,16 +242,16 @@ function Shelves() {
             className="mt-3 text-4xl md:text-5xl"
             style={{ color: ESPRESSO, fontFamily: SERIF, fontWeight: 500 }}
           >
-            Including the one that says{" "}
+            Four shelves.{" "}
             <span style={{ color: TERRACOTTA, fontStyle: "italic" }}>
-              you didn&apos;t finish.
+              That&apos;s it.
             </span>
           </h2>
           <p className="mt-4 text-base leading-relaxed" style={{ color: WALNUT }}>
-            Books move between four shelves you actually use, not fifteen
-            generic categories. ISBN-scan a cover with the camera and the
-            metadata fills in from Open Library. No corporate database,
-            no Amazon link in sight.
+            Books move between four shelves you&apos;ll actually use, not
+            fifteen generic categories. ISBN-scan a cover with the camera
+            and the metadata fills in from Open Library — the open,
+            community-run book database.
           </p>
         </div>
 
@@ -302,15 +302,15 @@ function Journal() {
             className="mt-3 text-4xl md:text-5xl"
             style={{ color: ESPRESSO, fontFamily: SERIF, fontWeight: 500 }}
           >
-            One review at the end is{" "}
+            A real journal for{" "}
             <span style={{ fontStyle: "italic", color: TERRACOTTA }}>
-              not a journal.
+              every book.
             </span>
           </h2>
           <p className="mt-5 text-base leading-relaxed" style={{ color: WALNUT }}>
-            Spindl gives every book a running thread. The line that
-            knocked you sideways on page 47. The slow patch you almost
-            quit at. The bit you read aloud to someone. Tag entries —
+            Every book gets a running thread. The line that knocked you
+            sideways on page 47. The slow patch you almost quit at. The
+            bit you read aloud to someone. Tag entries —
             <em> plot twist, great writing, slow section, made me cry</em>{" "}
             — and the patterns surface across your shelf.
           </p>
@@ -478,28 +478,28 @@ function ReportStat({ label, value }: { label: string; value: string }) {
 function Principles() {
   const principles = [
     {
-      title: "No Amazon. Anywhere.",
-      body: "Goodreads is owned by Amazon. Spindl isn&apos;t. There&apos;s no &lsquo;Buy on Amazon&rsquo; link, no affiliate code in your shelf, no quiet data pipe to Bezos.",
+      title: "Independent, on purpose",
+      body: "Spindl is built outside the big platforms. No corporate ties, no affiliate links in your shelf, no hidden data pipes. Just an app you pay for, that does what it says.",
     },
     {
       title: "Your shelf is yours",
-      body: "Export to CSV, PDF, or markdown whenever you want. If Spindl ever shuts down, you walk away with everything intact.",
+      body: "Export to CSV, PDF, or markdown whenever you want. If Spindl ever shuts down, you walk away with everything intact. That&apos;s a hard commitment.",
     },
     {
-      title: "No social feed",
-      body: "There is no &lsquo;your friend just rated...&rsquo; tab. There&apos;s no algorithm picking what you should read next. Reading is between you and the book.",
+      title: "Reading is private here",
+      body: "There&apos;s no feed of what your friends are rating, no algorithm picking what you should read next, no leaderboard. Reading is between you and the book.",
     },
     {
       title: "No ads, ever",
-      body: "Free tier stays free. Premium subscribers fund the work. That&apos;s the whole business model.",
+      body: "Free tier stays free. Premium subscribers fund the work. That&apos;s the whole business model — nothing else slipping in.",
     },
     {
-      title: "Open Library, not a moat",
-      body: "Book metadata comes from Open Library — the open, community-run alternative to Amazon&apos;s database. Free. Independent. Reliable.",
+      title: "Open Library, by choice",
+      body: "Book metadata comes from Open Library — the open, community-run book database run by the Internet Archive. Free, independent, well-loved by librarians.",
     },
     {
       title: "Built by one person",
-      body: "Hi, I&apos;m Mikey. I made Spindl because my Goodreads account became a graveyard. If something annoys you, you can email me.",
+      body: "Hi, I&apos;m Mikey. I made Spindl because my reading deserved better tools than I could find. If something annoys you, you can email me.",
     },
   ];
 
@@ -514,9 +514,9 @@ function Principles() {
             className="mt-3 text-4xl md:text-5xl"
             style={{ color: ESPRESSO, fontFamily: SERIF, fontWeight: 500 }}
           >
-            Six things I&apos;ve decided{" "}
+            Six things I&apos;ve{" "}
             <span style={{ color: TERRACOTTA, fontStyle: "italic" }}>
-              aren&apos;t up for discussion.
+              promised myself.
             </span>
           </h2>
         </div>
@@ -584,26 +584,26 @@ function FounderNote() {
                 fontWeight: 500,
               }}
             >
-              I built this because my Goodreads account became a
-              graveyard.
+              It started as a spreadsheet.
             </h2>
             <p
               className="mt-4 text-base leading-relaxed"
               style={{ color: WALNUT }}
             >
-              Half my shelves were wrong. The redesign never landed.
-              The recommendations were &lsquo;people who liked X also
-              liked X.&rsquo; I started keeping a spreadsheet of what
-              I was actually reading and what I thought of it. Then
-              the spreadsheet started doing things a spreadsheet
-              shouldn&apos;t. So here we are.
+              I&apos;m Mikey. A few years ago I started keeping a
+              spreadsheet of what I was reading, what I thought of it,
+              and the lines I wanted to remember. It got out of hand.
+              The columns multiplied, the formulas got fussy, and
+              eventually the spreadsheet started doing things a
+              spreadsheet really shouldn&apos;t.
             </p>
             <p
               className="mt-3 text-base leading-relaxed"
               style={{ color: WALNUT }}
             >
-              Spindl is the app I wanted, built quietly. The hedgehog
-              came later. He stayed because he&apos;s good company.
+              Spindl is the app that spreadsheet wanted to grow up
+              into. The hedgehog came later. He stayed because
+              he&apos;s good company.
             </p>
           </div>
         </div>

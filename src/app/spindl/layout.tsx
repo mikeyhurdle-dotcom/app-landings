@@ -1,13 +1,12 @@
 import type { Metadata } from "next";
-import { Fraunces, Inter } from "next/font/google";
+import { Lora, Inter } from "next/font/google";
 import { spindl } from "@/config/brands";
 import { Navbar, Footer } from "@/components/shared";
 
-const fraunces = Fraunces({
-  variable: "--font-fraunces",
+const lora = Lora({
+  variable: "--font-lora",
   subsets: ["latin"],
   display: "swap",
-  axes: ["opsz", "SOFT"],
 });
 
 const inter = Inter({
@@ -18,7 +17,7 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: {
-    default: "Spindl — A Reading Tracker Built Because Goodreads Gave Up",
+    default: "Spindl — A Reading Tracker for People Who Finish Books",
     template: "%s | Spindl",
   },
   description: spindl.description,
@@ -44,7 +43,7 @@ export const metadata: Metadata = {
     canonical: "/",
   },
   openGraph: {
-    title: "Spindl — A Reading Tracker Built Because Goodreads Gave Up",
+    title: "Spindl — A Reading Tracker for People Who Finish Books",
     description: spindl.description,
     url: "https://spindlapp.com",
     siteName: "Spindl",
@@ -53,7 +52,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Spindl — A Reading Tracker Built Because Goodreads Gave Up",
+    title: "Spindl — A Reading Tracker for People Who Finish Books",
     description: spindl.description,
   },
   robots: {
@@ -77,7 +76,7 @@ export default function SpindlLayout({
 }) {
   return (
     <div
-      className={`${fraunces.variable} ${inter.variable} min-h-screen flex flex-col`}
+      className={`${lora.variable} ${inter.variable} min-h-screen flex flex-col`}
       style={{
         backgroundColor: spindl.colors.background,
         fontFamily: "var(--font-inter)",

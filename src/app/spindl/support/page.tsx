@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/spindl/support" },
 };
 
-const SERIF = "var(--font-fraunces)";
+const SERIF = "var(--font-lora)";
 
 export default function SpindlSupportPage() {
   return (
