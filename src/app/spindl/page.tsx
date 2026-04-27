@@ -615,7 +615,7 @@ function FounderNote() {
 function Pricing() {
   return (
     <section id="pricing" className="px-6 py-24" style={{ backgroundColor: CREAM }}>
-      <div className="mx-auto max-w-5xl">
+      <div className="mx-auto max-w-6xl">
         <div className="max-w-xl">
           <p className="text-xs uppercase tracking-[0.18em]" style={{ color: WALNUT }}>
             Pricing
@@ -631,7 +631,7 @@ function Pricing() {
           </h2>
         </div>
 
-        <div className="mt-12 grid gap-6 md:grid-cols-2">
+        <div className="mt-12 grid gap-6 md:grid-cols-3">
           <div
             className="rounded-3xl p-8"
             style={{
@@ -712,7 +712,71 @@ function Pricing() {
               <li>Spindl theme variants</li>
             </ul>
           </div>
+
+          <div
+            className="relative rounded-3xl p-8"
+            style={{
+              backgroundColor: PAPER,
+              border: `2px solid ${GOLD}`,
+            }}
+          >
+            <span
+              className="inline-block rounded-full px-3 py-1 text-xs font-bold uppercase tracking-wider"
+              style={{
+                backgroundColor: `${GOLD}33`,
+                color: ESPRESSO,
+              }}
+            >
+              Founding Reader · 500 spots
+            </span>
+            <h3
+              className="mt-4 text-2xl"
+              style={{ color: ESPRESSO, fontFamily: SERIF, fontWeight: 600 }}
+            >
+              Lifetime
+            </h3>
+            <div className="mt-4 flex items-baseline gap-2">
+              <span
+                className="text-5xl"
+                style={{ color: ESPRESSO, fontFamily: SERIF, fontWeight: 500 }}
+              >
+                £49.99
+              </span>
+              <span className="text-sm" style={{ color: WALNUT }}>
+                once
+              </span>
+            </div>
+            <p className="mt-1 text-xs" style={{ color: WALNUT }}>
+              Pay once. Premium forever. No renewals.
+            </p>
+            <p
+              className="mt-5 text-xs uppercase tracking-wider"
+              style={{ color: WALNUT }}
+            >
+              For the no-subscriptions crowd —
+            </p>
+            <ul className="mt-3 space-y-2 text-sm" style={{ color: WALNUT }}>
+              <li>Everything in Premium, every future feature</li>
+              <li>Founding Reader badge in-app</li>
+              <li>First say on roadmap features</li>
+              <li>A direct line to me if anything breaks</li>
+              <li>
+                Capped at the first <strong>500 readers</strong> — when
+                they&apos;re gone, this tier is gone
+              </li>
+            </ul>
+          </div>
         </div>
+
+        <p
+          className="mx-auto mt-10 max-w-3xl text-center text-xs italic"
+          style={{ color: WALNUT }}
+        >
+          A handful of Premium features ship across v1 and the months
+          after launch. The yearly report, journal, and core stats are
+          there from day one — mood tracking, streak insurance, OCR
+          snap, and quarterly reports follow shortly after.
+        </p>
       </div>
     </section>
   );
