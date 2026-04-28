@@ -1,6 +1,7 @@
 import { isTeacherLoggedIn } from "@/lib/teacher-auth";
 import { redirect } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -30,9 +31,14 @@ export default async function TeacherLayout({
             href="/teacher"
             className="flex items-center gap-2 text-lg font-bold"
           >
-            <span className="inline-block h-8 w-8 rounded-lg bg-[#2D8B7E] text-white text-center leading-8">
-              M
-            </span>
+            <Image
+              src="/mewstro/app-icon.png"
+              alt="Mewstro"
+              width={32}
+              height={32}
+              className="rounded-lg"
+              priority
+            />
             <span>Mewstro</span>
             <span className="text-[#6B7280] font-normal">· Teacher</span>
           </Link>
