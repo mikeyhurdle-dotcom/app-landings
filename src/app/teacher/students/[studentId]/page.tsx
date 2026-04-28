@@ -514,6 +514,21 @@ function MilestoneCard({
           </p>
         </div>
       </div>
+
+      {milestone.videoUrl ? (
+        <video
+          controls
+          preload="metadata"
+          className="mt-3 w-full rounded-lg bg-black"
+          src={milestone.videoUrl}
+        >
+          Your browser doesn&apos;t support inline video. Sorry about that.
+        </video>
+      ) : (
+        <p className="mt-3 text-xs italic text-[#6B7280]">
+          Video still uploading or kept on the student&apos;s phone.
+        </p>
+      )}
     </div>
   );
 }

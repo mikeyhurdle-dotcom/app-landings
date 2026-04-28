@@ -91,6 +91,22 @@ export default function HelpFaqPage() {
         prioritise it for the next iteration.
       </p>
 
+      <h2>Where do my milestone videos and practice recordings live?</h2>
+      <p>
+        Inside the iPhone Files app under{" "}
+        <strong>Browse → On My iPhone → Mewstro</strong>. By default the files
+        are saved with their internal IDs as filenames. If a student wants
+        readable names like <code>Clair-de-Lune-2026-04-29.mp4</code> instead,
+        they can flip on{" "}
+        <em>Settings → Files → Save practice files to my iPhone Files app</em>{" "}
+        in the Mewstro app — existing files get renamed in place, and future
+        ones save with the readable name automatically.
+      </p>
+      <p>
+        One caveat: deleting Mewstro from the phone deletes the folder too, so
+        AirDrop or copy anything you want to keep before uninstalling.
+      </p>
+
       <h2>What happens to my students if I cancel after the pilot?</h2>
       <p>
         Their app keeps working in free mode (timer, basic features). They

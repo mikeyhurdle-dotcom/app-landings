@@ -81,6 +81,10 @@ export interface MilestoneRow {
   newValue: string | null;
   createdAt: string;
   durationSeconds: number;
+  /** 5-minute signed URL into the private `milestones` bucket. Present
+   * when the student has flipped share_with_teacher on AND the file has
+   * actually been uploaded. Null when the milestone is local-only. */
+  videoUrl: string | null;
 }
 
 export interface StudentDetail extends StudentSummary {
@@ -359,15 +363,33 @@ export async function getStudentDetail(
     supabase
       .from("mewstro_milestone_recordings")
       .select(
-        "id, repertoire_id, milestone_type, previous_value, new_value, created_at, duration_seconds",
+        "id, repertoire_id, milestone_type, previous_value, new_value, created_at, duration_seconds, storage_path, share_with_teacher",
       )
       .eq("user_id", userId)
+      .eq("share_with_teacher", true)
       .order("created_at", { ascending: false }),
   ]);
 
   const sessions = sessionsRes.data ?? [];
   const repertoire = repertoireRes.data ?? [];
-  const milestones = milestonesRes.data ?? [];
+  const rawMilestones = milestonesRes.data ?? [];
+
+  // Mint 5-minute signed URLs for each milestone that's actually been
+  // uploaded. RLS on the `milestones` bucket re-evaluates per request so a
+  // student revoking share_with_teacher takes effect on the *next* fetch
+  // even if a previously-issued URL hasn't expired.
+  const milestones = await Promise.all(
+    rawMilestones.map(async (m) => {
+      let videoUrl: string | null = null;
+      if (m.storage_path) {
+        const { data: signed } = await supabase.storage
+          .from("milestones")
+          .createSignedUrl(m.storage_path, 300);
+        videoUrl = signed?.signedUrl ?? null;
+      }
+      return { ...m, videoUrl };
+    }),
+  );
 
   // Build 90-day heatmap: YYYY-MM-DD → minutes
   const heatmap: Record<string, number> = {};
@@ -443,6 +465,7 @@ export async function getStudentDetail(
       newValue: m.new_value,
       createdAt: m.created_at,
       durationSeconds: m.duration_seconds,
+      videoUrl: m.videoUrl,
     })),
     heatmap,
     assignments: studentAssignments,
