@@ -176,7 +176,7 @@ export function StudentWelcomePDF({ vars }: { vars: TeacherAssetVars }) {
         </View>
         <Text style={styles.body}>
           For anything to do with the app itself (it crashed, the timer&apos;s
-          behaving oddly, you can&apos;t log in), email mikey@mewstro.app.
+          behaving oddly, you can&apos;t log in), email mikey@mewstro.com.
           That&apos;s Mikey, who built it. He&apos;s a one-person operation
           and gets back to people quickly.
         </Text>

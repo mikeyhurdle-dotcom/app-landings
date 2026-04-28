@@ -166,7 +166,7 @@ export function ParentOnePagerPDF({ vars }: { vars: TeacherAssetVars }) {
           </Text>
         </View>
         <Text style={styles.body}>
-          Email me at mikey@mewstro.app. I read every message myself, usually
+          Email me at mikey@mewstro.com. I read every message myself, usually
           within a day. If you&apos;d rather not have your child use the app
           at all, that&apos;s fine, just let {vars.teacherName} know and they
           can carry on with whatever was working before.
@@ -181,7 +181,7 @@ export function ParentOnePagerPDF({ vars }: { vars: TeacherAssetVars }) {
           <Text style={styles.signoffName}>— Mikey</Text>
           <Text style={styles.signoffRole}>Founder, Mewstro</Text>
           <Text style={styles.signoffContact}>
-            mikey@mewstro.app · mewstro.com
+            mikey@mewstro.com · mewstro.com
           </Text>
         </View>
 

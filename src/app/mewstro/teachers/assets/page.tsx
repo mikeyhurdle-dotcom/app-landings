@@ -115,10 +115,10 @@ export default function TeacherAssetsPage() {
               certificate template, a recital programme, an end-of-term
               report, just email me at{" "}
               <a
-                href="mailto:mikey@mewstro.app"
+                href="mailto:mikey@mewstro.com"
                 className="font-semibold text-[#2D8B7E] hover:underline"
               >
-                mikey@mewstro.app
+                mikey@mewstro.com
               </a>
               . I&apos;m building these in response to what teachers
               actually ask for, so the more specific you are, the faster
