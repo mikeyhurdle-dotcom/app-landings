@@ -10,7 +10,7 @@ import { getServerSupabase } from "./supabase";
  * logged-in teacher.
  */
 
-export const ELLIE_STUDIO_NAME = "Ellie Moorhouse's Studio";
+export const ELLIE_STUDIO_NAME = "EM:CAS";
 
 export interface StudentRow {
   userId: string;
