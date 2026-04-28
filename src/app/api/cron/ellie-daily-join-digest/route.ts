@@ -1,10 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
-import { Resend } from "resend";
+import { ServerClient } from "postmark";
 import { getServerSupabase } from "@/lib/supabase";
 import { ELLIE_STUDIO_NAME } from "@/lib/teacher-queries";
 
 // Required Vercel env vars:
-//   CRON_SECRET, RESEND_API_KEY,
+//   CRON_SECRET, POSTMARK_SERVER_TOKEN,
 //   NEXT_PUBLIC_SUPABASE_URL (existing), SUPABASE_SERVICE_ROLE_KEY (existing)
 
 export const runtime = "nodejs";
@@ -13,6 +13,7 @@ export const dynamic = "force-dynamic";
 const RECIPIENT = "ellie@em-cas.com";
 const SENDER = "Mewstro <noreply@mewstro.com>";
 const DASHBOARD_URL = "https://studio.mewstro.com";
+const MESSAGE_STREAM = "outbound"; // Postmark default transactional stream
 
 export async function GET(request: NextRequest) {
   const expected = process.env.CRON_SECRET;
@@ -48,14 +49,14 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ skipped: true, reason: "no new members" });
   }
 
-  const apiKey = process.env.RESEND_API_KEY;
-  if (!apiKey) {
+  const token = process.env.POSTMARK_SERVER_TOKEN;
+  if (!token) {
     return NextResponse.json(
-      { error: "RESEND_API_KEY not configured" },
+      { error: "POSTMARK_SERVER_TOKEN not configured" },
       { status: 500 },
     );
   }
-  const resend = new Resend(apiKey);
+  const postmark = new ServerClient(token);
 
   const count = newMembers.length;
   const noun = count === 1 ? "student" : "students";
@@ -88,29 +89,24 @@ export async function GET(request: NextRequest) {
   const html = `<!doctype html><html><body style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;color:#1a1a1a;line-height:1.55;max-width:560px;margin:0 auto;padding:24px;"><p>Hi Ellie,</p><p>${escapeHtml(greeting)}</p>${count > 1 ? `<ul style="padding-left:20px;">${namesHtml}</ul>` : ""}<p>You can see them in your studio dashboard:</p><p><a href="${DASHBOARD_URL}" style="color:#2D8B7E;font-weight:600;">${DASHBOARD_URL}</a></p><p>Thanks for being the first teacher on Mewstro.</p><p>— Mikey</p></body></html>`;
 
   try {
-    const result = await resend.emails.send({
-      from: SENDER,
-      to: RECIPIENT,
-      subject,
-      text,
-      html,
+    const result = await postmark.sendEmail({
+      From: SENDER,
+      To: RECIPIENT,
+      Subject: subject,
+      TextBody: text,
+      HtmlBody: html,
+      MessageStream: MESSAGE_STREAM,
     });
-    if (result.error) {
-      return NextResponse.json(
-        { error: `Resend: ${result.error.message}` },
-        { status: 502 },
-      );
-    }
     return NextResponse.json({
       sent: true,
       count,
       names,
-      messageId: result.data?.id ?? null,
+      messageId: result.MessageID ?? null,
     });
   } catch (err) {
     return NextResponse.json(
       {
-        error: `Send threw: ${err instanceof Error ? err.message : String(err)}`,
+        error: `Postmark: ${err instanceof Error ? err.message : String(err)}`,
       },
       { status: 502 },
     );
