@@ -27,13 +27,13 @@ export default function HelpFaqPage() {
         </li>
         <li>
           The <strong>invite code</strong> (your short one,{" "}
-          <code>ELLIE-2026</code>) joins them to your studio so you can see
+          <code>EMCAS</code>) joins them to your studio so you can see
           their practice.
         </li>
       </ul>
       <p>
         Ask them to open Mewstro → Settings → My Studio and type{" "}
-        <code>ELLIE-2026</code>. They&apos;ll appear here within seconds.
+        <code>EMCAS</code>. They&apos;ll appear here within seconds.
       </p>
 
       <h2>How do I create an assignment?</h2>
