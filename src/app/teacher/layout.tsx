@@ -37,14 +37,22 @@ export default async function TeacherLayout({
             <span className="text-[#6B7280] font-normal">· Teacher</span>
           </Link>
           {loggedIn && (
-            <form action="/api/teacher-logout" method="POST">
-              <button
-                type="submit"
+            <div className="flex items-center gap-5">
+              <Link
+                href="/teacher/help"
                 className="text-sm text-[#6B7280] hover:text-[#2D8B7E] transition-colors"
               >
-                Sign out
-              </button>
-            </form>
+                Help
+              </Link>
+              <form action="/api/teacher-logout" method="POST">
+                <button
+                  type="submit"
+                  className="text-sm text-[#6B7280] hover:text-[#2D8B7E] transition-colors"
+                >
+                  Sign out
+                </button>
+              </form>
+            </div>
           )}
         </div>
       </header>
