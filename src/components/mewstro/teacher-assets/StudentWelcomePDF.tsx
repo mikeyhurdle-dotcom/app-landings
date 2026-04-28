@@ -10,6 +10,7 @@ import {
 } from "@react-pdf/renderer";
 import { TeacherAssetVars, PALETTE, isLightColor } from "./types";
 import { MEWSTRO_ICON_DATA_URL } from "./app-icon";
+import { MEWSTRO_APPSTORE_QR_DATA_URL } from "./appstore-qr";
 
 export function StudentWelcomePDF({ vars }: { vars: TeacherAssetVars }) {
   const accent = vars.accentColor;
@@ -199,15 +200,14 @@ export function StudentWelcomePDF({ vars }: { vars: TeacherAssetVars }) {
         </View>
 
         <View style={styles.qrBlock} wrap={false}>
-          <View style={[styles.qrPlaceholder, { borderColor: accent }]}>
-            <Text style={styles.qrPlaceholderText}>
-              QR code{"\n"}(App Store)
+          {/* eslint-disable-next-line jsx-a11y/alt-text */}
+          <Image src={MEWSTRO_APPSTORE_QR_DATA_URL} style={styles.qrImage} />
+          <View style={styles.qrTextBlock}>
+            <Text style={styles.qrCaption}>
+              Scan to download Mewstro from the App Store.
             </Text>
+            <Text style={styles.qrUrl}>apps.apple.com/app/mewstro</Text>
           </View>
-          <Text style={styles.qrCaption}>
-            Scan to download Mewstro from the App Store, or search Mewstro
-            on iPhone.
-          </Text>
         </View>
 
         <View style={styles.footer} fixed>
@@ -448,21 +448,18 @@ function createStyles(accent: string, onAccent: string) {
       padding: 14,
       backgroundColor: PALETTE.surface,
     },
-    qrPlaceholder: {
+    qrImage: {
       width: 80,
       height: 80,
-      borderRadius: 8,
-      borderWidth: 1,
-      backgroundColor: PALETTE.panel,
-      justifyContent: "center",
-      alignItems: "center",
     },
-    qrPlaceholderText: {
-      fontSize: 8,
+    qrTextBlock: { flex: 1 },
+    qrCaption: { fontSize: 11, color: PALETTE.text, fontFamily: "Helvetica-Bold" },
+    qrUrl: {
+      fontSize: 9,
       color: PALETTE.textMuted,
-      textAlign: "center",
+      marginTop: 4,
+      fontFamily: "Helvetica",
     },
-    qrCaption: { flex: 1, fontSize: 10, color: PALETTE.textDim },
 
     footer: {
       position: "absolute",

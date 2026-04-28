@@ -49,7 +49,7 @@ export const mewstro: Brand = {
     body: "var(--font-geist-sans)",
   },
   links: {
-    appStore: "#",
+    appStore: "https://apps.apple.com/app/mewstro/id6761615884",
     privacy: "/mewstro/privacy",
     support: "/mewstro/support",
   },
