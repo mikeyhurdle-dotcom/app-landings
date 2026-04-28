@@ -111,16 +111,7 @@ export function ParentOnePagerPDF({ vars }: { vars: TeacherAssetVars }) {
           onAccent={onAccent}
         />
 
-        <View style={styles.footer} fixed>
-          <Text style={styles.footerLeft}>
-            A note for parents · {vars.studioName} on Mewstro
-          </Text>
-          <Text style={styles.footerRight}>mewstro.com</Text>
-        </View>
-      </Page>
-
-      <Page size="A4" style={styles.page}>
-        <View style={styles.sectionHeading}>
+        <View style={styles.sectionHeading} wrap={false}>
           <Text style={styles.sectionHeadingText}>
             Helping your child get set up
           </Text>
@@ -177,7 +168,7 @@ export function ParentOnePagerPDF({ vars }: { vars: TeacherAssetVars }) {
           {vars.studioName} on Mewstro, the better the product gets.
         </Text>
 
-        <View style={styles.signoff}>
+        <View style={styles.signoff} wrap={false}>
           <Text style={styles.signoffName}>— Mikey</Text>
           <Text style={styles.signoffRole}>Founder, Mewstro</Text>
           <Text style={styles.signoffContact}>
@@ -209,7 +200,7 @@ function Item({
 }) {
   const styles = createStyles(accent, onAccent);
   return (
-    <View style={styles.item}>
+    <View style={styles.item} wrap={false}>
       <Text style={[styles.itemTitle, { color: accent }]}>{title}</Text>
       <Text style={styles.itemBody}>{body}</Text>
     </View>
@@ -231,7 +222,7 @@ function Step({
 }) {
   const styles = createStyles(accent, onAccent);
   return (
-    <View style={styles.step}>
+    <View style={styles.step} wrap={false}>
       <View style={styles.stepNumber}>
         <Text style={styles.stepNumberText}>{n}</Text>
       </View>

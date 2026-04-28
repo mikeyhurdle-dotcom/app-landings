@@ -133,16 +133,7 @@ export function StudentWelcomePDF({ vars }: { vars: TeacherAssetVars }) {
           onAccent={onAccent}
         />
 
-        <View style={styles.footer} fixed>
-          <Text style={styles.footerLeft}>
-            {vars.studioName} on Mewstro · Welcome handout
-          </Text>
-          <Text style={styles.footerRight}>mewstro.com</Text>
-        </View>
-      </Page>
-
-      <Page size="A4" style={styles.page}>
-        <View style={styles.sectionHeading}>
+        <View style={styles.sectionHeading} wrap={false}>
           <Text style={styles.sectionHeadingText}>
             Things you&apos;ll probably wonder about
           </Text>
@@ -186,25 +177,28 @@ export function StudentWelcomePDF({ vars }: { vars: TeacherAssetVars }) {
           do.
         </Text>
 
-        <View style={styles.signoff}>
+        <View style={styles.signoff} wrap={false}>
           <Text style={styles.signoffName}>— {vars.teacherName}</Text>
           <Text style={styles.signoffRole}>{vars.studioName}</Text>
         </View>
 
-        <View style={[styles.aboutBox, { borderLeftColor: accent }]}>
+        <View
+          style={[styles.aboutBox, { borderLeftColor: accent }]}
+          wrap={false}
+        >
           <Text style={styles.aboutTitle}>A bit of context on the app</Text>
           <Text style={styles.aboutBody}>
             Mewstro was built by Mikey Hurdle, a piano student in Oxford who
             started lessons at 40 and made a spreadsheet to track his own
             practice. His piano teacher suggested turning it into an app her
-            other students could use. That&apos;s how Mewstro exists.
-            There&apos;s no big company behind it, no advertising, no data
-            sales, just one person trying to make practice tracking less of a
-            chore. You can read the whole story at mewstro.com/story.
+            other students could use. That&apos;s how Mewstro exists. No
+            advertising, no data sales, just one person trying to make
+            practice tracking less of a chore. The whole story is at
+            mewstro.com/story.
           </Text>
         </View>
 
-        <View style={styles.qrBlock}>
+        <View style={styles.qrBlock} wrap={false}>
           <View style={[styles.qrPlaceholder, { borderColor: accent }]}>
             <Text style={styles.qrPlaceholderText}>
               QR code{"\n"}(App Store)
@@ -258,7 +252,7 @@ function Step({
 }) {
   const styles = createStyles(accent, onAccent);
   return (
-    <View style={styles.step}>
+    <View style={styles.step} wrap={false}>
       <View style={styles.stepNumber}>
         <Text style={styles.stepNumberText}>{n}</Text>
       </View>
@@ -273,7 +267,7 @@ function Step({
 function Faq({ q, a }: { q: string; a: string }) {
   const styles = createStyles("#000", "#fff");
   return (
-    <View style={styles.faq}>
+    <View style={styles.faq} wrap={false}>
       <Text style={styles.faqQ}>{q}</Text>
       <Text style={styles.faqA}>{a}</Text>
     </View>
