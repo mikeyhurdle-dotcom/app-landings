@@ -86,53 +86,76 @@ export function StudentWelcomePDF({ vars }: { vars: TeacherAssetVars }) {
           </Bullet>
         </View>
 
+        <View wrap={false}>
         <View style={styles.sectionHeading}>
           <Text style={styles.sectionHeadingText}>How to get set up</Text>
         </View>
 
-        <Step
-          n={1}
-          title="Download Mewstro"
-          body={`Search "Mewstro" on the App Store, or scan the QR at the bottom of page two. iPhone only at the moment.`}
-          accent={accent}
-          onAccent={onAccent}
-        />
-        <Step
-          n={2}
-          title="Make an account"
-          body="Sign in with Apple, Google, or an email and password. Whichever's easiest."
-          accent={accent}
-          onAccent={onAccent}
-        />
-        <Step
-          n={3}
-          title="Enter your invite code"
-          body={`When the app asks if you have one, tap "I have an invite code" and enter the code below. That's the bit that links you to ${vars.studioName}, so I can see your practice and you don't get billed for anything.`}
-          accent={accent}
-          onAccent={onAccent}
-        />
+        <View style={styles.setupRow}>
+          <View style={styles.setupSteps}>
+            <Step
+              n={1}
+              title="Download Mewstro"
+              body="Scan the QR on the right, or search Mewstro on the App Store. iPhone only at the moment."
+              accent={accent}
+              onAccent={onAccent}
+            />
+            <Step
+              n={2}
+              title="Make an account"
+              body="Sign in with Apple, Google, or an email and password. Whichever's easiest."
+              accent={accent}
+              onAccent={onAccent}
+            />
+            <Step
+              n={3}
+              title="Enter your invite code"
+              body={`When the app asks if you have one, tap "I have an invite code" and type the code on the right. That's what links you to ${vars.studioName}, so I can see your practice and you don't get billed for anything.`}
+              accent={accent}
+              onAccent={onAccent}
+            />
+            <Step
+              n={4}
+              title="Pick your instrument(s)"
+              body="Add what you're actually learning. You can have more than one."
+              accent={accent}
+              onAccent={onAccent}
+            />
+            <Step
+              n={5}
+              title="Start your first session"
+              body="Tap the big start button next time you sit down to practise. Honestly, I'd suggest just doing this once and seeing how it feels before fiddling with anything else."
+              accent={accent}
+              onAccent={onAccent}
+            />
+          </View>
 
-        <View style={[styles.codeBox, { borderColor: accent }]}>
-          <Text style={styles.codeLabel}>YOUR INVITE CODE</Text>
-          <Text style={[styles.codeValue, { color: accent }]}>
-            {vars.inviteCode}
-          </Text>
+          <View style={styles.setupSidebar}>
+            <View style={[styles.codeCard, { borderColor: accent }]}>
+              <Text style={styles.codeCardLabel}>YOUR INVITE CODE</Text>
+              <Text style={[styles.codeCardValue, { color: accent }]}>
+                {vars.inviteCode}
+              </Text>
+              <Text style={styles.codeCardHint}>
+                Type this exactly when the app asks. Case doesn&apos;t
+                matter.
+              </Text>
+            </View>
+
+            <View style={[styles.qrCard, { borderColor: accent }]}>
+              <Text style={styles.qrCardLabel}>GET THE APP</Text>
+              {/* eslint-disable-next-line jsx-a11y/alt-text */}
+              <Image
+                src={MEWSTRO_APPSTORE_QR_DATA_URL}
+                style={styles.qrCardImage}
+              />
+              <Text style={styles.qrCardHint}>
+                Scan with your iPhone camera
+              </Text>
+            </View>
+          </View>
         </View>
-
-        <Step
-          n={4}
-          title="Pick your instrument(s)"
-          body="Add what you're actually learning. You can have more than one."
-          accent={accent}
-          onAccent={onAccent}
-        />
-        <Step
-          n={5}
-          title="Start your first session"
-          body="Tap the big start button next time you sit down to practise. Honestly, I'd suggest just doing this once and seeing how it feels before fiddling with anything else."
-          accent={accent}
-          onAccent={onAccent}
-        />
+        </View>
 
         <View style={styles.sectionHeading} wrap={false}>
           <Text style={styles.sectionHeadingText}>
@@ -197,17 +220,6 @@ export function StudentWelcomePDF({ vars }: { vars: TeacherAssetVars }) {
             practice tracking less of a chore. The whole story is at
             mewstro.com/story.
           </Text>
-        </View>
-
-        <View style={styles.qrBlock} wrap={false}>
-          {/* eslint-disable-next-line jsx-a11y/alt-text */}
-          <Image src={MEWSTRO_APPSTORE_QR_DATA_URL} style={styles.qrImage} />
-          <View style={styles.qrTextBlock}>
-            <Text style={styles.qrCaption}>
-              Scan to download Mewstro from the App Store.
-            </Text>
-            <Text style={styles.qrUrl}>apps.apple.com/app/mewstro</Text>
-          </View>
         </View>
 
         <View style={styles.footer} fixed>
@@ -386,25 +398,62 @@ function createStyles(accent: string, onAccent: string) {
     stepTitle: { fontSize: 12, fontFamily: "Helvetica-Bold", marginBottom: 2 },
     stepText: { fontSize: 11, color: PALETTE.textDim },
 
-    codeBox: {
+    setupRow: {
+      flexDirection: "row",
+      gap: 14,
+      marginTop: 4,
+    },
+    setupSteps: { flex: 1 },
+    setupSidebar: { width: 170 },
+
+    codeCard: {
       backgroundColor: PALETTE.surface,
       borderWidth: 2,
       borderRadius: 10,
       padding: 12,
-      marginVertical: 10,
       alignItems: "center",
+      marginBottom: 10,
     },
-    codeLabel: {
-      fontSize: 8,
+    codeCardLabel: {
+      fontSize: 7,
       letterSpacing: 1.2,
       color: PALETTE.textMuted,
       fontFamily: "Helvetica-Bold",
     },
-    codeValue: {
-      fontSize: 26,
+    codeCardValue: {
+      fontSize: 20,
       fontFamily: "Courier-Bold",
-      letterSpacing: 2,
-      marginTop: 4,
+      letterSpacing: 1.5,
+      marginTop: 6,
+    },
+    codeCardHint: {
+      fontSize: 8,
+      color: PALETTE.textMuted,
+      marginTop: 8,
+      textAlign: "center",
+      lineHeight: 1.4,
+    },
+
+    qrCard: {
+      backgroundColor: PALETTE.surface,
+      borderWidth: 1,
+      borderRadius: 10,
+      padding: 12,
+      alignItems: "center",
+    },
+    qrCardLabel: {
+      fontSize: 7,
+      letterSpacing: 1.2,
+      color: PALETTE.textMuted,
+      fontFamily: "Helvetica-Bold",
+      marginBottom: 8,
+    },
+    qrCardImage: { width: 110, height: 110 },
+    qrCardHint: {
+      fontSize: 8,
+      color: PALETTE.textMuted,
+      marginTop: 6,
+      textAlign: "center",
     },
 
     faq: { marginBottom: 10 },
@@ -437,29 +486,6 @@ function createStyles(accent: string, onAccent: string) {
       lineHeight: 1.5,
     },
 
-    qrBlock: {
-      marginTop: 4,
-      flexDirection: "row",
-      alignItems: "center",
-      gap: 14,
-      borderWidth: 1,
-      borderColor: PALETTE.border,
-      borderRadius: 12,
-      padding: 14,
-      backgroundColor: PALETTE.surface,
-    },
-    qrImage: {
-      width: 80,
-      height: 80,
-    },
-    qrTextBlock: { flex: 1 },
-    qrCaption: { fontSize: 11, color: PALETTE.text, fontFamily: "Helvetica-Bold" },
-    qrUrl: {
-      fontSize: 9,
-      color: PALETTE.textMuted,
-      marginTop: 4,
-      fontFamily: "Helvetica",
-    },
 
     footer: {
       position: "absolute",
