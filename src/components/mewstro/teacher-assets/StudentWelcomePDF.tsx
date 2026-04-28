@@ -11,6 +11,11 @@ import {
 import { TeacherAssetVars, PALETTE, isLightColor } from "./types";
 import { MEWSTRO_ICON_DATA_URL } from "./app-icon";
 import { MEWSTRO_APPSTORE_QR_DATA_URL } from "./appstore-qr";
+import {
+  SCREENSHOT_PRACTICE_TIMER_DATA_URL,
+  SCREENSHOT_CALENDAR_DATA_URL,
+  SCREENSHOT_MILESTONE_DATA_URL,
+} from "./screenshots";
 
 export function StudentWelcomePDF({ vars }: { vars: TeacherAssetVars }) {
   const accent = vars.accentColor;
@@ -86,6 +91,33 @@ export function StudentWelcomePDF({ vars }: { vars: TeacherAssetVars }) {
           </Bullet>
         </View>
 
+        <View style={styles.screenshotRow} wrap={false}>
+          <View style={styles.screenshotItem}>
+            {/* eslint-disable-next-line jsx-a11y/alt-text */}
+            <Image
+              src={SCREENSHOT_PRACTICE_TIMER_DATA_URL}
+              style={styles.screenshotImage}
+            />
+            <Text style={styles.screenshotCaption}>Practice timer</Text>
+          </View>
+          <View style={styles.screenshotItem}>
+            {/* eslint-disable-next-line jsx-a11y/alt-text */}
+            <Image
+              src={SCREENSHOT_CALENDAR_DATA_URL}
+              style={styles.screenshotImage}
+            />
+            <Text style={styles.screenshotCaption}>Your practice month</Text>
+          </View>
+          <View style={styles.screenshotItem}>
+            {/* eslint-disable-next-line jsx-a11y/alt-text */}
+            <Image
+              src={SCREENSHOT_MILESTONE_DATA_URL}
+              style={styles.screenshotImage}
+            />
+            <Text style={styles.screenshotCaption}>Milestone Moments</Text>
+          </View>
+        </View>
+
         <View wrap={false}>
         <View style={styles.sectionHeading}>
           <Text style={styles.sectionHeadingText}>How to get set up</Text>
@@ -93,13 +125,23 @@ export function StudentWelcomePDF({ vars }: { vars: TeacherAssetVars }) {
 
         <View style={styles.setupRow}>
           <View style={styles.setupSteps}>
-            <Step
-              n={1}
-              title="Download Mewstro"
-              body="Scan the QR on the right, or search Mewstro on the App Store. iPhone only at the moment."
-              accent={accent}
-              onAccent={onAccent}
-            />
+            {vars.offerCodeQrDataUrl ? (
+              <Step
+                n={1}
+                title="Scan the orange QR on the right"
+                body="That installs Mewstro and unlocks a full year of Premium for you, free, courtesy of the studio. If you already have the app, scanning still works to redeem the year."
+                accent={accent}
+                onAccent={onAccent}
+              />
+            ) : (
+              <Step
+                n={1}
+                title="Download Mewstro"
+                body="Scan the QR on the right, or search Mewstro on the App Store. iPhone only at the moment."
+                accent={accent}
+                onAccent={onAccent}
+              />
+            )}
             <Step
               n={2}
               title="Make an account"
@@ -142,15 +184,33 @@ export function StudentWelcomePDF({ vars }: { vars: TeacherAssetVars }) {
               </Text>
             </View>
 
+            {vars.offerCodeQrDataUrl ? (
+              <View style={[styles.qrCardPrimary, { borderColor: accent, backgroundColor: accent }]}>
+                <Text style={[styles.qrCardLabelOnAccent, { color: onAccent }]}>FREE YEAR — START HERE</Text>
+                {/* eslint-disable-next-line jsx-a11y/alt-text */}
+                <Image
+                  src={vars.offerCodeQrDataUrl}
+                  style={styles.qrCardImage}
+                />
+                <Text style={[styles.qrCardHintOnAccent, { color: onAccent }]}>
+                  Installs the app and unlocks a free year. Scan with your iPhone camera.
+                </Text>
+              </View>
+            ) : null}
+
             <View style={[styles.qrCard, { borderColor: accent }]}>
-              <Text style={styles.qrCardLabel}>GET THE APP</Text>
+              <Text style={styles.qrCardLabel}>
+                {vars.offerCodeQrDataUrl ? "BACKUP — JUST THE APP" : "GET THE APP"}
+              </Text>
               {/* eslint-disable-next-line jsx-a11y/alt-text */}
               <Image
                 src={MEWSTRO_APPSTORE_QR_DATA_URL}
                 style={styles.qrCardImage}
               />
               <Text style={styles.qrCardHint}>
-                Scan with your iPhone camera
+                {vars.offerCodeQrDataUrl
+                  ? "Use this only if the orange QR doesn't work for you."
+                  : "Scan with your iPhone camera"}
               </Text>
             </View>
           </View>
@@ -440,6 +500,13 @@ function createStyles(accent: string, onAccent: string) {
       borderRadius: 10,
       padding: 12,
       alignItems: "center",
+      marginTop: 8,
+    },
+    qrCardPrimary: {
+      borderWidth: 2,
+      borderRadius: 10,
+      padding: 12,
+      alignItems: "center",
     },
     qrCardLabel: {
       fontSize: 7,
@@ -448,12 +515,25 @@ function createStyles(accent: string, onAccent: string) {
       fontFamily: "Helvetica-Bold",
       marginBottom: 8,
     },
-    qrCardImage: { width: 110, height: 110 },
+    qrCardLabelOnAccent: {
+      fontSize: 7,
+      letterSpacing: 1.2,
+      fontFamily: "Helvetica-Bold",
+      marginBottom: 8,
+      textAlign: "center",
+    },
+    qrCardImage: { width: 110, height: 110, backgroundColor: "#FFFFFF", padding: 4 },
     qrCardHint: {
       fontSize: 8,
       color: PALETTE.textMuted,
       marginTop: 6,
       textAlign: "center",
+    },
+    qrCardHintOnAccent: {
+      fontSize: 8,
+      marginTop: 6,
+      textAlign: "center",
+      lineHeight: 1.35,
     },
 
     faq: { marginBottom: 10 },
@@ -466,6 +546,32 @@ function createStyles(accent: string, onAccent: string) {
       fontFamily: "Helvetica-Bold",
     },
     signoffRole: { fontSize: 10, color: PALETTE.textMuted, marginTop: 2 },
+
+    screenshotRow: {
+      flexDirection: "row",
+      justifyContent: "space-between",
+      gap: 10,
+      marginTop: 10,
+      marginBottom: 6,
+    },
+    screenshotItem: {
+      flex: 1,
+      alignItems: "center",
+    },
+    screenshotImage: {
+      width: "100%",
+      height: 200,
+      objectFit: "contain",
+      borderRadius: 8,
+    },
+    screenshotCaption: {
+      fontSize: 8,
+      color: PALETTE.textMuted,
+      marginTop: 6,
+      textAlign: "center",
+      fontFamily: "Helvetica-Bold",
+      letterSpacing: 0.4,
+    },
 
     aboutBox: {
       backgroundColor: PALETTE.panel,

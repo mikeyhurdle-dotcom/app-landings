@@ -5,6 +5,8 @@ export type TeacherAssetVars = {
   inviteCode: string;
   accentColor: string;
   studentName?: string;
+  offerCodeUrl?: string;
+  offerCodeQrDataUrl?: string;
 };
 
 export const DEFAULT_VARS: TeacherAssetVars = {
