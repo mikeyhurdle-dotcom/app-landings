@@ -1,6 +1,6 @@
 "use server";
 
-import { createAssignment } from "@/lib/teacher-queries";
+import { createAssignment, ELLIE_STUDIO_NAME } from "@/lib/teacher-queries";
 import { redirect } from "next/navigation";
 
 /**
@@ -33,7 +33,7 @@ export async function createAssignmentAction(
   }
 
   const result = await createAssignment({
-    studioName: "Ellie Moorhouse's Studio",
+    studioName: ELLIE_STUDIO_NAME,
     title,
     description,
     dueDate,
