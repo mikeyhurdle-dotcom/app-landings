@@ -68,7 +68,7 @@ export default async function TeacherLayout({
       <footer className="mt-20 border-t border-[#E8DFD3] bg-white py-8">
         <div className="mx-auto max-w-6xl px-6 text-center text-sm text-[#6B7280]">
           <p>
-            Built by Mikey Gilson. Feedback: reply to any Mewstro email, or
+            Built by Mikey Hurdle. Feedback: reply to any Mewstro email, or
             message me directly.
           </p>
           <p className="mt-2 text-xs">
