@@ -196,12 +196,13 @@ export async function getStudioOverview(
     );
   }
 
-  // 2. Memberships for this studio
+  // 2. Memberships for this studio. Teachers see ALL students regardless
+  // of `opted_in` — that flag controls peer-leaderboard visibility on iOS,
+  // not teacher visibility. Decision locked 2026-04-30 (HOBTRAC-118).
   const { data: memberships, error: memErr } = await supabase
     .from("mewstro_leaderboard_memberships")
     .select("user_id, display_name_override, opted_in")
-    .eq("studio_name", studioName)
-    .eq("opted_in", true);
+    .eq("studio_name", studioName);
 
   if (memErr || !memberships) {
     throw new Error(
