@@ -3,11 +3,13 @@ import { getServerSupabase } from "./supabase";
 /**
  * Typed read helpers for the teacher dashboard. Every function here pulls
  * from the shared HobbyPulse Supabase project (mewstro_ prefix) and
- * filters to a single studio.
+ * filters to a single studio. Callers pass the active studio name —
+ * resolved from the session cookie via `getActiveStudioName()`.
  *
- * For v1 demo the studio is hardcoded to Ellie's. Once per-teacher auth
- * lands, we'll swap the hardcoded studio name for a lookup based on the
- * logged-in teacher.
+ * `ELLIE_STUDIO_NAME` is kept as an exported constant only because the
+ * Ellie daily-join-digest cron is studio-specific by design and references
+ * it directly. Dashboard pages must NOT use this constant — they should
+ * always pass the active session's studio.
  */
 
 export const ELLIE_STUDIO_NAME = "EM:CAS";
@@ -179,7 +181,7 @@ function calcStreak(sessionDates: Date[]): number {
  * aggregate practice stats for the student list view.
  */
 export async function getStudioOverview(
-  studioName: string = ELLIE_STUDIO_NAME,
+  studioName: string,
 ): Promise<StudioOverview> {
   const supabase = getServerSupabase();
 
@@ -327,7 +329,7 @@ export async function getStudioOverview(
  */
 export async function getStudentDetail(
   userId: string,
-  studioName: string = ELLIE_STUDIO_NAME,
+  studioName: string,
 ): Promise<StudentDetail | null> {
   const supabase = getServerSupabase();
 
@@ -480,7 +482,7 @@ export async function getStudentDetail(
  * completion details joined in.
  */
 export async function getAssignmentsForStudio(
-  studioName: string = ELLIE_STUDIO_NAME,
+  studioName: string,
 ): Promise<AssignmentRow[]> {
   const supabase = getServerSupabase();
 
@@ -611,7 +613,7 @@ export async function getAssignmentsForStudent(
  * dashboard stat card.
  */
 export async function getAssignmentSummary(
-  studioName: string = ELLIE_STUDIO_NAME,
+  studioName: string,
 ): Promise<AssignmentSummary> {
   const assignments = await getAssignmentsForStudio(studioName);
   const activeCount = assignments.length;

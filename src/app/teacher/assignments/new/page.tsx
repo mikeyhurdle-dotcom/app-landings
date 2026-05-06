@@ -1,4 +1,4 @@
-import { isTeacherLoggedIn } from "@/lib/teacher-auth";
+import { getActiveStudioName } from "@/lib/teacher-auth";
 import { getStudioOverview } from "@/lib/teacher-queries";
 import { redirect } from "next/navigation";
 import Link from "next/link";
@@ -28,11 +28,12 @@ export default async function NewAssignmentPage({
 }: {
   searchParams: Promise<{ error?: string }>;
 }) {
-  if (!(await isTeacherLoggedIn())) {
+  const studioName = await getActiveStudioName();
+  if (!studioName) {
     redirect("/teacher/login");
   }
 
-  const overview = await getStudioOverview();
+  const overview = await getStudioOverview(studioName);
   const params = await searchParams;
   const errorMessage = errorFor(params.error);
 

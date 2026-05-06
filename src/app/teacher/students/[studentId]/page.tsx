@@ -1,4 +1,4 @@
-import { isTeacherLoggedIn } from "@/lib/teacher-auth";
+import { getActiveStudioName } from "@/lib/teacher-auth";
 import {
   getStudentDetail,
   type SessionRow,
@@ -158,12 +158,13 @@ export default async function StudentDetailPage({
 }: {
   params: Promise<{ studentId: string }>;
 }) {
-  if (!(await isTeacherLoggedIn())) {
+  const studioName = await getActiveStudioName();
+  if (!studioName) {
     redirect("/teacher/login");
   }
 
   const { studentId } = await params;
-  const student = await getStudentDetail(studentId);
+  const student = await getStudentDetail(studentId, studioName);
 
   if (!student) {
     notFound();

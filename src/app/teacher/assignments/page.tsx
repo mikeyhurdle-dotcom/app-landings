@@ -1,4 +1,4 @@
-import { isTeacherLoggedIn } from "@/lib/teacher-auth";
+import { getActiveStudioName } from "@/lib/teacher-auth";
 import {
   getAssignmentsForStudio,
   getStudioOverview,
@@ -41,13 +41,14 @@ function formatRelative(iso: string): string {
 }
 
 export default async function AssignmentsPage() {
-  if (!(await isTeacherLoggedIn())) {
+  const studioName = await getActiveStudioName();
+  if (!studioName) {
     redirect("/teacher/login");
   }
 
   const [assignments, overview] = await Promise.all([
-    getAssignmentsForStudio(),
-    getStudioOverview(),
+    getAssignmentsForStudio(studioName),
+    getStudioOverview(studioName),
   ]);
 
   const activeAssignments = assignments.filter((a) => {

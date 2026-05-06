@@ -1,6 +1,7 @@
 "use server";
 
-import { createAssignment, ELLIE_STUDIO_NAME } from "@/lib/teacher-queries";
+import { getActiveStudioName } from "@/lib/teacher-auth";
+import { createAssignment } from "@/lib/teacher-queries";
 import { redirect } from "next/navigation";
 
 /**
@@ -32,8 +33,13 @@ export async function createAssignmentAction(
     redirect("/teacher/assignments/new?error=students");
   }
 
+  const studioName = await getActiveStudioName();
+  if (!studioName) {
+    redirect("/teacher/login");
+  }
+
   const result = await createAssignment({
-    studioName: ELLIE_STUDIO_NAME,
+    studioName,
     title,
     description,
     dueDate,

@@ -1,4 +1,4 @@
-import { isTeacherLoggedIn } from "@/lib/teacher-auth";
+import { getActiveStudioName } from "@/lib/teacher-auth";
 import {
   getStudioOverview,
   getAssignmentSummary,
@@ -58,13 +58,14 @@ function engagementIndicator(weekMinutes: number, streak: number): string {
 export default async function TeacherDashboardPage() {
   // Auth check — layout already renders regardless, but we need to gate
   // the actual data fetch to stop unauthed hits going to Supabase.
-  if (!(await isTeacherLoggedIn())) {
+  const studioName = await getActiveStudioName();
+  if (!studioName) {
     redirect("/teacher/login");
   }
 
   const [overview, assignmentSummary] = await Promise.all([
-    getStudioOverview(),
-    getAssignmentSummary(),
+    getStudioOverview(studioName),
+    getAssignmentSummary(studioName),
   ]);
 
   return (
