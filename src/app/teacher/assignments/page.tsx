@@ -133,16 +133,16 @@ export default async function AssignmentsPage() {
       <div className="mt-12 rounded-2xl border border-[#E8DFD3] bg-[#FAF6EF] p-8">
         <div className="mb-4 flex items-center gap-2">
           <span className="inline-flex h-6 items-center rounded-full bg-[#2D8B7E] px-3 text-xs font-bold uppercase tracking-wider text-white">
-            Coming next update
+            On the roadmap
           </span>
         </div>
         <h3 className="text-lg font-semibold">
           What your students will see
         </h3>
         <p className="mt-2 text-sm text-[#5A4E42]">
-          When the next Mewstro build lands on your students&apos; phones,
-          assignments will show up in their Profile tab inside the app.
-          Here&apos;s the preview:
+          Once the in-app inbox ships, assignments will appear in your
+          students&apos; Profile tab inside Mewstro. Here&apos;s the
+          planned look:
         </p>
 
         <div className="mt-6 flex justify-center">
@@ -162,8 +162,9 @@ export default async function AssignmentsPage() {
         </div>
 
         <p className="mt-6 text-xs text-[#6B7280]">
-          Today, Ellie&apos;s dashboard is the whole story. The in-app
-          inbox ships in v1.1 once the pilot has validated the teacher
+          For now, your dashboard is the only surface — students
+          don&apos;t see assignments inside the app yet. The in-app
+          inbox is on the roadmap once the pilot has validated this
           side.
         </p>
       </div>

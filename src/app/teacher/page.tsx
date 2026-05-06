@@ -285,8 +285,8 @@ export default async function TeacherDashboardPage() {
             chase them up.
           </li>
           <li>
-            • This is a demo dashboard. Per-teacher login, assignment
-            creation, and messaging are coming in the next sprint.
+            • Per-teacher login and in-app student messaging are on the
+            roadmap.
           </li>
         </ul>
       </div>

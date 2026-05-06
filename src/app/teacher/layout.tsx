@@ -72,7 +72,7 @@ export default async function TeacherLayout({
             message me directly.
           </p>
           <p className="mt-2 text-xs">
-            v0.1 demo · Supabase-backed · Per-teacher auth coming next
+            Mewstro Teacher · Supabase-backed
           </p>
         </div>
       </footer>
