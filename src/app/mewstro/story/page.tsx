@@ -421,7 +421,7 @@ export default function MewstroStoryPage() {
             already know how to do, project-managing delivery, to the
             new thing I was trying to learn.{" "}
             <a
-              href="https://store.matthewcawood.com/collections/books"
+              href="https://www.youtube.com/watch?v=uFz8rJ2PGeU"
               target="_blank"
               rel="noopener noreferrer"
               className="font-medium text-[#2D8B7E] underline decoration-[#2D8B7E]/40 underline-offset-2 transition-colors hover:decoration-[#2D8B7E]"
@@ -429,7 +429,16 @@ export default function MewstroStoryPage() {
               Matthew Cawood&apos;s writing on deliberate practice
             </a>{" "}
             gave it the rest of its
-            shape, along with a guy called Jazer and a handful of other
+            shape, along with{" "}
+            <a
+              href="https://www.youtube.com/watch?v=13Qa9mpCHo0"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-medium text-[#2D8B7E] underline decoration-[#2D8B7E]/40 underline-offset-2 transition-colors hover:decoration-[#2D8B7E]"
+            >
+              a guy called Jazer
+            </a>{" "}
+            and a handful of other
             piano teachers and bloggers who kept showing up in my
             research. They all said variations of the same thing.
             Don&apos;t go through the motions, have intent in every
