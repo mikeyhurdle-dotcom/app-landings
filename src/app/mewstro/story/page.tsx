@@ -60,6 +60,30 @@ export default function MewstroStoryPage() {
             practice in the same way. My teacher Ellie saw it. That&apos;s
             pretty much how Mewstro began.
           </p>
+
+          {/* TODO: replace placeholder with /mewstro/story-collage.jpg
+              (Canva collage: spreadsheet | PowerPoint timeline | playing at home).
+              Recommended export: 1600x900 JPG. */}
+          <figure className="mt-12">
+            <div
+              className="relative aspect-video w-full overflow-hidden rounded-3xl border border-[#E8DFD3] bg-[#FAF6EF]"
+              aria-hidden
+            >
+              <div className="absolute inset-0 grid grid-cols-3 gap-px">
+                <div className="bg-[#FFFBF7]" />
+                <div className="bg-[#FAF6EF]" />
+                <div className="bg-[#FFFBF7]" />
+              </div>
+              <div className="absolute inset-0 flex items-center justify-center">
+                <p className="text-xs uppercase tracking-wider text-[#6B7280]">
+                  Spreadsheet · Timeline tracker · At the keys
+                </p>
+              </div>
+            </div>
+            <figcaption className="mt-3 text-center text-xs text-[#6B7280]">
+              June 2023 → today.
+            </figcaption>
+          </figure>
         </div>
       </section>
 
@@ -190,7 +214,7 @@ export default function MewstroStoryPage() {
           </p>
 
           <p className="mt-6">
-            Harriet was a little sceptical in the nicest way, she knows
+            My wife was a little sceptical in the nicest way, she knows
             my hobby pattern. So we compromised. I went on Facebook
             Marketplace, found a pretty cheap keyboard, drove to pick it
             up. The first thing I had to do when I got it home was give
@@ -241,7 +265,16 @@ export default function MewstroStoryPage() {
             around on beds with all sorts of instruments, and I just
             loved that energy. The serious goal was being able to play
             something by Ludovico Einaudi, &ldquo;Experience&rdquo;
-            specifically. Pianote had a beginner version of it in their
+            specifically.{" "}
+            <a
+              href="https://www.pianote.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-medium text-[#2D8B7E] underline decoration-[#2D8B7E]/40 underline-offset-2 transition-colors hover:decoration-[#2D8B7E]"
+            >
+              Pianote
+            </a>{" "}
+            had a beginner version of it in their
             course and I got a bit obsessed. It was straight-up muscle
             memory really, I was watching Lisa Witt play it and
             memorising every finger position before I really understood
@@ -260,7 +293,15 @@ export default function MewstroStoryPage() {
             which is rare. I don&apos;t really go back to it myself
             anymore, but I do still go back to some of the YouTube
             videos I discovered when I first started playing. I
-            subscribed to Matthew Cawood&apos;s Monday Music Tips
+            subscribed to{" "}
+            <a
+              href="https://www.youtube.com/@matticawood"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-medium text-[#2D8B7E] underline decoration-[#2D8B7E]/40 underline-offset-2 transition-colors hover:decoration-[#2D8B7E]"
+            >
+              Matthew Cawood&apos;s Monday Music Tips
+            </a>{" "}
             newsletter and I still read it today, really insightful
             stuff. David Bennett&apos;s theory channel filled in loads
             of the gaps. I probably Googled &ldquo;how to practise
@@ -279,7 +320,7 @@ export default function MewstroStoryPage() {
           </p>
 
           <p className="mt-6">
-            Time-wise I had the hours. Harriet had just started a new
+            Time-wise I had the hours. My wife had just started a new
             job at a bakery so she was up at 4:45 four mornings a week,
             Wednesday to Saturday, and I&apos;m a morning person anyway,
             so I didn&apos;t want to be on a different rhythm to her.
@@ -378,8 +419,16 @@ export default function MewstroStoryPage() {
           <p className="mt-6">
             So what I ended up with was basically me applying what I
             already know how to do, project-managing delivery, to the
-            new thing I was trying to learn. Matthew Cawood&apos;s
-            writing on deliberate practice gave it the rest of its
+            new thing I was trying to learn.{" "}
+            <a
+              href="https://store.matthewcawood.com/collections/books"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-medium text-[#2D8B7E] underline decoration-[#2D8B7E]/40 underline-offset-2 transition-colors hover:decoration-[#2D8B7E]"
+            >
+              Matthew Cawood&apos;s writing on deliberate practice
+            </a>{" "}
+            gave it the rest of its
             shape, along with a guy called Jazer and a handful of other
             piano teachers and bloggers who kept showing up in my
             research. They all said variations of the same thing.
@@ -424,7 +473,15 @@ export default function MewstroStoryPage() {
           </h3>
 
           <p className="mt-4">
-            James Hawker was my second teacher. A Cornish man, a
+            <a
+              href="https://jameshawken.com/home"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-medium text-[#2D8B7E] underline decoration-[#2D8B7E]/40 underline-offset-2 transition-colors hover:decoration-[#2D8B7E]"
+            >
+              James Hawken
+            </a>{" "}
+            was my second teacher. A Cornish man, a
             wonderful human being, and we really hit it off on a
             personal level, which was important to me. I needed to
             feel in a safe environment and he provided that. The
@@ -465,7 +522,29 @@ export default function MewstroStoryPage() {
             doing &ldquo;Experience,&rdquo; but he didn&apos;t quite
             catch the ending because he wanted to go and get food,
             and I hadn&apos;t really warned him how long the piece
-            was going to go on for. The public piano thing had
+            was going to go on for.
+          </p>
+
+          <figure className="mt-8">
+            <div className="overflow-hidden rounded-2xl border border-[#E8DFD3] shadow-sm">
+              <div className="relative aspect-video w-full bg-black">
+                <iframe
+                  src="https://www.youtube.com/embed/sy-c1KlgY04"
+                  title="Mikey playing &lsquo;Experience&rsquo; at San Diego airport"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                  className="absolute inset-0 h-full w-full"
+                />
+              </div>
+            </div>
+            <figcaption className="mt-3 text-center text-xs text-[#6B7280]">
+              San Diego airport, mid-&ldquo;Experience.&rdquo; The
+              ending got away from us.
+            </figcaption>
+          </figure>
+
+          <p className="mt-8">
+            The public piano thing had
             already been a rule for me by that point, actually. If I
             see a piano, I sit down and play something. It&apos;s
             not really about performing, I&apos;m not into that at
@@ -483,7 +562,7 @@ export default function MewstroStoryPage() {
 
           <p className="mt-8">
             I did have one other public piano moment, at Melbourne
-            airport on a holiday with Harriet. Someone clapped
+            airport on a holiday with my wife. Someone clapped
             after I played something, and I got so embarrassed that
             I couldn&apos;t actually carry on, I just had to stop.
             I did say thanks though.
