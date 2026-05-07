@@ -295,7 +295,7 @@ export default function MewstroStoryPage() {
             videos I discovered when I first started playing. I
             subscribed to{" "}
             <a
-              href="https://www.youtube.com/@matticawood"
+              href="https://www.matthewcawood.com/monday-music-tips"
               target="_blank"
               rel="noopener noreferrer"
               className="font-medium text-[#2D8B7E] underline decoration-[#2D8B7E]/40 underline-offset-2 transition-colors hover:decoration-[#2D8B7E]"
