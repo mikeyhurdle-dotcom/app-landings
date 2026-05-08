@@ -61,29 +61,33 @@ export default function MewstroStoryPage() {
             pretty much how Mewstro began.
           </p>
 
-          {/* TODO: replace placeholder with /mewstro/story-collage.jpg
-              (Canva collage: spreadsheet | PowerPoint timeline | playing at home).
+          {/* Hero collage hidden until /mewstro/story-collage.jpg is ready
+              (Canva: spreadsheet | PowerPoint timeline | playing at home).
+              To restore: remove the {false && (...)} wrapper and swap the
+              placeholder div for an <Image src="/mewstro/story-collage.jpg" />.
               Recommended export: 1600x900 JPG. */}
-          <figure className="mt-12">
-            <div
-              className="relative aspect-video w-full overflow-hidden rounded-3xl border border-[#E8DFD3] bg-[#FAF6EF]"
-              aria-hidden
-            >
-              <div className="absolute inset-0 grid grid-cols-3 gap-px">
-                <div className="bg-[#FFFBF7]" />
-                <div className="bg-[#FAF6EF]" />
-                <div className="bg-[#FFFBF7]" />
+          {false && (
+            <figure className="mt-12">
+              <div
+                className="relative aspect-video w-full overflow-hidden rounded-3xl border border-[#E8DFD3] bg-[#FAF6EF]"
+                aria-hidden
+              >
+                <div className="absolute inset-0 grid grid-cols-3 gap-px">
+                  <div className="bg-[#FFFBF7]" />
+                  <div className="bg-[#FAF6EF]" />
+                  <div className="bg-[#FFFBF7]" />
+                </div>
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <p className="text-xs uppercase tracking-wider text-[#6B7280]">
+                    Spreadsheet · Timeline tracker · At the keys
+                  </p>
+                </div>
               </div>
-              <div className="absolute inset-0 flex items-center justify-center">
-                <p className="text-xs uppercase tracking-wider text-[#6B7280]">
-                  Spreadsheet · Timeline tracker · At the keys
-                </p>
-              </div>
-            </div>
-            <figcaption className="mt-3 text-center text-xs text-[#6B7280]">
-              June 2023 → today.
-            </figcaption>
-          </figure>
+              <figcaption className="mt-3 text-center text-xs text-[#6B7280]">
+                June 2023 → today.
+              </figcaption>
+            </figure>
+          )}
         </div>
       </section>
 
