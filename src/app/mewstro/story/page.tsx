@@ -347,7 +347,16 @@ export default function MewstroStoryPage() {
             got a strong understanding of what motivates me and what
             gets me to work well, and I&apos;ll push back when
             something isn&apos;t landing. I agreed to do a trial
-            lesson with a guy called Josh, based up in Scotland from
+            lesson with a guy called{" "}
+            <a
+              href="https://musicteachers.co.uk/musicteacher/Josh/JZYcvb5SL7"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-medium text-[#2D8B7E] underline decoration-[#2D8B7E]/40 underline-offset-2 transition-colors hover:decoration-[#2D8B7E]"
+            >
+              Josh
+            </a>
+            , based up in Scotland from
             what I remember. Really nice guy, a lot younger than me,
             but you could tell he was super passionate about music. I
             even looked him up on YouTube on his own personal account
@@ -637,7 +646,16 @@ export default function MewstroStoryPage() {
           </p>
 
           <p className="mt-6">
-            I messaged a teacher called Auris about singing lessons
+            I messaged a teacher called{" "}
+            <a
+              href="https://musicteachers.co.uk/musicteacher/Auris/jBWV0AErUE"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-medium text-[#2D8B7E] underline decoration-[#2D8B7E]/40 underline-offset-2 transition-colors hover:decoration-[#2D8B7E]"
+            >
+              Auris
+            </a>{" "}
+            about singing lessons
             and he sent me one of the most interesting replies
             I&apos;ve had from a prospective teacher. He basically
             said he didn&apos;t think I should do singing lessons
@@ -655,7 +673,16 @@ export default function MewstroStoryPage() {
             Somewhere in the middle of all this, a local teacher
             I&apos;d had a discussion with said I wasn&apos;t
             really the right fit for her, and she pointed me at
-            Ellie. Ellie Moorhouse, who runs a music studio
+            Ellie.{" "}
+            <a
+              href="https://www.em-cas.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-medium text-[#2D8B7E] underline decoration-[#2D8B7E]/40 underline-offset-2 transition-colors hover:decoration-[#2D8B7E]"
+            >
+              Ellie Moorhouse
+            </a>
+            , who runs a music studio
             locally but does all her lessons online. I thought
             I&apos;d still have an introductory call rather than
             going straight into a lesson, and we had a quick chat
