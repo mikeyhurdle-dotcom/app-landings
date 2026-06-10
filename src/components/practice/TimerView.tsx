@@ -7,6 +7,10 @@ import { createClient } from "@/lib/practice/supabase/client";
 import { INSTRUMENTS, taskTypesFor } from "@/lib/practice/instruments";
 import { buildSession, saveSessionOrQueue } from "@/lib/practice/sessions";
 import {
+  type RepertoirePiece,
+  fetchRepertoire,
+} from "@/lib/practice/repertoire";
+import {
   type TimerState,
   elapsedMs,
   startTimer,
@@ -37,6 +41,8 @@ export function TimerView({ userId }: { userId: string }) {
   const [notes, setNotes] = useState("");
   const [showManualEntry, setShowManualEntry] = useState(false);
   const [busy, setBusy] = useState(false);
+  const [pieces, setPieces] = useState<RepertoirePiece[]>([]);
+  const [repertoireId, setRepertoireId] = useState<string | null>(null);
   // Ticker — purely cosmetic; elapsed time always derives from wall clock.
   const [, setTick] = useState(0);
   const restored = useRef(false);
@@ -50,6 +56,7 @@ export function TimerView({ userId }: { userId: string }) {
       setTimer(active);
       setInstrument(active.instrument);
       setTaskType(active.taskType);
+      setRepertoireId(active.repertoireId ?? null);
       setPhase({ kind: "running" });
     } else {
       const last = localStorage.getItem(LAST_INSTRUMENT_KEY);
@@ -59,6 +66,13 @@ export function TimerView({ userId }: { userId: string }) {
       }
     }
   }, []);
+
+  // Pieces for the "Repertoire" task — active ones only, like iOS's picker.
+  useEffect(() => {
+    fetchRepertoire(createClient(), userId)
+      .then((all) => setPieces(all.filter((p) => p.status !== "archived")))
+      .catch(() => {});
+  }, [userId]);
 
   useEffect(() => {
     if (phase.kind !== "running") return;
@@ -78,7 +92,8 @@ export function TimerView({ userId }: { userId: string }) {
 
   function handleStart() {
     localStorage.setItem(LAST_INSTRUMENT_KEY, instrument);
-    update(startTimer(instrument, taskType, Date.now()));
+    const pieceId = taskType === "Repertoire" ? repertoireId : null;
+    update(startTimer(instrument, taskType, Date.now(), pieceId));
     setPhase({ kind: "running" });
   }
 
@@ -98,6 +113,7 @@ export function TimerView({ userId }: { userId: string }) {
       taskType,
       instrumentType: instrument,
       notes,
+      repertoireId: taskType === "Repertoire" ? repertoireId : null,
     });
     const saved = await saveSessionOrQueue(createClient(), localStorage, row);
     update(null);
@@ -176,7 +192,12 @@ export function TimerView({ userId }: { userId: string }) {
     return (
       <main className="flex flex-col items-center px-6 pt-12 text-center">
         <p className="text-sm font-semibold text-mewstro-dim">
-          {INSTRUMENTS.find((i) => i.key === instrument)?.name} · {taskType}
+          {INSTRUMENTS.find((i) => i.key === instrument)?.name} ·{" "}
+          {repertoireId
+            ? `${taskType} — ${
+                pieces.find((p) => p.id === repertoireId)?.title ?? ""
+              }`
+            : taskType}
         </p>
         <Image
           src="/mewstro/mascot-conducting.png"
@@ -259,7 +280,10 @@ export function TimerView({ userId }: { userId: string }) {
           <button
             key={t}
             type="button"
-            onClick={() => setTaskType(t)}
+            onClick={() => {
+              setTaskType(t);
+              if (t !== "Repertoire") setRepertoireId(null);
+            }}
             className={`rounded-full px-4 py-2 text-sm font-semibold ${
               taskType === t
                 ? "bg-mewstro-primary text-white"
@@ -270,6 +294,39 @@ export function TimerView({ userId }: { userId: string }) {
           </button>
         ))}
       </div>
+
+      {taskType === "Repertoire" &&
+        pieces.some((p) => p.instrument_type === instrument) && (
+          <>
+            <p className="mt-6 text-xs font-semibold uppercase tracking-wide text-mewstro-dim">
+              Which piece?
+            </p>
+            <div className="mt-2 flex flex-wrap gap-2">
+              {pieces
+                .filter((p) => p.instrument_type === instrument)
+                .map((p) => (
+                  <button
+                    key={p.id}
+                    type="button"
+                    onClick={() =>
+                      setRepertoireId(repertoireId === p.id ? null : p.id)
+                    }
+                    className={`rounded-full px-4 py-2 text-sm font-semibold ${
+                      repertoireId === p.id
+                        ? "bg-mewstro-accent text-white"
+                        : "border border-[#E8DFD3] bg-mewstro-surface text-mewstro-text"
+                    }`}
+                  >
+                    {p.title}
+                  </button>
+                ))}
+            </div>
+            <p className="mt-2 text-xs text-mewstro-dim">
+              Optional — pick a piece and this session counts towards its
+              total.
+            </p>
+          </>
+        )}
 
       <button
         type="button"
@@ -290,6 +347,7 @@ export function TimerView({ userId }: { userId: string }) {
       {showManualEntry && (
         <ManualEntryForm
           userId={userId}
+          pieces={pieces}
           onSaved={(minutes, queued) =>
             setPhase({ kind: "saved", minutes, queued })
           }

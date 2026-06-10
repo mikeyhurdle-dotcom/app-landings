@@ -27,6 +27,7 @@ function row(id: string): PracticeSessionRow {
     task_type: "Repertoire",
     instrument_type: "piano",
     notes: null,
+    repertoire_id: null,
     created_at: "2026-06-10T12:30:00.000Z",
   };
 }
@@ -50,13 +51,27 @@ describe("buildSession", () => {
       "id",
       "instrument_type",
       "notes",
+      "repertoire_id",
       "session_date",
       "task_type",
       "user_id",
     ]);
     expect(built.session_date).toBe("2026-06-10T09:00:00.000Z");
     expect(built.notes).toBe("hands together");
+    expect(built.repertoire_id).toBeNull();
     expect(built.id).toMatch(/^[0-9a-f-]{36}$/);
+  });
+
+  it("carries the piece id when practising repertoire", () => {
+    const built = buildSession({
+      userId: "user-1",
+      sessionDate: new Date(),
+      durationMinutes: 25,
+      taskType: "Repertoire",
+      instrumentType: "piano",
+      repertoireId: "piece-1",
+    });
+    expect(built.repertoire_id).toBe("piece-1");
   });
 
   it("stores empty notes as null", () => {

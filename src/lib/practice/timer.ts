@@ -12,6 +12,8 @@ export type TimerState = {
   accumulatedMs: number;
   instrument: string;
   taskType: string;
+  /** Piece being practised, when task type is "Repertoire". */
+  repertoireId?: string | null;
 };
 
 export const ACTIVE_TIMER_KEY = "mewstro-active-timer";
@@ -25,8 +27,15 @@ export function startTimer(
   instrument: string,
   taskType: string,
   now: number,
+  repertoireId: string | null = null,
 ): TimerState {
-  return { startedAt: now, accumulatedMs: 0, instrument, taskType };
+  return {
+    startedAt: now,
+    accumulatedMs: 0,
+    instrument,
+    taskType,
+    repertoireId,
+  };
 }
 
 export function pauseTimer(state: TimerState, now: number): TimerState {

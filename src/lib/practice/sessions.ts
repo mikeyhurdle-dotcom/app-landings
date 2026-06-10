@@ -16,6 +16,7 @@ export type PracticeSessionRow = {
   task_type: string;
   instrument_type: string;
   notes: string | null;
+  repertoire_id: string | null;
   created_at: string;
 };
 
@@ -26,6 +27,7 @@ export function buildSession(input: {
   taskType: string;
   instrumentType: string;
   notes?: string;
+  repertoireId?: string | null;
 }): PracticeSessionRow {
   return {
     id: crypto.randomUUID(),
@@ -35,6 +37,7 @@ export function buildSession(input: {
     task_type: input.taskType,
     instrument_type: input.instrumentType,
     notes: input.notes?.trim() ? input.notes.trim() : null,
+    repertoire_id: input.repertoireId ?? null,
     created_at: new Date().toISOString(),
   };
 }

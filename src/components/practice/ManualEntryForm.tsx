@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/practice/supabase/client";
 import { INSTRUMENTS, taskTypesFor } from "@/lib/practice/instruments";
 import { buildSession, saveSessionOrQueue } from "@/lib/practice/sessions";
+import type { RepertoirePiece } from "@/lib/practice/repertoire";
 import { inputClass, primaryButtonClass } from "./AuthShell";
 
 function todayLocalISO(): string {
@@ -18,9 +19,11 @@ function todayLocalISO(): string {
 /** Log a past session: date, duration, instrument, notes. No future dates. */
 export function ManualEntryForm({
   userId,
+  pieces = [],
   onSaved,
 }: {
   userId: string;
+  pieces?: RepertoirePiece[];
   onSaved: (minutes: number, queued: boolean) => void;
 }) {
   const router = useRouter();
@@ -28,9 +31,14 @@ export function ManualEntryForm({
   const [minutes, setMinutes] = useState("30");
   const [instrument, setInstrument] = useState("piano");
   const [taskType, setTaskType] = useState("Repertoire");
+  const [repertoireId, setRepertoireId] = useState("");
   const [notes, setNotes] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
+
+  const instrumentPieces = pieces.filter(
+    (p) => p.instrument_type === instrument,
+  );
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -57,6 +65,8 @@ export function ManualEntryForm({
       taskType,
       instrumentType: instrument,
       notes,
+      repertoireId:
+        taskType === "Repertoire" && repertoireId ? repertoireId : null,
     });
     const saved = await saveSessionOrQueue(createClient(), localStorage, row);
     setBusy(false);
@@ -103,6 +113,7 @@ export function ManualEntryForm({
           onChange={(e) => {
             setInstrument(e.target.value);
             setTaskType(taskTypesFor(e.target.value)[0]);
+            setRepertoireId("");
           }}
         >
           {INSTRUMENTS.map((i) => (
@@ -118,7 +129,10 @@ export function ManualEntryForm({
         <select
           className={`mt-1 ${inputClass}`}
           value={taskType}
-          onChange={(e) => setTaskType(e.target.value)}
+          onChange={(e) => {
+            setTaskType(e.target.value);
+            if (e.target.value !== "Repertoire") setRepertoireId("");
+          }}
         >
           {taskTypesFor(instrument).map((t) => (
             <option key={t} value={t}>
@@ -127,6 +141,24 @@ export function ManualEntryForm({
           ))}
         </select>
       </label>
+
+      {taskType === "Repertoire" && instrumentPieces.length > 0 && (
+        <label className="text-sm">
+          <span className="font-semibold">Which piece? (optional)</span>
+          <select
+            className={`mt-1 ${inputClass}`}
+            value={repertoireId}
+            onChange={(e) => setRepertoireId(e.target.value)}
+          >
+            <option value="">No specific piece</option>
+            {instrumentPieces.map((p) => (
+              <option key={p.id} value={p.id}>
+                {p.title}
+              </option>
+            ))}
+          </select>
+        </label>
+      )}
 
       <label className="text-sm">
         <span className="font-semibold">Notes (optional)</span>
