@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { mewstro } from "@/config/brands";
+import { FOUNDING_SLOTS_LEFT } from "@/config/founding";
 import { ScreenshotCarousel, FaqSection } from "@/components/shared";
 import { MewstroJsonLd, FaqJsonLd } from "@/components/shared/JsonLd";
 import type { Screenshot } from "@/components/shared";
@@ -54,7 +55,7 @@ const faqs = [
   {
     question: "Why do I need to apply, why can't I just subscribe?",
     answer:
-      "Mewstro is finishing its founding pilot with Ellie Moorhouse, my own teacher. I want to make sure everything actually works in a real studio before I start taking on paying teachers. The first five Founding Studios are hand-picked, with a personal conversation, 50% off for life, and direct input on where the product goes next. After those five, the next twenty join as Early Access at standard pricing and the standard 30-day trial, with their price locked in for two years, a Founding badge, and priority support. Once teacher #25 is in, it's standard self-serve signup.",
+      "Mewstro has just finished its founding pilot with Ellie Moorhouse, my own teacher, so I know it works in a real studio. The founding round is now open. The first five Founding Studios are hand-picked, with a personal conversation, 50% off for life, and direct input on where the product goes next. After those five, the next twenty join as Early Access at standard pricing and the standard 30-day trial, with their price locked in for two years, a Founding badge, and priority support. Once teacher #25 is in, it's standard self-serve signup.",
   },
   {
     question: "What instruments are supported?",
@@ -89,11 +90,12 @@ function FoundingStrip() {
           </span>
           <div>
             <p className="text-sm font-semibold text-[#1A1A2E]">
-              I&apos;m hand-picking the first 5 Founding Studios.
+              The founding round is open — {FOUNDING_SLOTS_LEFT} of 5 Founding
+              Studios left.
             </p>
             <p className="text-xs text-[#5A4E42]">
               50% off for life, a direct line to me, and first say on where
-              the product goes. 1 of 5 reserved for Ellie.
+              the product goes. Hand-picked, by application.
             </p>
           </div>
         </div>
@@ -431,6 +433,32 @@ function DashboardTour() {
   );
 }
 
+function EllieQuoteBand() {
+  return (
+    <section className="bg-white px-6 py-16">
+      <div className="mx-auto max-w-3xl rounded-3xl border border-[#E8DFD3] bg-[#FAF6EF] p-8 md:p-10">
+        <p className="text-xs uppercase tracking-wider text-[#6B7280]">
+          From the founding studio
+        </p>
+        <blockquote className="mt-4 text-lg leading-relaxed text-[#1A1A2E] md:text-xl">
+          &ldquo;This app is everything that I&apos;d been looking for! It
+          allows me to work with my students to put together their practice
+          schedule, and creates an inviting space for them to record how
+          well they&apos;re able to stick to that schedule. I also love the
+          leader-board feature, this really appeals to my more competitive
+          students! Highly recommend.&rdquo;
+        </blockquote>
+        <p className="mt-5 text-sm font-semibold text-[#1A1A2E]">
+          Ellie Moorhouse
+        </p>
+        <p className="text-xs text-[#6B7280]">
+          EM:CAS — Founding Studio #1
+        </p>
+      </div>
+    </section>
+  );
+}
+
 function StudentSideBand() {
   return (
     <section
@@ -643,12 +671,12 @@ function FinalCTA() {
     >
       <div className="mx-auto max-w-2xl">
         <h2 className="text-3xl font-bold text-[#1A1A2E] md:text-4xl">
-          Five Founding Studios. One of them could be yours.
+          The founding round is open. {FOUNDING_SLOTS_LEFT} of 5 spots left.
         </h2>
         <p className="mt-4 text-base text-[#5A4E42]">
           50% off for life, a direct line to me, and first say on where
-          Mewstro goes next. Apply now and I&apos;ll be in touch once
-          Ellie&apos;s pilot fortnight wraps.
+          Mewstro goes next. Apply now and I&apos;ll speak to you
+          personally — they&apos;re going fast.
         </p>
         <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:justify-center">
           <Link
@@ -702,6 +730,7 @@ export default function MewstroTeacherHomePage() {
       <Hero />
       <FoundingStrip />
       <DashboardTour />
+      <EllieQuoteBand />
       <StudentSideBand />
       <ScreenshotCarousel
         brand={mewstro}

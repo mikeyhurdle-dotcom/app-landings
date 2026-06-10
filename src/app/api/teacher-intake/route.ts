@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { ServerClient } from "postmark";
 import { getServerSupabase } from "@/lib/supabase";
 
 export const runtime = "nodejs";
@@ -148,6 +149,69 @@ function fireServerBeacon(
   }
 }
 
+// Fire-and-forget notification email to Mikey on each new waitlist application.
+function sendNewApplicantAlert(parsed: IntakePayload): void {
+  const token = process.env.POSTMARK_SERVER_TOKEN;
+  const notifyEmail = process.env.NOTIFY_EMAIL ?? "mikey@mewstro.com";
+  if (!token) return;
+  const postmark = new ServerClient(token);
+
+  const studentCount = parsed.estimatedStudentCount ?? "—";
+  const instruments = parsed.instruments?.join(", ") || "—";
+  const howHeard = parsed.howHeard ?? "—";
+  const notes = parsed.notes ?? "—";
+  const location = [parsed.location, parsed.country].filter(Boolean).join(", ") || "—";
+
+  const text = [
+    `New Founding Teacher waitlist application`,
+    ``,
+    `Name:       ${parsed.firstName} ${parsed.lastName}`,
+    `Email:      ${parsed.email}`,
+    `Studio:     ${parsed.studioName ?? "—"}`,
+    `Location:   ${location}`,
+    `Students:   ${studentCount}`,
+    `Years:      ${parsed.yearsTeaching ?? "—"}`,
+    `Instruments:${instruments}`,
+    `How heard:  ${howHeard}`,
+    `Notes:      ${notes}`,
+  ].join("\n");
+
+  const html = `<!doctype html><html><body style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;color:#1a1a1a;line-height:1.6;max-width:520px;margin:0 auto;padding:24px;">
+<h2 style="color:#2D8B7E;margin-top:0;">New waitlist application 🎵</h2>
+<table style="width:100%;border-collapse:collapse;font-size:14px;">
+  <tr><td style="padding:6px 0;color:#6B7280;width:120px;">Name</td><td style="padding:6px 0;font-weight:600;">${escapeHtml(`${parsed.firstName} ${parsed.lastName}`)}</td></tr>
+  <tr><td style="padding:6px 0;color:#6B7280;">Email</td><td style="padding:6px 0;"><a href="mailto:${escapeHtml(parsed.email)}" style="color:#2D8B7E;">${escapeHtml(parsed.email)}</a></td></tr>
+  <tr><td style="padding:6px 0;color:#6B7280;">Studio</td><td style="padding:6px 0;">${escapeHtml(parsed.studioName ?? "—")}</td></tr>
+  <tr><td style="padding:6px 0;color:#6B7280;">Location</td><td style="padding:6px 0;">${escapeHtml(location)}</td></tr>
+  <tr><td style="padding:6px 0;color:#6B7280;">Students</td><td style="padding:6px 0;">${studentCount}</td></tr>
+  <tr><td style="padding:6px 0;color:#6B7280;">Years teaching</td><td style="padding:6px 0;">${parsed.yearsTeaching ?? "—"}</td></tr>
+  <tr><td style="padding:6px 0;color:#6B7280;">Instruments</td><td style="padding:6px 0;">${escapeHtml(instruments)}</td></tr>
+  <tr><td style="padding:6px 0;color:#6B7280;">How heard</td><td style="padding:6px 0;">${escapeHtml(howHeard)}</td></tr>
+  ${parsed.notes ? `<tr><td style="padding:6px 0;color:#6B7280;vertical-align:top;">Notes</td><td style="padding:6px 0;">${escapeHtml(parsed.notes)}</td></tr>` : ""}
+</table>
+</body></html>`;
+
+  void postmark.sendEmail({
+    From: "Mewstro <noreply@mewstro.com>",
+    To: notifyEmail,
+    Subject: `New Founding Teacher application — ${parsed.firstName} ${parsed.lastName}`,
+    TextBody: text,
+    HtmlBody: html,
+    MessageStream: "outbound",
+  }).catch(() => {
+    // Never let a notification failure surface to the applicant.
+  });
+}
+
+function escapeHtml(s: string): string {
+  return s
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
 export async function POST(req: NextRequest) {
   let body: unknown;
   try {
@@ -225,6 +289,9 @@ export async function POST(req: NextRequest) {
     // Non-fatal — the primary record is saved. Log for visibility.
     console.error("teacher-intake activity log failed", activityErr);
   }
+
+  // Notify Mikey immediately via email. Fire-and-forget — never blocks the response.
+  sendNewApplicantAlert(parsed);
 
   // Server-side Tealium beacon mirror — rescues attribution from ad-blockers
   // that kill the client-side teacher_apply_submitted event. Fire-and-forget.

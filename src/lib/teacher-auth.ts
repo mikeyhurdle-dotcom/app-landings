@@ -6,9 +6,10 @@ import { cookies } from "next/headers";
  * studio so subsequent requests know which tenant to scope queries to.
  *
  * Configured studios:
- *   TEACHER_DASHBOARD_PASSWORD       → "EM:CAS"          (Ellie's pilot)
- *   TEACHER_DASHBOARD_PASSWORD_DEMO  → "Mewstro Studio"  (sales/marketing)
- *   TEACHER_DASHBOARD_PASSWORD_TEST  → "Mewstro (Test)"  (Mikey's testing)
+ *   TEACHER_DASHBOARD_PASSWORD       → "EM:CAS"             (Ellie's pilot)
+ *   TEACHER_DASHBOARD_PASSWORD_DEMO  → "Mewstro Studio"     (sales/marketing)
+ *   TEACHER_DASHBOARD_PASSWORD_TEST  → "Mewstro (Test)"     (Mikey's testing)
+ *   TEACHER_DASHBOARD_PASSWORD_JOSH  → "Josh Ingram Studio" (Founding Studio pilot)
  *
  * Real per-teacher auth (Supabase magic link) is still the next step;
  * this is the smallest change that unblocks Ellie + a demo + a test
@@ -23,9 +24,11 @@ function getPasswordToStudioMap(): Record<string, string> {
   const ellie = process.env.TEACHER_DASHBOARD_PASSWORD;
   const demo = process.env.TEACHER_DASHBOARD_PASSWORD_DEMO;
   const test = process.env.TEACHER_DASHBOARD_PASSWORD_TEST;
+  const josh = process.env.TEACHER_DASHBOARD_PASSWORD_JOSH;
   if (ellie) map[ellie] = "EM:CAS";
   if (demo) map[demo] = "Mewstro Studio";
   if (test) map[test] = "Mewstro (Test)";
+  if (josh) map[josh] = "Josh Ingram Studio";
   if (Object.keys(map).length === 0) {
     throw new Error(
       "No TEACHER_DASHBOARD_PASSWORD* env vars set. Add at least one in Vercel (and .env.local for dev).",
