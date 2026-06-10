@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/practice/supabase/server";
 import { PortalNav } from "@/components/practice/PortalNav";
+import { PendingSessionsFlusher } from "@/components/practice/PendingSessionsFlusher";
 
 /**
  * Shell for the signed-in portal pages. The middleware already gates
@@ -23,6 +24,7 @@ export default async function PortalAppLayout({
 
   return (
     <div className="mx-auto min-h-dvh w-full max-w-md pb-24">
+      <PendingSessionsFlusher />
       {children}
       <PortalNav />
     </div>
