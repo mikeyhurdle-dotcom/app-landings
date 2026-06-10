@@ -128,7 +128,7 @@ export function StudentWelcomePDF({ vars }: { vars: TeacherAssetVars }) {
             {vars.offerCodeQrDataUrl ? (
               <Step
                 n={1}
-                title="Scan the orange QR on the right"
+                title="Scan the QR on the right"
                 body="That installs Mewstro and unlocks a full year of Premium for you, free, courtesy of the studio. If you already have the app, scanning still works to redeem the year."
                 accent={accent}
                 onAccent={onAccent}
@@ -209,7 +209,7 @@ export function StudentWelcomePDF({ vars }: { vars: TeacherAssetVars }) {
               />
               <Text style={styles.qrCardHint}>
                 {vars.offerCodeQrDataUrl
-                  ? "Use this only if the orange QR doesn't work for you."
+                  ? "Use this only if the QR doesn't work for you."
                   : "Scan with your iPhone camera"}
               </Text>
             </View>

@@ -12,6 +12,7 @@ import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { getConsentStatus, trackLink, studioSizeTier } from "@/lib/tealium";
+import { FOUNDING_SLOTS_LEFT } from "@/config/founding";
 import { resolveAttribution } from "@/lib/utm";
 
 const INSTRUMENTS = [
@@ -301,14 +302,13 @@ function TeacherApplyForm() {
             />
           </div>
           <h1 className="text-3xl font-bold text-[#1A1A2E]">
-            You&apos;re on the Founding Teacher waitlist.
+            Application received — I&apos;ll be in touch personally.
           </h1>
           <p className="mt-4 text-base text-[#5A4E42]">
-            Mewstro is in final pilot with Ellie Moorhouse, my own piano
-            teacher and founding studio. Once her studio has been running
-            on Mewstro for two weeks, I&apos;ll open the first five
-            Founding Studio slots, and you&apos;ll be among the first
-            people I contact.
+            The founding round is open and I&apos;m hand-picking the studios
+            — there are {FOUNDING_SLOTS_LEFT} of 5 spots left. I&apos;ll email
+            you personally to set up a quick call. Applications are handled in
+            order, so the sooner the better.
           </p>
           <div className="mt-8 rounded-2xl bg-[#FAF6EF] p-6 text-left text-sm text-[#5A4E42]">
             <p className="font-semibold text-[#1A1A2E]">
@@ -316,17 +316,17 @@ function TeacherApplyForm() {
             </p>
             <ol className="mt-3 space-y-2">
               <li>
-                <strong>1.</strong> Our founding pilot with Ellie wraps up
-                (2&ndash;3 weeks from now).
+                <strong>1.</strong> I email you personally to set up a
+                15-minute call, in order of application.
               </li>
               <li>
-                <strong>2.</strong> I email you personally to set up a
-                15-minute call, in order of application.
+                <strong>2.</strong> We make sure Mewstro&apos;s a genuine
+                fit for your studio.
               </li>
               <li>
                 <strong>3.</strong> Founding Studios get 50% off for life,
                 a direct line to me, and first say on where Mewstro goes
-                next. Five spots only.
+                next. Only {FOUNDING_SLOTS_LEFT} of 5 spots left.
               </li>
             </ol>
           </div>
@@ -365,17 +365,18 @@ function TeacherApplyForm() {
     <div className="mx-auto max-w-3xl px-6 py-14 md:py-20">
       <div className="mb-10 text-center">
         <p className="text-sm font-semibold uppercase tracking-wider text-[#2D8B7E]">
-          Founding Teacher waitlist
+          Founding Studios — now open
         </p>
         <h1 className="mt-2 text-4xl font-bold text-[#1A1A2E] md:text-5xl">
-          Be one of the first five studios.
+          Claim one of the last {FOUNDING_SLOTS_LEFT} founding spots.
         </h1>
         <p className="mt-5 text-base text-[#5A4E42] md:text-lg">
-          Mewstro is in final pilot with my own piano teacher Ellie as our
-          founding studio. Apply now and I&apos;ll speak to you personally
-          about joining the Founding Studios cohort. You get 50% off for
-          life, a direct line to me, and first say on where the product
-          goes next. Five slots, by application only.
+          The founding pilot with my own piano teacher Ellie is done —
+          Mewstro&apos;s proven in a real studio. The founding round is open
+          and I&apos;m hand-picking the studios. Apply now and I&apos;ll speak
+          to you personally. You get 50% off for life, a direct line to me,
+          and first say on where the product goes next. Only{" "}
+          {FOUNDING_SLOTS_LEFT} of 5 slots left, by application.
         </p>
       </div>
 
@@ -581,7 +582,7 @@ function TeacherApplyForm() {
           >
             {submit.status === "submitting"
               ? "Submitting..."
-              : "Join the Founding Teacher waitlist"}
+              : "Apply for a Founding Studio"}
           </button>
         </div>
       </form>
