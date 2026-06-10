@@ -1,26 +1,50 @@
-import Image from "next/image";
-import Link from "next/link";
+import { redirect } from "next/navigation";
+import { createClient } from "@/lib/practice/supabase/server";
+import { fetchDisplayName, fetchMembership } from "@/lib/practice/studio";
+import { getMyAssignments, type Assignment } from "@/lib/practice/assignments";
+import { TodayView } from "@/components/practice/TodayView";
 
-export default function TodayPage() {
+export default async function TodayPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ code?: string }>;
+}) {
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) redirect("/practice/sign-in");
+
+  const { code } = await searchParams;
+
+  const [membership, displayName, sessionsResult] = await Promise.all([
+    fetchMembership(supabase, user.id).catch(() => null),
+    fetchDisplayName(supabase, user.id).catch(() => null),
+    supabase
+      .from("mewstro_practice_sessions")
+      .select("session_date, duration_minutes")
+      .eq("user_id", user.id)
+      .order("session_date", { ascending: false })
+      .limit(1000),
+  ]);
+
+  // A signed-in student following a teacher's invite link goes straight
+  // to the join flow with the code carried over.
+  if (code && !membership) {
+    redirect(`/practice/join?code=${encodeURIComponent(code)}`);
+  }
+
+  let assignments: Assignment[] = [];
+  if (membership) {
+    assignments = await getMyAssignments(supabase).catch(() => []);
+  }
+
   return (
-    <main className="flex flex-col items-center px-6 pt-12 text-center">
-      <Image
-        src="/mewstro/mascot.png"
-        alt="Mewstro the cat, baton at the ready"
-        width={140}
-        height={140}
-        priority
-      />
-      <h1 className="mt-6 text-2xl font-bold">Ready when you are</h1>
-      <p className="mt-2 text-sm text-mewstro-dim">
-        Every practice deserves an encore.
-      </p>
-      <Link
-        href="/practice/timer"
-        className="mt-8 w-full rounded-2xl bg-mewstro-primary px-6 py-4 text-base font-semibold text-white shadow-sm"
-      >
-        Start practising
-      </Link>
-    </main>
+    <TodayView
+      displayName={displayName}
+      hasStudio={Boolean(membership)}
+      sessions={sessionsResult.data ?? []}
+      assignments={assignments}
+    />
   );
 }
