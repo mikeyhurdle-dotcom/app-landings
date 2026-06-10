@@ -849,7 +849,7 @@ export default function MewstroStoryPage() {
         </article>
       </section>
 
-      {/* Ellie quote slot — reserved, honest placeholder until she records */}
+      {/* Ellie quote — captured after her founding pilot wrapped */}
       <section className="bg-white px-6 py-16">
         <div className="mx-auto max-w-3xl rounded-3xl border border-[#E8DFD3] bg-[#FAF6EF] p-8 md:p-10">
           <div className="flex flex-col items-center gap-4 text-center">
@@ -862,9 +862,19 @@ export default function MewstroStoryPage() {
             <p className="text-xs uppercase tracking-wider text-[#6B7280]">
               From our founding teacher
             </p>
-            <p className="text-base italic text-[#5A4E42]">
-              Ellie&apos;s own words will live here once her founding pilot
-              fortnight wraps. Leaving the space empty until then.
+            <blockquote className="text-lg leading-relaxed text-[#1A1A2E]">
+              &ldquo;This app is everything that I&apos;d been looking for!
+              It allows me to work with my students to put together their
+              practice schedule, and creates an inviting space for them to
+              record how well they&apos;re able to stick to that schedule.
+              I also love the leader-board feature, this really appeals to
+              my more competitive students! Highly recommend.&rdquo;
+            </blockquote>
+            <p className="text-sm font-semibold text-[#1A1A2E]">
+              Ellie Moorhouse
+              <span className="ml-2 font-normal text-[#6B7280]">
+                EM:CAS — Founding Studio #1
+              </span>
             </p>
           </div>
         </div>
