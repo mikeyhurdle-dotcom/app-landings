@@ -45,7 +45,9 @@ export function SignUpForm() {
     }
 
     if (data.session) {
-      router.push(next);
+      // New accounts go through onboarding (display name + studio join);
+      // the original destination — including any ?code= — rides along.
+      router.push(`/practice/onboarding?next=${encodeURIComponent(next)}`);
       router.refresh();
       return;
     }

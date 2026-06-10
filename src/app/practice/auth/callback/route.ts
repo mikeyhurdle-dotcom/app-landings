@@ -8,6 +8,29 @@ function safeNext(raw: string | null): string {
 }
 
 /**
+ * First sign-in (Google OAuth lands here without passing the sign-up
+ * form) goes through onboarding — display name + studio join. Returning
+ * students, who already have a display name, go straight on.
+ */
+async function landing(
+  supabase: Awaited<ReturnType<typeof createClient>>,
+  next: string,
+): Promise<string> {
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) return next;
+
+  const { data } = await supabase
+    .from("mewstro_user_profiles")
+    .select("display_name")
+    .eq("user_id", user.id);
+
+  if (data?.[0]?.display_name) return next;
+  return `/practice/onboarding?next=${encodeURIComponent(next)}`;
+}
+
+/**
  * Lands both the Google OAuth redirect (`?code=`) and Supabase email
  * confirmation links (`?token_hash=&type=`), then forwards to `next`.
  */
@@ -20,7 +43,7 @@ export async function GET(request: NextRequest) {
   const code = searchParams.get("code");
   if (code) {
     const { error } = await supabase.auth.exchangeCodeForSession(code);
-    if (!error) return NextResponse.redirect(`${origin}${next}`);
+    if (!error) return NextResponse.redirect(`${origin}${await landing(supabase, next)}`);
   }
 
   const tokenHash = searchParams.get("token_hash");
@@ -30,7 +53,7 @@ export async function GET(request: NextRequest) {
       token_hash: tokenHash,
       type,
     });
-    if (!error) return NextResponse.redirect(`${origin}${next}`);
+    if (!error) return NextResponse.redirect(`${origin}${await landing(supabase, next)}`);
   }
 
   return NextResponse.redirect(
