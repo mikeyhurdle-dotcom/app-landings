@@ -640,44 +640,49 @@ export async function createAssignment(args: {
   studioName: string;
   title: string;
   description: string | null;
-  dueDate: string | null; // ISO date string or null
+  dueDate: string | null;
   studentUserIds: string[];
+  idempotencyKey: string;
 }): Promise<{ ok: true; id: string } | { ok: false; error: string }> {
   const supabase = getServerSupabase();
 
-  // Resolve studio
   const { data: studio, error: studioErr } = await supabase
     .from("mewstro_studios")
     .select("id, teacher_email")
     .eq("studio_name", args.studioName)
     .single();
+  if (studioErr || !studio) return { ok: false, error: "Studio not found" };
 
-  if (studioErr || !studio) {
-    return { ok: false, error: "Studio not found" };
-  }
-
-  // Insert assignment — use a placeholder teacher_user_id for the demo
-  // since we don't have real teacher auth yet. The column is still
-  // NOT NULL so we pass the same placeholder used in the seed data.
   const placeholderTeacherId = "00000000-0000-0000-0000-000000000001";
 
-  const { data: created, error: insertErr } = await supabase
+  // Idempotent insert: a retry with the same key is ignored. We then read
+  // back the row for this key so a double-submit returns the SAME id.
+  const { error: upsertErr } = await supabase
     .from("mewstro_assignments")
-    .insert({
-      studio_id: studio.id,
-      teacher_user_id: placeholderTeacherId,
-      title: args.title,
-      description: args.description,
-      due_date: args.dueDate,
-    })
-    .select("id")
-    .single();
+    .upsert(
+      {
+        studio_id: studio.id,
+        teacher_user_id: placeholderTeacherId,
+        title: args.title,
+        description: args.description,
+        due_date: args.dueDate,
+        idempotency_key: args.idempotencyKey,
+      },
+      { onConflict: "idempotency_key", ignoreDuplicates: true },
+    );
+  if (upsertErr) return { ok: false, error: upsertErr.message };
 
-  if (insertErr || !created) {
-    return { ok: false, error: insertErr?.message ?? "Insert failed" };
+  const { data: created, error: readErr } = await supabase
+    .from("mewstro_assignments")
+    .select("id")
+    .eq("idempotency_key", args.idempotencyKey)
+    .single();
+  if (readErr || !created) {
+    return { ok: false, error: readErr?.message ?? "Insert failed" };
   }
 
-  // Insert targets
+  // Targets: PK is (assignment_id, student_user_id) so re-inserting on a
+  // retry is naturally idempotent — ignore duplicates.
   if (args.studentUserIds.length > 0) {
     const rows = args.studentUserIds.map((uid) => ({
       assignment_id: created.id,
@@ -685,12 +690,12 @@ export async function createAssignment(args: {
     }));
     const { error: targetErr } = await supabase
       .from("mewstro_assignment_targets")
-      .insert(rows);
+      .upsert(rows, {
+        onConflict: "assignment_id,student_user_id",
+        ignoreDuplicates: true,
+      });
     if (targetErr) {
-      return {
-        ok: false,
-        error: `Assignment created but targets failed: ${targetErr.message}`,
-      };
+      return { ok: false, error: `Assignment created but targets failed: ${targetErr.message}` };
     }
   }
 

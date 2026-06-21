@@ -25,6 +25,11 @@ export async function createAssignmentAction(
   // Student ids come in as multiple values named "studentIds"
   const studentIds = formData.getAll("studentIds").map(String).filter(Boolean);
 
+  const idempotencyKey = (formData.get("idempotencyKey") as string | null)?.trim() ?? "";
+  if (!idempotencyKey) {
+    redirect("/teacher/assignments/new?error=server");
+  }
+
   if (!title) {
     redirect("/teacher/assignments/new?error=title");
   }
@@ -44,6 +49,7 @@ export async function createAssignmentAction(
     description,
     dueDate,
     studentUserIds: studentIds,
+    idempotencyKey,
   });
 
   if (!result.ok) {
