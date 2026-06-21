@@ -1,7 +1,6 @@
 import { getActiveStudioName } from "@/lib/teacher-auth";
 import {
   getAssignmentsForStudio,
-  getStudioOverview,
   type AssignmentRow,
 } from "@/lib/teacher-queries";
 import { redirect } from "next/navigation";
@@ -46,10 +45,7 @@ export default async function AssignmentsPage() {
     redirect("/teacher/login");
   }
 
-  const [assignments, overview] = await Promise.all([
-    getAssignmentsForStudio(studioName),
-    getStudioOverview(studioName),
-  ]);
+  const assignments = await getAssignmentsForStudio(studioName);
 
   const activeAssignments = assignments.filter((a) => {
     if (!a.dueDate) return true;
@@ -129,45 +125,6 @@ export default async function AssignmentsPage() {
         </div>
       )}
 
-      {/* What your students see — iOS preview */}
-      <div className="mt-12 rounded-2xl border border-[#E8DFD3] bg-[#FAF6EF] p-8">
-        <div className="mb-4 flex items-center gap-2">
-          <span className="inline-flex h-6 items-center rounded-full bg-[#2D8B7E] px-3 text-xs font-bold uppercase tracking-wider text-white">
-            On the roadmap
-          </span>
-        </div>
-        <h3 className="text-lg font-semibold">
-          What your students will see
-        </h3>
-        <p className="mt-2 text-sm text-[#5A4E42]">
-          Once the in-app inbox ships, assignments will appear in your
-          students&apos; Profile tab inside Mewstro. Here&apos;s the
-          planned look:
-        </p>
-
-        <div className="mt-6 flex justify-center">
-          <IOSAssignmentPreview
-            count={overview.totalStudents > 0 ? 1 : 0}
-            title={assignments[0]?.title ?? "Practice your scales this week"}
-            dueLabel={
-              assignments[0]
-                ? formatDueDate(assignments[0].dueDate).label
-                : "Due Sunday"
-            }
-            description={
-              assignments[0]?.description?.slice(0, 120) ??
-              "Work through C major, G major, and D major scales slowly with the metronome…"
-            }
-          />
-        </div>
-
-        <p className="mt-6 text-xs text-[#6B7280]">
-          For now, your dashboard is the only surface — students
-          don&apos;t see assignments inside the app yet. The in-app
-          inbox is on the roadmap once the pilot has validated this
-          side.
-        </p>
-      </div>
     </div>
   );
 }
@@ -269,73 +226,3 @@ function AssignmentCard({ assignment }: { assignment: AssignmentRow }) {
   );
 }
 
-/**
- * A static visual preview of what the iOS assignment inbox will look
- * like. This is illustration only — no real iOS code runs here. Helps
- * Ellie see the full teacher→student loop without needing a TestFlight
- * build on her students' phones.
- */
-function IOSAssignmentPreview({
-  title,
-  dueLabel,
-  description,
-}: {
-  count: number;
-  title: string;
-  dueLabel: string;
-  description: string;
-}) {
-  return (
-    <div className="w-[280px] rounded-[32px] bg-[#1A1A2E] p-3 shadow-xl">
-      <div className="rounded-[24px] bg-white p-5">
-        {/* Fake header */}
-        <div className="mb-4 flex items-center justify-between">
-          <p className="text-xs font-medium text-[#6B7280]">9:41</p>
-          <div className="flex gap-1">
-            <div className="h-2 w-2 rounded-full bg-[#1A1A2E]/20" />
-            <div className="h-2 w-2 rounded-full bg-[#1A1A2E]/20" />
-            <div className="h-2 w-2 rounded-full bg-[#1A1A2E]/40" />
-          </div>
-        </div>
-
-        <h4 className="text-lg font-bold text-[#1A1A2E]">Assignments</h4>
-        <p className="mt-0.5 text-xs text-[#6B7280]">
-          From Ellie Moorhouse&apos;s Studio
-        </p>
-
-        <div className="mt-4 space-y-3">
-          {/* Primary assignment card */}
-          <div className="rounded-xl border border-[#2D8B7E]/30 bg-[#2D8B7E]/5 p-4">
-            <div className="flex items-start gap-2">
-              <span className="text-base">📝</span>
-              <div className="flex-1">
-                <p className="text-sm font-semibold text-[#1A1A2E] leading-tight">
-                  {title}
-                </p>
-                <p className="mt-1 text-[10px] font-medium text-[#2D8B7E]">
-                  {dueLabel}
-                </p>
-                <p className="mt-2 text-[11px] text-[#5A4E42] line-clamp-3 leading-snug">
-                  {description}
-                </p>
-              </div>
-            </div>
-            <button
-              disabled
-              className="mt-3 w-full rounded-lg bg-[#2D8B7E] py-2 text-xs font-semibold text-white"
-            >
-              Mark complete
-            </button>
-          </div>
-
-          {/* Subtle "more" placeholder */}
-          <div className="rounded-xl border border-[#E8DFD3] bg-[#FAF6EF] p-3">
-            <p className="text-[10px] text-[#6B7280]">
-              + more assignments appear here
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
