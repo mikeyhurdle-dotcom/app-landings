@@ -181,13 +181,21 @@ export default async function StudentDetailPage({
       </Link>
 
       {/* Student header */}
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold text-[#1A1A2E]">
-          {student.displayName}
-        </h1>
-        <p className="mt-1 text-sm text-[#6B7280]">
-          {student.studioName} · Last practised {relativeLabel(student.lastPracticeAt)}
-        </p>
+      <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+        <div>
+          <h1 className="text-3xl font-bold text-[#1A1A2E]">
+            {student.displayName}
+          </h1>
+          <p className="mt-1 text-sm text-[#6B7280]">
+            {student.studioName} · Last practised {relativeLabel(student.lastPracticeAt)}
+          </p>
+        </div>
+        <Link
+          href={`/teacher/assignments/new?student=${student.userId}`}
+          className="inline-flex shrink-0 items-center gap-2 rounded-xl bg-[#2D8B7E] px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-[#246F64] transition-colors"
+        >
+          <span className="text-lg leading-none">+</span> Set an assignment
+        </Link>
       </div>
 
       {/* Stat row */}

@@ -28,7 +28,7 @@ function errorFor(code: string | undefined): string | null {
 export default async function NewAssignmentPage({
   searchParams,
 }: {
-  searchParams: Promise<{ error?: string }>;
+  searchParams: Promise<{ error?: string; student?: string }>;
 }) {
   const studioName = await getActiveStudioName();
   if (!studioName) {
@@ -39,6 +39,14 @@ export default async function NewAssignmentPage({
   const params = await searchParams;
   const errorMessage = errorFor(params.error);
   const idempotencyKey = randomUUID();
+
+  // When arriving from a student's dashboard ("Set an assignment for this
+  // student"), pre-select only that student. The teacher can still adjust
+  // the selection before saving.
+  const preStudentId = params.student;
+  const preStudent = preStudentId
+    ? overview.students.find((s) => s.userId === preStudentId)
+    : undefined;
 
   // Suggested default due date: next Sunday
   const suggestedDueDate = (() => {
@@ -160,7 +168,7 @@ export default async function NewAssignmentPage({
                       type="checkbox"
                       name="studentIds"
                       value={s.userId}
-                      defaultChecked
+                      defaultChecked={preStudent ? s.userId === preStudent.userId : true}
                       className="h-4 w-4 rounded border-[#E8DFD3] text-[#2D8B7E] focus:ring-[#2D8B7E]"
                     />
                     <span className="font-medium text-[#1A1A2E] truncate">
@@ -172,8 +180,9 @@ export default async function NewAssignmentPage({
             )}
           </div>
           <p className="mt-2 text-xs text-[#6B7280]">
-            All students are selected by default — uncheck anyone you
-            don&apos;t want to include.
+            {preStudent
+              ? `Pre-selected ${preStudent.displayName} — tick anyone else you want to include.`
+              : "All students are selected by default — uncheck anyone you don't want to include."}
           </p>
         </div>
 
