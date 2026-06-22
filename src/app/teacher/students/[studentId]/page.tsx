@@ -8,6 +8,7 @@ import {
 } from "@/lib/teacher-queries";
 import { notFound, redirect } from "next/navigation";
 import Link from "next/link";
+import RepertoireEditor from "./RepertoireEditor";
 
 function formatMinutes(mins: number): string {
   if (mins === 0) return "0m";
@@ -267,18 +268,10 @@ export default async function StudentDetailPage({
               ({student.repertoire.length})
             </span>
           </h2>
-          {student.repertoire.length === 0 ? (
-            <p className="text-sm text-[#6B7280]">
-              No pieces yet. They&apos;ll appear here once the student adds
-              any from the Repertoire tab in the app.
-            </p>
-          ) : (
-            <div className="space-y-3">
-              {student.repertoire.map((r) => (
-                <RepertoireCard key={r.id} piece={r} />
-              ))}
-            </div>
-          )}
+          <RepertoireEditor
+            studentId={student.userId}
+            repertoire={student.repertoire}
+          />
         </div>
 
         {/* Recent sessions */}

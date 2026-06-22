@@ -73,6 +73,7 @@ export interface RepertoireRow {
   instrumentType: string;
   targetBpm: number | null;
   currentBpm: number | null;
+  targetCompletionDate: string | null;
 }
 
 export interface MilestoneRow {
@@ -239,12 +240,13 @@ export async function getStudioOverview(
     throw new Error(`Sessions fetch failed: ${sessErr.message}`);
   }
 
-  // 4. Repertoire + milestone counts per user (all time)
+  // 4. Repertoire + milestone counts per user (all time, excluding tombstoned)
   const [{ data: repertoire }, { data: milestones }] = await Promise.all([
     supabase
       .from("mewstro_repertoire")
       .select("user_id")
-      .in("user_id", userIds),
+      .in("user_id", userIds)
+      .is("deleted_at", null),
     supabase
       .from("mewstro_milestone_recordings")
       .select("user_id")
@@ -359,9 +361,10 @@ export async function getStudentDetail(
     supabase
       .from("mewstro_repertoire")
       .select(
-        "id, title, artist, status, total_practice_minutes, instrument_type, target_bpm, current_bpm",
+        "id, title, artist, status, total_practice_minutes, instrument_type, target_bpm, current_bpm, target_completion_date",
       )
       .eq("user_id", userId)
+      .is("deleted_at", null)
       .order("created_at", { ascending: false }),
     supabase
       .from("mewstro_milestone_recordings")
@@ -459,6 +462,7 @@ export async function getStudentDetail(
       instrumentType: r.instrument_type,
       targetBpm: r.target_bpm,
       currentBpm: r.current_bpm,
+      targetCompletionDate: r.target_completion_date,
     })),
     milestones: milestones.map((m) => ({
       id: m.id,
@@ -711,4 +715,84 @@ export async function createAssignment(args: {
   }
 
   return { ok: true, id: createdId };
+}
+
+// ─── Repertoire write helpers ──────────────────────────────────────────
+
+/**
+ * Update editable fields on a repertoire piece. `updated_at` is stamped by
+ * the DB trigger — do NOT pass it here.
+ */
+export async function updateRepertoirePiece(args: {
+  id: string;
+  studioName: string;
+  title?: string;
+  artist?: string | null;
+  status?: string;
+  targetBpm?: number | null;
+  targetCompletionDate?: string | null;
+  instrumentType?: string;
+}): Promise<{ ok: true } | { ok: false; error: string }> {
+  const supabase = getServerSupabase();
+  const fields: Record<string, unknown> = {};
+  if (args.title !== undefined) fields.title = args.title;
+  if (args.artist !== undefined) fields.artist = args.artist;
+  if (args.status !== undefined) fields.status = args.status;
+  if (args.targetBpm !== undefined) fields.target_bpm = args.targetBpm;
+  if (args.targetCompletionDate !== undefined)
+    fields.target_completion_date = args.targetCompletionDate;
+  if (args.instrumentType !== undefined) fields.instrument_type = args.instrumentType;
+  const { error } = await supabase
+    .from("mewstro_repertoire")
+    .update(fields)
+    .eq("id", args.id);
+  return error ? { ok: false, error: error.message } : { ok: true };
+}
+
+/**
+ * Soft-delete a repertoire piece by setting `deleted_at`. The DB trigger
+ * also stamps `updated_at`.
+ */
+export async function softDeleteRepertoirePiece(
+  id: string,
+): Promise<{ ok: true } | { ok: false; error: string }> {
+  const supabase = getServerSupabase();
+  const { error } = await supabase
+    .from("mewstro_repertoire")
+    .update({ deleted_at: new Date().toISOString() })
+    .eq("id", id);
+  return error ? { ok: false, error: error.message } : { ok: true };
+}
+
+/**
+ * Insert a new repertoire piece for a student. `total_practice_minutes`
+ * defaults to 0; `updated_at` is stamped by the DB trigger.
+ */
+export async function addRepertoirePiece(args: {
+  studentUserId: string;
+  title: string;
+  artist: string | null;
+  status: string;
+  instrumentType: string;
+  targetBpm: number | null;
+  targetCompletionDate: string | null;
+}): Promise<{ ok: true; id: string } | { ok: false; error: string }> {
+  const supabase = getServerSupabase();
+  const { data, error } = await supabase
+    .from("mewstro_repertoire")
+    .insert({
+      user_id: args.studentUserId,
+      title: args.title,
+      artist: args.artist,
+      status: args.status,
+      instrument_type: args.instrumentType,
+      target_bpm: args.targetBpm,
+      target_completion_date: args.targetCompletionDate,
+      total_practice_minutes: 0,
+    })
+    .select("id")
+    .single();
+  return error || !data
+    ? { ok: false, error: error?.message ?? "Insert failed" }
+    : { ok: true, id: data.id };
 }
