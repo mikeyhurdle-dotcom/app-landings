@@ -720,11 +720,35 @@ export async function createAssignment(args: {
 // ─── Repertoire write helpers ──────────────────────────────────────────
 
 /**
+ * Returns true iff a `mewstro_leaderboard_memberships` row exists for the
+ * given student under the given studio. Used as a multi-tenant scope guard
+ * before any repertoire write so a teacher authed to studio A cannot touch
+ * students in studio B.
+ */
+export async function studentInStudio(
+  studentUserId: string,
+  studioName: string,
+): Promise<boolean> {
+  const supabase = getServerSupabase();
+  const { data, error } = await supabase
+    .from("mewstro_leaderboard_memberships")
+    .select("user_id")
+    .eq("user_id", studentUserId)
+    .eq("studio_name", studioName)
+    .maybeSingle();
+  return !error && data !== null;
+}
+
+/**
  * Update editable fields on a repertoire piece. `updated_at` is stamped by
  * the DB trigger — do NOT pass it here.
+ * The `studentUserId` is used as a defence-in-depth `.eq("user_id", …)` on
+ * the UPDATE so the write is always scoped to the owning student's row, even
+ * if the piece id were somehow spoofed to belong to a different user.
  */
 export async function updateRepertoirePiece(args: {
   id: string;
+  studentUserId: string;
   studioName: string;
   title?: string;
   artist?: string | null;
@@ -745,22 +769,27 @@ export async function updateRepertoirePiece(args: {
   const { error } = await supabase
     .from("mewstro_repertoire")
     .update(fields)
-    .eq("id", args.id);
+    .eq("id", args.id)
+    .eq("user_id", args.studentUserId);
   return error ? { ok: false, error: error.message } : { ok: true };
 }
 
 /**
  * Soft-delete a repertoire piece by setting `deleted_at`. The DB trigger
  * also stamps `updated_at`.
+ * The `studentUserId` is used as a defence-in-depth `.eq("user_id", …)` so
+ * the delete cannot touch a row belonging to a different student.
  */
 export async function softDeleteRepertoirePiece(
   id: string,
+  studentUserId: string,
 ): Promise<{ ok: true } | { ok: false; error: string }> {
   const supabase = getServerSupabase();
   const { error } = await supabase
     .from("mewstro_repertoire")
     .update({ deleted_at: new Date().toISOString() })
-    .eq("id", id);
+    .eq("id", id)
+    .eq("user_id", studentUserId);
   return error ? { ok: false, error: error.message } : { ok: true };
 }
 

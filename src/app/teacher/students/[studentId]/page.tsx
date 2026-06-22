@@ -156,8 +156,10 @@ function Heatmap({ data }: { data: Record<string, number> }) {
 
 export default async function StudentDetailPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ studentId: string }>;
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
 }) {
   const studioName = await getActiveStudioName();
   if (!studioName) {
@@ -170,6 +172,12 @@ export default async function StudentDetailPage({
   if (!student) {
     notFound();
   }
+
+  const resolvedSearch = await searchParams;
+  const repertoireError =
+    typeof resolvedSearch.repertoire_error === "string"
+      ? decodeURIComponent(resolvedSearch.repertoire_error)
+      : null;
 
   return (
     <div className="mx-auto max-w-6xl px-6 py-10">
@@ -255,6 +263,14 @@ export default async function StudentDetailPage({
               <StudentAssignmentCard key={a.id} assignment={a} />
             ))}
           </div>
+        </div>
+      )}
+
+      {/* Repertoire error banner (M1) */}
+      {repertoireError && (
+        <div className="mb-6 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+          <span className="font-semibold">Repertoire error: </span>
+          {repertoireError}
         </div>
       )}
 
