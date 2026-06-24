@@ -199,12 +199,20 @@ export default async function StudentDetailPage({
             {student.studioName} · Last practised {relativeLabel(student.lastPracticeAt)}
           </p>
         </div>
-        <Link
-          href={`/teacher/assignments/new?student=${student.userId}`}
-          className="inline-flex shrink-0 items-center gap-2 rounded-xl bg-[#2D8B7E] px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-[#246F64] transition-colors"
-        >
-          <span className="text-lg leading-none">+</span> Set an assignment
-        </Link>
+        <div className="flex flex-wrap gap-2 shrink-0">
+          <Link
+            href={`/teacher/assignments/new?student=${student.userId}`}
+            className="inline-flex items-center gap-2 rounded-xl bg-[#2D8B7E] px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-[#246F64] transition-colors"
+          >
+            <span className="text-lg leading-none">+</span> Set an assignment
+          </Link>
+          <Link
+            href={`/teacher/materials?student=${student.userId}&studentName=${encodeURIComponent(student.displayName)}`}
+            className="inline-flex items-center gap-2 rounded-xl border border-[#2D8B7E] px-4 py-2.5 text-sm font-semibold text-[#2D8B7E] shadow-sm hover:bg-[#2D8B7E]/5 transition-colors"
+          >
+            <span className="text-lg leading-none">+</span> Add material
+          </Link>
+        </div>
       </div>
 
       {/* Stat row */}

@@ -69,7 +69,7 @@ function errorMessageFor(code: string | undefined): string | null {
 export default async function StudioMaterialsPage({
   searchParams,
 }: {
-  searchParams: Promise<{ error?: string }>;
+  searchParams: Promise<{ error?: string; student?: string; studentName?: string }>;
 }) {
   const studioName = await getActiveStudioName();
   if (!studioName) {
@@ -83,6 +83,13 @@ export default async function StudioMaterialsPage({
 
   const params = await searchParams;
   const errorMessage = errorMessageFor(params.error);
+
+  // When arriving from a student's dashboard via "Add material", pre-select
+  // audience=student with that student — teacher can still change it.
+  const preStudentId = params.student;
+  const preStudentName = params.studentName
+    ? decodeURIComponent(params.studentName)
+    : undefined;
 
   const students: StudentOption[] = overview.students.map((s) => ({
     userId: s.userId,
@@ -156,7 +163,12 @@ export default async function StudioMaterialsPage({
         <h2 className="mb-4 text-lg font-semibold text-[#1A1A2E]">
           Manage materials
         </h2>
-        <MaterialsManager resources={resources} students={students} />
+        <MaterialsManager
+          resources={resources}
+          students={students}
+          initialStudentId={preStudentId}
+          initialStudentName={preStudentName}
+        />
       </div>
     </div>
   );

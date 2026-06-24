@@ -333,15 +333,28 @@ function AudienceSelector({
 
 // ─── Add material form ───────────────────────────────────────────────────
 
-function AddMaterialForm({ students }: { students: StudentOption[] }) {
-  const [open, setOpen] = useState(false);
+function AddMaterialForm({
+  students,
+  initialStudentId,
+}: {
+  students: StudentOption[];
+  initialStudentId?: string;
+}) {
+  // When arriving from a student page, open the form immediately and
+  // pre-select audience=student with that student pre-filled.
+  const hasPreStudent = !!initialStudentId;
+  const [open, setOpen] = useState(hasPreStudent);
   const [busy, setBusy] = useState(false);
   const [type, setType] = useState<ResourceType>("link");
-  const [audience, setAudience] = useState<AudienceType>("studio");
+  const [audience, setAudience] = useState<AudienceType>(
+    hasPreStudent ? "student" : "studio",
+  );
   const [audienceInstrument, setAudienceInstrument] = useState<string>(
     INSTRUMENTS[0],
   );
-  const [audienceStudentUserId, setAudienceStudentUserId] = useState("");
+  const [audienceStudentUserId, setAudienceStudentUserId] = useState(
+    initialStudentId ?? "",
+  );
   const [fileError, setFileError] = useState<string | null>(null);
   const [ipChecked, setIpChecked] = useState(false);
 
@@ -565,12 +578,23 @@ function AddMaterialForm({ students }: { students: StudentOption[] }) {
 export default function MaterialsManager({
   resources,
   students,
+  initialStudentId,
+  initialStudentName,
 }: {
   resources: StudioResourceRow[];
   students: StudentOption[];
+  initialStudentId?: string;
+  initialStudentName?: string;
 }) {
   return (
     <div>
+      {initialStudentId && initialStudentName && (
+        <div className="mb-4 rounded-lg border border-amber-200 bg-amber-50 px-3 py-2 text-sm text-amber-800">
+          Adding a material for{" "}
+          <span className="font-semibold">{initialStudentName}</span> — audience
+          is pre-set to &ldquo;Student&rdquo;. You can change this below.
+        </div>
+      )}
       {resources.length === 0 ? (
         <p className="text-sm text-[#6B7280]">
           No materials yet. Add a link or embed below and your students will
@@ -583,7 +607,7 @@ export default function MaterialsManager({
           ))}
         </div>
       )}
-      <AddMaterialForm students={students} />
+      <AddMaterialForm students={students} initialStudentId={initialStudentId} />
     </div>
   );
 }
