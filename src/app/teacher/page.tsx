@@ -267,6 +267,32 @@ export default async function TeacherDashboardPage() {
         )}
       </div>
 
+      {/* Studio materials banner */}
+      <Link
+        href="/teacher/materials"
+        className="mb-8 block rounded-2xl border border-blue-200/60 bg-blue-50/40 p-5 shadow-sm hover:border-blue-300 hover:bg-blue-50/70 transition-colors"
+      >
+        <div className="flex items-center justify-between gap-4">
+          <div className="flex items-center gap-4">
+            <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-blue-600 text-xl text-white">
+              📚
+            </div>
+            <div>
+              <p className="text-xs uppercase tracking-wider text-[#6B7280]">
+                Studio materials
+              </p>
+              <p className="mt-0.5 text-lg font-bold text-[#1A1A2E]">
+                Links &amp; resources for your students
+              </p>
+            </div>
+          </div>
+          <div className="flex items-center gap-2 text-sm font-semibold text-blue-600">
+            <span>Manage</span>
+            <span>→</span>
+          </div>
+        </div>
+      </Link>
+
       {/* Helper callout */}
       <div className="mt-8 rounded-2xl border border-[#E8DFD3] bg-[#FAF6EF] p-6">
         <h3 className="font-semibold text-[#1A1A2E]">What you&apos;re seeing</h3>

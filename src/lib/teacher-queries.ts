@@ -793,6 +793,185 @@ export async function softDeleteRepertoirePiece(
   return error ? { ok: false, error: error.message } : { ok: true };
 }
 
+// ─── Studio resource helpers ───────────────────────────────────────────
+
+export interface StudioResourceRow {
+  id: string;
+  studioId: string;
+  type: "link" | "embed" | "document";
+  title: string;
+  description: string | null;
+  url: string | null;
+  storagePath: string | null;
+  audience: "studio" | "instrument" | "student";
+  audienceInstrument: string | null;
+  audienceStudentUserId: string | null;
+  createdAt: string;
+}
+
+/**
+ * List all non-deleted studio resources for a given studio, most recent
+ * first. Uses service-role so no RLS; caller must resolve studioName
+ * from the active session before calling.
+ */
+export async function listStudioResources(
+  studioName: string,
+): Promise<StudioResourceRow[]> {
+  const supabase = getServerSupabase();
+
+  const { data: studio, error: studioErr } = await supabase
+    .from("mewstro_studios")
+    .select("id")
+    .eq("studio_name", studioName)
+    .single();
+
+  if (studioErr || !studio) return [];
+
+  const { data, error } = await supabase
+    .from("mewstro_studio_resources")
+    .select(
+      "id, studio_id, type, title, description, url, storage_path, audience, audience_instrument, audience_student_user_id, created_at",
+    )
+    .eq("studio_id", studio.id)
+    .is("deleted_at", null)
+    .order("created_at", { ascending: false });
+
+  if (error || !data) return [];
+
+  return data.map((r) => ({
+    id: r.id,
+    studioId: r.studio_id,
+    type: r.type as "link" | "embed" | "document",
+    title: r.title,
+    description: r.description,
+    url: r.url,
+    storagePath: r.storage_path,
+    audience: r.audience as "studio" | "instrument" | "student",
+    audienceInstrument: r.audience_instrument,
+    audienceStudentUserId: r.audience_student_user_id,
+    createdAt: r.created_at,
+  }));
+}
+
+/**
+ * Insert a new studio resource. studio_id is resolved from studioName.
+ * `updated_at` is trigger-stamped — do NOT pass it. For audience=student,
+ * the action must have verified `studentInStudio` before calling this.
+ */
+export async function createResource(args: {
+  studioName: string;
+  type: "link" | "embed" | "document";
+  title: string;
+  description: string | null;
+  url: string | null;
+  storagePath: string | null;
+  audience: "studio" | "instrument" | "student";
+  audienceInstrument: string | null;
+  audienceStudentUserId: string | null;
+}): Promise<{ ok: true; id: string } | { ok: false; error: string }> {
+  const supabase = getServerSupabase();
+
+  const { data: studio, error: studioErr } = await supabase
+    .from("mewstro_studios")
+    .select("id")
+    .eq("studio_name", args.studioName)
+    .single();
+
+  if (studioErr || !studio) return { ok: false, error: "Studio not found" };
+
+  const { data, error } = await supabase
+    .from("mewstro_studio_resources")
+    .insert({
+      studio_id: studio.id,
+      type: args.type,
+      title: args.title,
+      description: args.description,
+      url: args.url,
+      storage_path: args.storagePath,
+      audience: args.audience,
+      audience_instrument: args.audienceInstrument,
+      audience_student_user_id: args.audienceStudentUserId,
+    })
+    .select("id")
+    .single();
+
+  return error || !data
+    ? { ok: false, error: error?.message ?? "Insert failed" }
+    : { ok: true, id: data.id };
+}
+
+/**
+ * Update editable fields on a studio resource, scoped to the studio.
+ * `updated_at` is stamped by the DB trigger — do NOT set it here.
+ */
+export async function updateResource(args: {
+  id: string;
+  studioName: string;
+  title?: string;
+  description?: string | null;
+  url?: string | null;
+  audience?: "studio" | "instrument" | "student";
+  audienceInstrument?: string | null;
+  audienceStudentUserId?: string | null;
+}): Promise<{ ok: true } | { ok: false; error: string }> {
+  const supabase = getServerSupabase();
+
+  const { data: studio, error: studioErr } = await supabase
+    .from("mewstro_studios")
+    .select("id")
+    .eq("studio_name", args.studioName)
+    .single();
+
+  if (studioErr || !studio) return { ok: false, error: "Studio not found" };
+
+  const fields: Record<string, unknown> = {};
+  if (args.title !== undefined) fields.title = args.title;
+  if (args.description !== undefined) fields.description = args.description;
+  if (args.url !== undefined) fields.url = args.url;
+  if (args.audience !== undefined) fields.audience = args.audience;
+  if (args.audienceInstrument !== undefined)
+    fields.audience_instrument = args.audienceInstrument;
+  if (args.audienceStudentUserId !== undefined)
+    fields.audience_student_user_id = args.audienceStudentUserId;
+
+  const { error } = await supabase
+    .from("mewstro_studio_resources")
+    .update(fields)
+    .eq("id", args.id)
+    .eq("studio_id", studio.id);
+
+  return error ? { ok: false, error: error.message } : { ok: true };
+}
+
+/**
+ * Soft-delete a studio resource by setting `deleted_at`, scoped to the
+ * studio so a teacher cannot delete resources from another studio.
+ */
+export async function softDeleteResource(
+  id: string,
+  studioName: string,
+): Promise<{ ok: true } | { ok: false; error: string }> {
+  const supabase = getServerSupabase();
+
+  const { data: studio, error: studioErr } = await supabase
+    .from("mewstro_studios")
+    .select("id")
+    .eq("studio_name", studioName)
+    .single();
+
+  if (studioErr || !studio) return { ok: false, error: "Studio not found" };
+
+  const { error } = await supabase
+    .from("mewstro_studio_resources")
+    .update({ deleted_at: new Date().toISOString() })
+    .eq("id", id)
+    .eq("studio_id", studio.id);
+
+  return error ? { ok: false, error: error.message } : { ok: true };
+}
+
+// ─── Repertoire write helpers ──────────────────────────────────────────
+
 /**
  * Insert a new repertoire piece for a student. `total_practice_minutes`
  * defaults to 0; `updated_at` is stamped by the DB trigger.
