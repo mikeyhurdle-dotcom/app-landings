@@ -56,7 +56,17 @@ function errorMessageFor(code: string | undefined): string | null {
     case "instrument":
       return "Please select an instrument.";
     case "scope":
-      return "That student does not belong to your studio.";
+      return "That student isn't in your studio.";
+    case "attestation":
+      return "Please confirm you have the right to share this material.";
+    case "file_missing":
+      return "Choose a PDF to upload.";
+    case "file_type":
+      return "Only PDF files are supported.";
+    case "file_size":
+      return "That PDF is over the 25 MB limit.";
+    case "upload":
+      return "Upload failed — please try again.";
     case "doc_not_supported":
       return "Document (PDF) upload is not yet available. Use a link or embed for now.";
     case "server":
@@ -119,8 +129,8 @@ export default async function StudioMaterialsPage({
             Studio materials
           </h1>
           <p className="mt-1 text-sm text-[#6B7280]">
-            Links and embeds you share with your students. They appear in the
-            Mewstro app and the practice portal.
+            Links, embeds and PDFs you share with your students. They appear in
+            the Mewstro app and the practice portal.
           </p>
         </div>
       </div>

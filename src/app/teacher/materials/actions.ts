@@ -108,7 +108,12 @@ export async function createResourceAction(
 
 /**
  * Update an existing studio resource's editable fields. Scoped to the
- * teacher's studio; validates enums + URL requirement server-side.
+ * teacher's studio; validates enums server-side.
+ *
+ * For `document` resources the URL is stored in Supabase Storage — the
+ * action must NOT require or overwrite it. Only title, description, and
+ * audience fields are updated. The URL field is only required and applied
+ * when the type is `link` or `embed`.
  */
 export async function updateResourceAction(
   formData: FormData,
@@ -123,12 +128,14 @@ export async function updateResourceAction(
     redirect("/teacher/materials?error=server");
   }
 
+  const typeRaw = (formData.get("type") as string | null)?.trim() ?? "";
+  // Silently fall back to "link" only if the hidden field is somehow absent.
+  const type: ResourceType = isValidType(typeRaw) ? typeRaw : "link";
+
   const title = (formData.get("title") as string | null)?.trim() ?? "";
   const description =
     ((formData.get("description") as string | null)?.trim() ?? "") || null;
   const audienceRaw = (formData.get("audience") as string | null)?.trim() ?? "";
-  const url =
-    ((formData.get("url") as string | null)?.trim() ?? "") || null;
   const audienceInstrument =
     ((formData.get("audienceInstrument") as string | null)?.trim() ?? "") || null;
   const audienceStudentUserId =
@@ -142,8 +149,14 @@ export async function updateResourceAction(
     redirect("/teacher/materials?error=audience");
   }
 
-  if (!url) {
-    redirect("/teacher/materials?error=url");
+  // URL is only required (and written) for link/embed. Documents have their
+  // file in storage — leave url/storage_path untouched.
+  let url: string | null = null;
+  if (type !== "document") {
+    url = ((formData.get("url") as string | null)?.trim() ?? "") || null;
+    if (!url) {
+      redirect("/teacher/materials?error=url");
+    }
   }
 
   if (audienceRaw === "student") {
@@ -165,8 +178,10 @@ export async function updateResourceAction(
     studioName,
     title,
     description,
-    url,
-    audience: audienceRaw,
+    // Pass url only for link/embed; omit entirely for documents so the
+    // query function does not write a null over the existing storage URL.
+    ...(type !== "document" ? { url } : {}),
+    audience: audienceRaw as AudienceType,
     audienceInstrument: audienceRaw === "instrument" ? audienceInstrument : null,
     audienceStudentUserId: audienceRaw === "student" ? audienceStudentUserId : null,
   });

@@ -112,6 +112,8 @@ function ResourceRow({
       <div className="rounded-xl border border-[#2D8B7E]/40 bg-[#F7FDFC] p-4">
         <form action={handleSave} className="space-y-3">
           <input type="hidden" name="resourceId" value={resource.id} />
+          {/* Pass resource type so the action knows whether to require a URL */}
+          <input type="hidden" name="type" value={resource.type} />
 
           <div>
             <label className="mb-1 block text-xs font-medium text-[#6B7280]">
@@ -139,20 +141,25 @@ function ResourceRow({
             />
           </div>
 
-          <div>
-            <label className="mb-1 block text-xs font-medium text-[#6B7280]">
-              URL <span className="text-red-500">*</span>
-            </label>
-            <input
-              name="url"
-              type="url"
-              required
-              value={url}
-              onChange={(e) => setUrl(e.target.value)}
-              placeholder="https://…"
-              className="w-full rounded-lg border border-[#E8DFD3] bg-white px-3 py-2 text-sm text-[#1A1A2E] focus:border-[#2D8B7E] focus:outline-none"
-            />
-          </div>
+          {/* URL is only editable for link/embed. Documents live in storage —
+              showing an editable URL field would mislead the teacher and could
+              corrupt the row if they submitted a bogus value. */}
+          {resource.type !== "document" && (
+            <div>
+              <label className="mb-1 block text-xs font-medium text-[#6B7280]">
+                URL <span className="text-red-500">*</span>
+              </label>
+              <input
+                name="url"
+                type="url"
+                required
+                value={url}
+                onChange={(e) => setUrl(e.target.value)}
+                placeholder="https://…"
+                className="w-full rounded-lg border border-[#E8DFD3] bg-white px-3 py-2 text-sm text-[#1A1A2E] focus:border-[#2D8B7E] focus:outline-none"
+              />
+            </div>
+          )}
 
           <AudienceSelector
             audience={audience}
@@ -597,8 +604,8 @@ export default function MaterialsManager({
       )}
       {resources.length === 0 ? (
         <p className="text-sm text-[#6B7280]">
-          No materials yet. Add a link or embed below and your students will
-          see it in the app.
+          No materials yet. Add a link, embed or PDF below and your students
+          will see it in the app.
         </p>
       ) : (
         <div className="space-y-3">
