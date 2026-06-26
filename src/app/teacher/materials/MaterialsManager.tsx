@@ -605,7 +605,7 @@ export default function MaterialsManager({
       {resources.length === 0 ? (
         <p className="text-sm text-[#6B7280]">
           No materials yet. Add a link, embed or PDF below and your students
-          will see it in the app.
+          will see it in the practice portal (and the app with the next update).
         </p>
       ) : (
         <div className="space-y-3">

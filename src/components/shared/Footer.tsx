@@ -58,6 +58,15 @@ export function Footer({ brand }: { brand: Brand }) {
                   Pricing
                 </Link>
               </li>
+              <li>
+                <Link
+                  href={`${base}/roadmap`}
+                  className="text-sm hover:opacity-80 transition-colors"
+                  style={{ color: brand.colors.textDim }}
+                >
+                  Roadmap
+                </Link>
+              </li>
             </ul>
           </div>
 

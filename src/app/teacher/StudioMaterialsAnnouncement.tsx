@@ -42,7 +42,7 @@ export function StudioMaterialsAnnouncement() {
       <p className="flex-1 text-sm text-[#1A1A2E]">
         <span className="font-semibold">New: Studio Materials</span> — share
         links, videos &amp; PDFs with your students. They&apos;ll see them in the
-        app and the practice portal.{" "}
+        practice portal now — and in the app with the next update.{" "}
         <Link
           href="/teacher/materials"
           className="font-semibold text-[#2D8B7E] underline underline-offset-2 hover:text-[#246F64]"

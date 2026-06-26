@@ -130,7 +130,7 @@ export default async function StudioMaterialsPage({
           </h1>
           <p className="mt-1 text-sm text-[#6B7280]">
             Links, embeds and PDFs you share with your students. They appear in
-            the Mewstro app and the practice portal.
+            the practice portal now, and in the Mewstro app with the next update.
           </p>
         </div>
       </div>

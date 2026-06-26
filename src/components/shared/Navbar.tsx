@@ -23,6 +23,7 @@ function getNavConfig(brand: Brand): {
         { label: "Studio toolkit", href: `${base}/teachers/assets` },
         { label: "Solo learners", href: `${base}/app` },
         { label: "Story", href: `${base}/story` },
+        { label: "Roadmap", href: `${base}/roadmap` },
         { label: "Pricing", href: `${base}/pricing` },
         { label: "Support", href: brand.links.support },
       ],
