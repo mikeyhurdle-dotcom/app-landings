@@ -5,6 +5,7 @@ import {
 } from "@/lib/teacher-queries";
 import { redirect } from "next/navigation";
 import Link from "next/link";
+import { StudioMaterialsAnnouncement } from "./StudioMaterialsAnnouncement";
 
 function formatRelativeTime(iso: string | null): string {
   if (!iso) return "Never";
@@ -70,6 +71,8 @@ export default async function TeacherDashboardPage() {
 
   return (
     <div className="mx-auto max-w-6xl px-6 py-10">
+      <StudioMaterialsAnnouncement />
+
       {/* Studio header */}
       <div className="mb-8">
         <div className="flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
